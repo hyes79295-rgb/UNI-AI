@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UNI AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+:root {
+    --bg: #0b1020;
+    --header: #151d35;
+    --panel: #11182c;
+    --message: #202a45;
+    --text: white;
+    --subtext: #b8c1d9;
+    --button: #3157d5;
+}
+
+body.light {
+    --bg: #f2f4f8;
+    --header: #ffffff;
+    --panel: #e4e8f0;
+    --message: #ffffff;
+    --text: #111827;
+    --subtext: #596579;
+    --button: #3157d5;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: 0.3s;
+}
+
+header {
+    background: var(--header);
+    padding: 16px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 30px;
+}
+
+header p {
+    color: var(--subtext);
+    margin-top: 5px;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: var(--panel);
+}
+
+.top-button {
+    border: none;
+    border-radius: 20px;
+    padding: 9px 14px;
+    background: var(--message);
+    color: var(--text);
+}
+
+.modes {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    background: var(--panel);
+    overflow-x: auto;
+}
+
+.mode {
+    padding: 9px 14px;
+    border: none;
+    border-radius: 20px;
+    background: var(--message);
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.mode.active {
+    background: var(--button);
+    color: white;
+}
+
+#chat {
+    height: calc(100vh - 300px);
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 100px;
+}
+
+.message {
+    max-width: 85%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.user {
+    background: var(--button);
+    color: white;
+    margin-left: auto;
+}
+
+.uni {
+    background: var(--message);
+    color: var(--text);
+    margin-right: auto;
+}
+
+.search-result {
+    background: var(--message);
+    color: var(--text);
+    border-left: 4px solid var(--button);
+}
+
+.search-result a {
+    color: #6ea8ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 7px;
+    padding: 12px;
+    background: var(--header);
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.action-button {
+    width: 48px;
+    border: none;
+    border-radius: 10px;
+    background: var(--button);
+    color: white;
+    font-size: 20px;
+}
+
+#sendButton {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: var(--button);
+    color: white;
+    font-size: 16px;
+}
+
+#searchButton {
+    background: #16834b;
+}
+
+.listening {
+    background: #d93636 !important;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🤖 UNI AI</h1>
+    <p>Ujjwal Neural Intelligence</p>
+</header>
+
+
+<!-- TOP BUTTONS -->
+
+<div class="top-buttons">
+
+    <button class="top-button" id="themeButton">
+        🌙 Dark Mode
+    </button>
+
+    <button class="top-button" onclick="clearChat()">
+        🗑️ Clear
+    </button>
+
+</div>
+
+
+<!-- MODES -->
+
+<div class="modes">
+
+    <button
+        class="mode active"
+        onclick="setMode('general', this)">
+        🤖 General
+    </button>
+
+    <button
+        class="mode"
+        onclick="setMode('study', this)">
+        📚 Study
+    </button>
+
+    <button
+        class="mode"
+        onclick="setMode('coding', this)">
+        💻 Coding
+    </button>
+
+    <button
+        class="mode"
+        onclick="setMode('search', this)">
+        🌐 Search
+    </button>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div id="chat">
+
+    <div class="message uni">
+        👋 Hello! I am UNI AI.
+
+Choose a mode and ask me something!
+    </div>
+
+</div>
+
+
+<!-- INPUT -->
+
+<div class="input-area">
+
+    <button
+        id="micButton"
+        class="action-button"
+        title="Voice input">
+        🎤
+    </button>
+
+    <input
+        id="userInput"
+        type="text"
+        placeholder="Ask UNI AI..."
+    >
+
+    <button
+        id="speakButton"
+        class="action-button"
+        title="Read last answer">
+        🔊
+    </button>
+
+    <button
+        id="searchButton"
+        class="action-button"
+        title="Search web">
+        🌐
+    </button>
+
+    <button id="sendButton">
+        Send
+    </button>
+
+</div>
+
+
+<script>
+
+let currentMode = "general";
+let lastAnswer = "";
+
+const input = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
+const micButton = document.getElementById("micButton");
+const speakButton = document.getElementById("speakButton");
+const searchButton = document.getElementById("searchButton");
+const chat = document.getElementById("chat");
+const themeButton = document.getElementById("themeButton");
+
+
+/* =========================
+   DARK / LIGHT MODE
+========================= */
+
+themeButton.addEventListener("click", function() {
+
+    document.body.classList.toggle("light");
+
+    if (document.body.classList.contains("light")) {
+
+        themeButton.textContent = "🌙 Dark Mode";
+
+    } else {
+
+        themeButton.textContent = "☀️ Light Mode";
+
+    }
+
+});
+
+
+/* =========================
+   ADD MESSAGE
+========================= */
+
+function addMessage(text, type) {
+
+    const message = document.createElement("div");
+
+    message.className = "message " + type;
+
+    message.textContent = text;
+
+    chat.appendChild(message);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+
+/* =========================
+   CLEAR CHAT
+========================= */
+
+function clearChat() {
+
+    chat.innerHTML = "";
+
+    addMessage(
+        "👋 Chat cleared!\nHello! I am UNI AI. How can I help you?",
+        "uni"
+    );
+
+}
+
+
+/* =========================
+   MODE SYSTEM
+========================= */
+
+function setMode(mode, buttonElement) {
+
+    currentMode = mode;
+
+    document.querySelectorAll(".mode").forEach(function(button) {
+        button.classList.remove("active");
+    });
+
+    buttonElement.classList.add("active");
+
+
+    if (mode === "study") {
+
+        addMessage(
+            "📚 Study Mode ON!\nI will explain things in simple Class 8 language.",
+            "uni"
+        );
+
+    }
+
+    else if (mode === "coding") {
+
+        addMessage(
+            "💻 Coding Mode ON!\nAsk me about HTML, CSS, JavaScript or Python.",
+            "uni"
+        );
+
+    }
+
+    else if (mode === "search") {
+
+        addMessage(
+            "🌐 Search Mode ON!\nType something and press 🌐 to search the web.",
+            "uni"
+        );
+
+    }
+
+    else {
+
+        addMessage(
+            "🤖 General Mode ON!",
+            "uni"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   ANSWER SYSTEM
+========================= */
+
+function getAnswer(question) {
+
+    const q = question.toLowerCase();
+
+
+    /* STUDY MODE */
+
+    if (currentMode === "study") {
+
+        if (q.includes("photosynthesis")) {
+
+            return "🌱 Photosynthesis is the process by which green plants make their food using sunlight, carbon dioxide and water.";
+
+        }
+
+        if (
+            q.includes("ai") ||
+            q.includes("artificial intelligence")
+        ) {
+
+            return "🤖 Artificial Intelligence means making computers or machines perform tasks that normally need human intelligence.";
+
+        }
+
+        if (q.includes("democracy")) {
+
+            return "🏛️ Democracy is a form of government in which people choose their representatives through elections.";
+
+        }
+
+        if (q.includes("math")) {
+
+            return "📐 Sure! Send me your Maths question and I will help you step by step.";
+
+        }
+
+        if (q.includes("science")) {
+
+            return "🔬 Send me your Science question and I will explain it in simple Class 8 language.";
+
+        }
+
+        if (q.includes("english")) {
+
+            return "📖 I can help you with English grammar, writing and literature.";
+
+        }
+
+        return "📚 I am in Study Mode. Ask me a Class 8 question from Science, Maths, English, Social Science or AI.";
+
+    }
+
+
+    /* CODING MODE */
+
+    if (currentMode === "coding") {
+
+        if (q.includes("html")) {
+
+            return "🌐 HTML creates the structure of a webpage.";
+
+        }
+
+        if (q.includes("css")) {
+
+            return "🎨 CSS controls the design, colours, sizes and layout of a webpage.";
+
+        }
+
+        if (q.includes("javascript")) {
+
+            return "⚡ JavaScript makes webpages interactive.";
+
+        }
+
+        if (q.includes("python")) {
+
+            return "🐍 Python is a programming language commonly used for AI, automation and software.";
+
+        }
+
+        return "💻 I am in Coding Mode. Ask me about HTML, CSS, JavaScript or Python.";
+
+    }
+
+
+    /* SEARCH MODE */
+
+    if (currentMode === "search") {
+
+        return "🌐 Search Mode is ready!\nPress the green 🌐 button to search the web for:\n\n• News\n• Science\n• Sports\n• Wikipedia topics\n• Current information\n• Any question";
+
+    }
+
+
+    /* GENERAL MODE */
+
+    if (
+        q.includes("hello") ||
+        q.includes("hi")
+    ) {
+
+        return "Hello! 👋 I am UNI AI. How can I help you?";
+
+    }
+
+    if (
+        q.includes("who are you") ||
+        q.includes("your name")
+    ) {
+
+        return "I am UNI — Ujjwal Neural Intelligence 🤖.";
+
+    }
+
+    if (q.includes("ai")) {
+
+        return "🤖 AI means Artificial Intelligence. It helps computers perform tasks that normally require human intelligence.";
+
+    }
+
+    if (q.includes("thank")) {
+
+        return "You're welcome! 😊";
+
+    }
+
+    return "🤖 I am UNI AI. Choose Study Mode, Coding Mode, Search Mode, or General Mode.";
+
+}
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+function sendMessage() {
+
+    const question = input.value.trim();
+
+    if (question === "") {
+        return;
+    }
+
+    addMessage(question, "user");
+
+    input.value = "";
+
+
+    setTimeout(function() {
+
+        const answer = getAnswer(question);
+
+        lastAnswer = answer;
+
+        addMessage(answer, "uni");
+
+        speak(answer);
+
+    }, 400);
+
+}
+
+
+/* =========================
+   VOICE REPLY
+========================= */
+
+function speak(text) {
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-IN";
+
+    speech.rate = 0.95;
+
+    speech.pitch = 1;
+
+    window.speechSynthesis.speak(speech);
+
+}
+
+
+/* =========================
+   SPEAKER BUTTON
+========================= */
+
+speakButton.addEventListener("click", function() {
+
+    if (lastAnswer !== "") {
+
+        speak(lastAnswer);
+
+    } else {
+
+        speak("Hello! I am UNI AI.");
+
+    }
+
+});
+
+
+/* =========================
+   WEB SEARCH
+========================= */
+
+searchButton.addEventListener("click", function() {
+
+    const query = input.value.trim();
+
+    if (query === "") {
+
+        addMessage(
+            "🌐 Type something first, then press the green Search button.",
+            "uni"
+        );
+
+        return;
+
+    }
+
+
+    addMessage(
+        "🔎 Searching for: " + query,
+        "uni"
+    );
+
+
+    /*
+       Opens Google search in a new tab.
+       This does not require an API key.
+    */
+
+    const searchURL =
+        "https://www.google.com/search?q=" +
+        encodeURIComponent(query);
+
+    window.open(searchURL, "_blank");
+
+});
+
+
+/* =========================
+   VOICE INPUT
+========================= */
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+let recognition = null;
+
+
+if (SpeechRecognition) {
+
+    recognition = new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+
+    recognition.continuous = false;
+
+    recognition.interimResults = false;
+
+
+    recognition.onstart = function() {
+
+        micButton.classList.add("listening");
+
+        micButton.textContent = "🔴";
+
+    };
+
+
+    recognition.onresult = function(event) {
+
+        const voiceText =
+            event.results[0][0].transcript;
+
+        input.value = voiceText;
+
+        micButton.classList.remove("listening");
+
+        micButton.textContent = "🎤";
+
+        sendMessage();
+
+    };
+
+
+    recognition.onerror = function() {
+
+        micButton.classList.remove("listening");
+
+        micButton.textContent = "🎤";
+
+        addMessage(
+            "🎤 I couldn't hear that. Please try again.",
+            "uni"
+        );
+
+    };
+
+
+    recognition.onend = function() {
+
+        micButton.classList.remove("listening");
+
+        micButton.textContent = "🎤";
+
+    };
+
+
+    micButton.addEventListener("click", function() {
+
+        try {
+
+            recognition.start();
+
+        }
+
+        catch (error) {
+
+            console.log(error);
+
+        }
+
+    });
+
+}
+
+else {
+
+    micButton.addEventListener("click", function() {
+
+        addMessage(
+            "🎤 Voice input is not supported in this browser. Try opening UNI in Chrome.",
+            "uni"
+        );
+
+    });
+
+}
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+input.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
