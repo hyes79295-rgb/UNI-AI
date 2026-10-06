@@ -12,13 +12,17 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+app.get("/", (req, res) => {
+  res.send("UNI AI backend is running!");
+});
+
 app.post("/ask", async (req, res) => {
   try {
     const question = req.body.question;
 
-    if (!question) {
+    if (!question || !question.trim()) {
       return res.status(400).json({
-        error: "No question was provided."
+        error: "Please enter a question."
       });
     }
 
@@ -27,7 +31,7 @@ app.post("/ask", async (req, res) => {
       instructions:
         "You are UNI, Ujjwal Neural Intelligence. " +
         "Be friendly and helpful. " +
-        "For school questions, explain in simple Class 8 language. " +
+        "For Class 8 school questions, explain in very simple language. " +
         "For coding questions, explain step by step.",
       input: question
     });
@@ -37,7 +41,7 @@ app.post("/ask", async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("OpenAI error:", error);
 
     res.status(500).json({
       error: "UNI could not get an AI response."
@@ -47,6 +51,6 @@ app.post("/ask", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`UNI backend running on port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`UNI AI backend running on port ${PORT}`);
 });
