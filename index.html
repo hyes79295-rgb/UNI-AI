@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>
-UNI AI — Ujjwal Neural Intelligence
-</title>
-
+<title>UNI AI — Ujjwal Neural Intelligence</title>
 
 <style>
-
 /* =========================
-   UNI AI AESTHETIC UI
+   UNI AI — AESTHETIC UI
 ========================= */
 
 * {
@@ -27,310 +17,210 @@ UNI AI — Ujjwal Neural Intelligence
     padding: 0;
 }
 
-
 :root {
-
     --bg: #070914;
-
-    --card:
-        rgba(20, 24, 45, 0.74);
-
-    --card2:
-        rgba(31, 36, 64, 0.80);
-
+    --card: rgba(20, 24, 45, 0.72);
+    --card2: rgba(31, 36, 64, 0.72);
     --text: #f5f7ff;
-
     --muted: #9da5c5;
-
     --accent: #8b5cf6;
-
     --accent2: #22d3ee;
-
-    --border:
-        rgba(255,255,255,0.10);
-
-    --user:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #2563eb
-        );
-
-    --uni:
-        rgba(255,255,255,0.07);
-
-    --shadow:
-        0 20px 60px rgba(0,0,0,.35);
+    --border: rgba(255,255,255,0.10);
+    --user: linear-gradient(135deg, #7c3aed, #2563eb);
+    --uni: rgba(255,255,255,0.07);
+    --shadow: 0 20px 60px rgba(0,0,0,.35);
 }
-
 
 body.light {
-
     --bg: #eef2ff;
-
-    --card:
-        rgba(255,255,255,.78);
-
-    --card2:
-        rgba(255,255,255,.92);
-
+    --card: rgba(255,255,255,.75);
+    --card2: rgba(255,255,255,.9);
     --text: #171827;
-
     --muted: #68708c;
-
-    --border:
-        rgba(0,0,0,.08);
-
-    --uni:
-        rgba(255,255,255,.82);
-
-    --shadow:
-        0 20px 50px rgba(80,90,140,.18);
+    --border: rgba(0,0,0,.08);
+    --uni: rgba(255,255,255,.8);
+    --shadow: 0 20px 50px rgba(80,90,140,.18);
 }
-
 
 body {
-
     min-height: 100vh;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     color: var(--text);
-
     background:
-
-        radial-gradient(
-            circle at 15% 15%,
-            rgba(124,58,237,.25),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(34,211,238,.18),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(99,102,241,.16),
-            transparent 35%
-        ),
-
+        radial-gradient(circle at 15% 15%, rgba(124,58,237,.25), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(34,211,238,.18), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(99,102,241,.16), transparent 35%),
         var(--bg);
-
-    transition: .3s;
-
     overflow-x: hidden;
+    transition: .3s;
 }
 
+/* Animated background */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float 8s ease-in-out infinite alternate;
+}
+
+body::before {
+    background: rgba(139,92,246,.20);
+    top: 5%;
+    left: -100px;
+}
+
+body::after {
+    background: rgba(34,211,238,.15);
+    right: -100px;
+    bottom: 5%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    from { transform: translateY(-20px); }
+    to { transform: translateY(30px); }
+}
 
 /* =========================
    APP
 ========================= */
 
 .app {
-
-    width:
-        min(1200px, 96%);
-
+    width: min(1200px, 96%);
     margin: auto;
-
-    padding:
-        18px 0 30px;
+    padding: 18px 0 30px;
 }
-
 
 /* =========================
    HEADER
 ========================= */
 
 .header {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    padding:
-        14px 18px;
-
+    padding: 14px 18px;
     margin-bottom: 18px;
 
-    background:
-        var(--card);
+    background: var(--card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
 
-    border:
-        1px solid var(--border);
-
-    backdrop-filter:
-        blur(20px);
-
-    border-radius:
-        24px;
-
-    box-shadow:
-        var(--shadow);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
 }
 
-
 .brand {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 }
 
-
-.logo {
-
-    width: 50px;
-    height: 50px;
-
+.logo-small {
+    width: 48px;
+    height: 48px;
     border-radius: 16px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    font-size: 25px;
+    font-size: 24px;
 
-    background:
-
-        linear-gradient(
-            135deg,
-            var(--accent),
-            var(--accent2)
-        );
+    background: linear-gradient(
+        135deg,
+        var(--accent),
+        var(--accent2)
+    );
 
     box-shadow:
-        0 0 30px
-        rgba(139,92,246,.5);
+        0 0 25px rgba(139,92,246,.5);
 }
 
-
 .brand h1 {
-
     font-size: 21px;
 }
 
-
 .brand p {
-
     color: var(--muted);
-
     font-size: 12px;
-
     margin-top: 3px;
 }
 
-
 .header-actions {
-
     display: flex;
-
     gap: 8px;
 }
 
-
 .icon-btn {
-
     width: 42px;
     height: 42px;
 
-    border:
-        1px solid var(--border);
-
+    border: 1px solid var(--border);
     border-radius: 14px;
 
-    background:
-        var(--card2);
-
-    color:
-        var(--text);
+    background: var(--card2);
+    color: var(--text);
 
     cursor: pointer;
-
     font-size: 18px;
 
-    transition: .2s;
+    transition: .25s;
 }
-
 
 .icon-btn:hover {
-
-    transform:
-        translateY(-2px);
-
-    border-color:
-        var(--accent);
+    transform: translateY(-2px);
+    border-color: var(--accent);
 }
-
 
 /* =========================
    HERO
 ========================= */
 
 .hero {
+    position: relative;
+    overflow: hidden;
 
     text-align: center;
 
-    padding:
-        38px 20px 30px;
-
+    padding: 40px 20px 32px;
     margin-bottom: 18px;
 
-    border:
-        1px solid var(--border);
-
+    border: 1px solid var(--border);
     border-radius: 30px;
 
     background:
-
         linear-gradient(
             135deg,
             rgba(139,92,246,.14),
             rgba(34,211,238,.07)
         ),
-
         var(--card);
 
-    backdrop-filter:
-        blur(25px);
-
-    box-shadow:
-        var(--shadow);
+    backdrop-filter: blur(25px);
+    box-shadow: var(--shadow);
 }
 
-
-.orb {
-
+.hero-orb {
     width: 105px;
     height: 105px;
 
-    margin:
-        0 auto 18px;
+    margin: 0 auto 20px;
 
     border-radius: 50%;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     font-size: 48px;
 
     background:
-
         radial-gradient(
             circle at 35% 30%,
             #ffffff,
@@ -340,1431 +230,822 @@ body {
         );
 
     box-shadow:
+        0 0 25px rgba(139,92,246,.65),
+        0 0 70px rgba(34,211,238,.25);
 
-        0 0 30px
-        rgba(139,92,246,.7),
-
-        0 0 90px
-        rgba(34,211,238,.25);
-
-    animation:
-        orb 3s ease-in-out infinite;
+    animation: orb 3s ease-in-out infinite;
 }
 
-
 @keyframes orb {
-
     0%,100% {
         transform: scale(1);
+        box-shadow:
+            0 0 25px rgba(139,92,246,.65),
+            0 0 70px rgba(34,211,238,.25);
     }
 
     50% {
         transform: scale(1.06);
+        box-shadow:
+            0 0 35px rgba(139,92,246,.8),
+            0 0 100px rgba(34,211,238,.35);
     }
-
 }
 
-
 .hero h2 {
-
-    font-size:
-        clamp(28px, 5vw, 45px);
-
+    font-size: clamp(28px, 5vw, 45px);
     margin-bottom: 8px;
 }
 
+.gradient-text {
+    background: linear-gradient(
+        90deg,
+        #a78bfa,
+        #22d3ee,
+        #c084fc
+    );
 
-.gradient {
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #a78bfa,
-            #22d3ee,
-            #c084fc
-        );
-
-    -webkit-background-clip:
-        text;
-
-    background-clip:
-        text;
-
+    -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
-
 .hero p {
-
-    color:
-        var(--muted);
-
-    max-width:
-        650px;
-
-    margin:
-        auto;
-
-    line-height:
-        1.6;
+    color: var(--muted);
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.6;
 }
 
+/* Status */
 
 .status {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
+    display: inline-flex;
+    align-items: center;
     gap: 7px;
 
-    margin-top:
-        16px;
+    margin-top: 18px;
 
-    padding:
-        7px 13px;
+    padding: 7px 13px;
 
-    border-radius:
-        50px;
+    border-radius: 50px;
 
-    background:
-        rgba(34,211,238,.08);
+    background: rgba(34,211,238,.08);
+    border: 1px solid rgba(34,211,238,.18);
 
-    border:
-        1px solid
-        rgba(34,211,238,.18);
-
-    color:
-        var(--muted);
-
-    font-size:
-        12px;
+    color: var(--muted);
+    font-size: 12px;
 }
 
-
 .status-dot {
-
     width: 8px;
     height: 8px;
 
     border-radius: 50%;
 
-    background:
-        #22c55e;
+    background: #22c55e;
 
-    box-shadow:
-        0 0 10px #22c55e;
+    box-shadow: 0 0 10px #22c55e;
 }
-
 
 /* =========================
    QUICK CARDS
 ========================= */
 
-.section-title {
-
-    margin:
-        18px 4px 10px;
-
-    font-size:
-        16px;
+.quick-title {
+    font-size: 16px;
+    margin: 20px 4px 10px;
 }
-
 
 .quick-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap:
-        12px;
-
-    margin-bottom:
-        18px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
 }
-
 
 .quick-card {
+    position: relative;
+    overflow: hidden;
 
-    padding:
-        18px;
+    padding: 18px;
 
-    min-height:
-        110px;
+    min-height: 110px;
 
-    border-radius:
-        22px;
+    border-radius: 22px;
 
-    background:
-        var(--card);
+    background: var(--card);
+    border: 1px solid var(--border);
 
-    border:
-        1px solid
-        var(--border);
+    backdrop-filter: blur(20px);
 
-    backdrop-filter:
-        blur(20px);
+    cursor: pointer;
 
-    cursor:
-        pointer;
-
-    transition:
-        .25s;
+    transition: .25s;
 }
-
 
 .quick-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(139,92,246,.5);
+    transform: translateY(-5px);
+    border-color: rgba(139,92,246,.5);
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
 }
-
 
 .quick-icon {
-
-    font-size:
-        25px;
-
-    margin-bottom:
-        12px;
+    font-size: 25px;
+    margin-bottom: 12px;
 }
-
 
 .quick-card strong {
-
-    display:
-        block;
-
-    margin-bottom:
-        5px;
+    display: block;
+    margin-bottom: 5px;
 }
-
 
 .quick-card span {
-
-    font-size:
-        12px;
-
-    color:
-        var(--muted);
+    font-size: 12px;
+    color: var(--muted);
 }
-
 
 /* =========================
    MODE BAR
 ========================= */
 
 .mode-bar {
+    display: flex;
+    gap: 8px;
 
-    display:
-        flex;
+    overflow-x: auto;
 
-    gap:
-        8px;
+    padding: 8px;
 
-    overflow-x:
-        auto;
+    margin-bottom: 12px;
 
-    padding:
-        8px;
+    border-radius: 20px;
 
-    margin-bottom:
-        12px;
+    background: var(--card);
+    border: 1px solid var(--border);
 
-    border-radius:
-        20px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid
-        var(--border);
+    backdrop-filter: blur(20px);
 }
 
+.mode-bar::-webkit-scrollbar {
+    display: none;
+}
 
 .mode-btn {
+    flex: 1;
 
-    flex:
-        1;
+    min-width: 105px;
 
-    min-width:
-        105px;
+    border: 0;
 
-    border:
-        0;
+    border-radius: 14px;
 
-    border-radius:
-        14px;
+    padding: 11px 14px;
 
-    padding:
-        11px 14px;
+    color: var(--muted);
+    background: transparent;
 
-    color:
-        var(--muted);
+    cursor: pointer;
 
-    background:
-        transparent;
-
-    cursor:
-        pointer;
+    transition: .2s;
 }
 
-
 .mode-btn.active {
-
-    color:
-        white;
+    color: white;
 
     background:
-
         linear-gradient(
             135deg,
             var(--accent),
             #4f46e5
         );
-}
 
+    box-shadow: 0 8px 25px rgba(124,58,237,.25);
+}
 
 /* =========================
    CHAT
 ========================= */
 
-.chat {
+.chat-box {
+    height: 420px;
 
-    height:
-        430px;
+    overflow-y: auto;
 
-    overflow-y:
-        auto;
+    padding: 18px;
 
-    padding:
-        18px;
+    border-radius: 26px;
 
-    border-radius:
-        26px;
+    background: var(--card);
+    border: 1px solid var(--border);
 
-    background:
-        var(--card);
+    backdrop-filter: blur(20px);
 
-    border:
-        1px solid
-        var(--border);
+    box-shadow: var(--shadow);
 
-    backdrop-filter:
-        blur(20px);
-
-    box-shadow:
-        var(--shadow);
+    scroll-behavior: smooth;
 }
-
 
 .message {
-
-    display:
-        flex;
-
-    margin:
-        12px 0;
+    display: flex;
+    margin: 12px 0;
 }
-
 
 .message.user {
-
-    justify-content:
-        flex-end;
+    justify-content: flex-end;
 }
-
 
 .bubble {
+    max-width: 80%;
 
-    max-width:
-        80%;
+    padding: 12px 15px;
 
-    padding:
-        12px 15px;
+    border-radius: 18px;
 
-    border-radius:
-        18px;
+    line-height: 1.5;
 
-    line-height:
-        1.5;
+    font-size: 14px;
 
-    font-size:
-        14px;
-
-    white-space:
-        pre-wrap;
+    white-space: pre-wrap;
 }
-
 
 .message.uni .bubble {
-
-    background:
-        var(--uni);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-bottom-left-radius:
-        5px;
+    background: var(--uni);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 5px;
 }
-
 
 .message.user .bubble {
+    color: white;
 
-    color:
-        white;
+    background: var(--user);
 
-    background:
-        var(--user);
+    border-bottom-right-radius: 5px;
 
-    border-bottom-right-radius:
-        5px;
+    box-shadow: 0 8px 25px rgba(37,99,235,.18);
 }
-
-
-/* =========================
-   IMAGE PREVIEW
-========================= */
-
-.image-preview {
-
-    display:
-        none;
-
-    margin:
-        10px 0;
-
-    position:
-        relative;
-
-    width:
-        fit-content;
-
-    max-width:
-        100%;
-}
-
-
-.image-preview.show {
-
-    display:
-        block;
-}
-
-
-.image-preview img {
-
-    max-width:
-        260px;
-
-    max-height:
-        200px;
-
-    border-radius:
-        16px;
-
-    border:
-        1px solid
-        var(--border);
-
-    display:
-        block;
-}
-
-
-.remove-image {
-
-    position:
-        absolute;
-
-    top:
-        6px;
-
-    right:
-        6px;
-
-    width:
-        30px;
-
-    height:
-        30px;
-
-    border:
-        0;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(0,0,0,.7);
-
-    color:
-        white;
-
-    cursor:
-        pointer;
-}
-
 
 /* =========================
    INPUT
 ========================= */
 
 .input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-    display:
-        flex;
+    margin-top: 12px;
 
-    align-items:
-        center;
+    padding: 8px;
 
-    gap:
-        7px;
+    border-radius: 22px;
 
-    margin-top:
-        12px;
+    background: var(--card);
+    border: 1px solid var(--border);
 
-    padding:
-        8px;
+    backdrop-filter: blur(20px);
 
-    border-radius:
-        22px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid
-        var(--border);
-
-    backdrop-filter:
-        blur(20px);
-
-    box-shadow:
-        var(--shadow);
+    box-shadow: var(--shadow);
 }
-
 
 .input-area input {
+    flex: 1;
 
-    flex:
-        1;
+    min-width: 0;
 
-    min-width:
-        0;
+    border: 0;
+    outline: 0;
 
-    border:
-        0;
+    background: transparent;
 
-    outline:
-        0;
+    color: var(--text);
 
-    background:
-        transparent;
+    padding: 13px;
 
-    color:
-        var(--text);
-
-    padding:
-        13px;
-
-    font-size:
-        15px;
+    font-size: 15px;
 }
-
 
 .input-area input::placeholder {
-
-    color:
-        var(--muted);
+    color: var(--muted);
 }
 
+.action-btn {
+    width: 44px;
+    height: 44px;
 
-.action {
+    flex-shrink: 0;
 
-    width:
-        44px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
 
-    height:
-        44px;
+    background: var(--card2);
+    color: var(--text);
 
-    flex-shrink:
-        0;
+    cursor: pointer;
 
-    border:
-        1px solid
-        var(--border);
+    transition: .2s;
+}
 
-    border-radius:
-        14px;
+.action-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.send-btn {
+    width: 50px;
 
     background:
-        var(--card2);
-
-    color:
-        var(--text);
-
-    cursor:
-        pointer;
-
-    font-size:
-        18px;
-
-    transition:
-        .2s;
-}
-
-
-.action:hover {
-
-    transform:
-        translateY(-2px);
-
-    border-color:
-        var(--accent);
-}
-
-
-.send {
-
-    width:
-        50px;
-
-    color:
-        white;
-
-    border:
-        0;
-
-    background:
-
         linear-gradient(
             135deg,
             var(--accent),
             #2563eb
         );
+
+    color: white;
+
+    border: 0;
+
+    font-size: 18px;
 }
-
-
-/* =========================
-   CAMERA MODAL
-========================= */
-
-.camera-modal {
-
-    display:
-        none;
-
-    position:
-        fixed;
-
-    inset:
-        0;
-
-    z-index:
-        1000;
-
-    background:
-        rgba(0,0,0,.78);
-
-    backdrop-filter:
-        blur(12px);
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        20px;
-}
-
-
-.camera-modal.show {
-
-    display:
-        flex;
-}
-
-
-.camera-box {
-
-    width:
-        min(600px, 100%);
-
-    padding:
-        18px;
-
-    border-radius:
-        25px;
-
-    background:
-        #111528;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.5);
-}
-
-
-.camera-box h3 {
-
-    margin-bottom:
-        12px;
-}
-
-
-#cameraVideo {
-
-    width:
-        100%;
-
-    max-height:
-        60vh;
-
-    object-fit:
-        cover;
-
-    border-radius:
-        18px;
-
-    background:
-        #000;
-}
-
-
-.camera-buttons {
-
-    display:
-        flex;
-
-    gap:
-        10px;
-
-    margin-top:
-        12px;
-}
-
-
-.camera-buttons button {
-
-    flex:
-        1;
-
-    padding:
-        13px;
-
-    border:
-        0;
-
-    border-radius:
-        14px;
-
-    cursor:
-        pointer;
-
-    font-weight:
-        bold;
-}
-
-
-.capture {
-
-    color:
-        white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8b5cf6,
-            #2563eb
-        );
-}
-
-
-.close-camera {
-
-    background:
-        #252a40;
-
-    color:
-        white;
-}
-
 
 /* =========================
    FOOTER
 ========================= */
 
 .footer {
+    text-align: center;
 
-    text-align:
-        center;
+    color: var(--muted);
 
-    color:
-        var(--muted);
+    font-size: 11px;
 
-    font-size:
-        11px;
-
-    padding:
-        18px;
+    padding: 18px;
 }
 
+.footer strong {
+    color: var(--text);
+}
 
 /* =========================
-   RESPONSIVE
+   TYPING
+========================= */
+
+.typing {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.typing span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--muted);
+
+    animation: typing 1s infinite;
+}
+
+.typing span:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.typing span:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes typing {
+    0%,60%,100% {
+        opacity: .25;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
+
+/* =========================
+   TABLET / MOBILE
 ========================= */
 
 @media (max-width: 700px) {
 
-    .quick-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
+    .app {
+        width: 94%;
     }
 
-    .chat {
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-        height:
-            390px;
+    .hero {
+        padding: 32px 15px 25px;
+    }
 
+    .hero-orb {
+        width: 85px;
+        height: 85px;
+        font-size: 38px;
+    }
+
+    .chat-box {
+        height: 390px;
     }
 
     .bubble {
-
-        max-width:
-            88%;
-
+        max-width: 88%;
     }
 
+    .input-area {
+        gap: 5px;
+    }
+
+    .action-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .send-btn {
+        width: 44px;
+    }
 }
 
-
-@media (max-width: 430px) {
+@media (max-width: 420px) {
 
     .brand p {
-
-        display:
-            none;
-
+        display: none;
     }
 
-    .action {
-
-        width:
-            40px;
-
-        height:
-            40px;
-
+    .logo-small {
+        width: 42px;
+        height: 42px;
     }
 
-    .send {
-
-        width:
-            44px;
-
+    .quick-card {
+        padding: 14px;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="app">
 
+    <!-- HEADER -->
+    <header class="header">
 
-<!-- =========================
-     HEADER
-========================= -->
+        <div class="brand">
 
-<header class="header">
+            <div class="logo-small">
+                🤖
+            </div>
 
-    <div class="brand">
+            <div>
+                <h1>UNI AI</h1>
+                <p>Ujjwal Neural Intelligence</p>
+            </div>
 
-        <div class="logo">
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                class="icon-btn"
+                id="themeButton"
+                title="Change theme">
+                🌙
+            </button>
+
+            <button
+                class="icon-btn"
+                id="clearButton"
+                title="Clear chat">
+                🗑️
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-orb">
             🤖
         </div>
 
-        <div>
+        <h2>
+            Welcome to
+            <span class="gradient-text">UNI</span>
+        </h2>
 
-            <h1>
-                UNI AI
-            </h1>
+        <p>
+            <strong>Ujjwal Neural Intelligence</strong><br>
+            Your smart personal AI assistant for studying,
+            coding, questions and ideas.
+        </p>
 
-            <p>
-                Ujjwal Neural Intelligence
-            </p>
+        <div class="status">
+            <span class="status-dot"></span>
+            UNI is ready
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-title">
+        ✨ Quick Actions
+    </div>
+
+    <section class="quick-grid">
+
+        <div class="quick-card" data-question="Explain photosynthesis in simple Class 8 language.">
+            <div class="quick-icon">📚</div>
+            <strong>Study with UNI</strong>
+            <span>Learn school topics easily</span>
+        </div>
+
+        <div class="quick-card" data-question="Help me write HTML code for a simple webpage.">
+            <div class="quick-icon">💻</div>
+            <strong>Code with UNI</strong>
+            <span>Build and learn coding</span>
+        </div>
+
+        <div class="quick-card" data-question="What can you help me with?">
+            <div class="quick-icon">🤖</div>
+            <strong>Ask UNI</strong>
+            <span>Ask anything you want</span>
+        </div>
+
+        <div class="quick-card" data-search="latest science news">
+            <div class="quick-icon">🌐</div>
+            <strong>Search Web</strong>
+            <span>Find information online</span>
+        </div>
+
+    </section>
+
+
+    <!-- MODES -->
+    <div class="mode-bar">
+
+        <button
+            class="mode-btn active"
+            data-mode="general">
+            🤖 General
+        </button>
+
+        <button
+            class="mode-btn"
+            data-mode="study">
+            📚 Study
+        </button>
+
+        <button
+            class="mode-btn"
+            data-mode="coding">
+            💻 Coding
+        </button>
+
+        <button
+            class="mode-btn"
+            data-mode="search">
+            🌐 Search
+        </button>
+
+    </div>
+
+
+    <!-- CHAT -->
+    <section
+        class="chat-box"
+        id="chat">
+
+        <div class="message uni">
+
+            <div class="bubble">
+                👋 Hi! I'm <strong>UNI</strong> — Ujjwal Neural Intelligence.<br><br>
+                I'm ready to help you with studying, coding,
+                questions and ideas. ✨
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <div class="header-actions">
-
-        <button
-            class="icon-btn"
-            id="themeButton">
-
-            🌙
-
-        </button>
-
+    <!-- INPUT -->
+    <div class="input-area">
 
         <button
-            class="icon-btn"
-            id="clearButton">
+            class="action-btn"
+            id="micButton"
+            title="Voice input">
+            🎤
+        </button>
 
-            🗑️
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Ask UNI anything..."
+            autocomplete="off">
 
+        <button
+            class="action-btn"
+            id="speakButton"
+            title="Speak last answer">
+            🔊
+        </button>
+
+        <button
+            class="action-btn"
+            id="searchButton"
+            title="Search Google">
+            🌐
+        </button>
+
+        <button
+            class="action-btn send-btn"
+            id="sendButton"
+            title="Send">
+            ➤
         </button>
 
     </div>
 
-</header>
 
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-    <div class="orb">
-        🤖
-    </div>
-
-
-    <h2>
-
-        Welcome to
-        <span class="gradient">
-            UNI
-        </span>
-
-    </h2>
-
-
-    <p>
-
-        <strong>
-            Ujjwal Neural Intelligence
-        </strong>
-
+    <footer class="footer">
+        <strong>UNI AI</strong> • Ujjwal Neural Intelligence
         <br>
-
-        Your personal AI for
-        questions, studying, coding
-        and images.
-
-    </p>
-
-
-    <div class="status">
-
-        <span class="status-dot"></span>
-
-        UNI is ready
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     QUICK ACTIONS
-========================= -->
-
-<div class="section-title">
-    ✨ Quick Actions
-</div>
-
-
-<section class="quick-grid">
-
-
-    <div
-        class="quick-card"
-        data-question=
-        "Explain photosynthesis in simple Class 8 language.">
-
-        <div class="quick-icon">
-            📚
-        </div>
-
-        <strong>
-            Study
-        </strong>
-
-        <span>
-            Learn with UNI
-        </span>
-
-    </div>
-
-
-
-    <div
-        class="quick-card"
-        data-question=
-        "Help me create a simple HTML webpage.">
-
-        <div class="quick-icon">
-            💻
-        </div>
-
-        <strong>
-            Coding
-        </strong>
-
-        <span>
-            Build with UNI
-        </span>
-
-    </div>
-
-
-
-    <div
-        class="quick-card"
-        data-camera="true">
-
-        <div class="quick-icon">
-            📷
-        </div>
-
-        <strong>
-            Camera
-        </strong>
-
-        <span>
-            Show UNI something
-        </span>
-
-    </div>
-
-
-
-    <div
-        class="quick-card"
-        id="photoQuick">
-
-        <div class="quick-icon">
-            🖼️
-        </div>
-
-        <strong>
-            Photo
-        </strong>
-
-        <span>
-            Upload an image
-        </span>
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================
-     MODES
-========================= -->
-
-<div class="mode-bar">
-
-    <button
-        class="mode-btn active"
-        data-mode="general">
-
-        🤖 General
-
-    </button>
-
-
-    <button
-        class="mode-btn"
-        data-mode="study">
-
-        📚 Study
-
-    </button>
-
-
-    <button
-        class="mode-btn"
-        data-mode="coding">
-
-        💻 Coding
-
-    </button>
-
-
-    <button
-        class="mode-btn"
-        data-mode="search">
-
-        🌐 Search
-
-    </button>
+        Your personal AI assistant ✨
+    </footer>
 
 </div>
 
-
-
-<!-- =========================
-     CHAT
-========================= -->
-
-<section
-    class="chat"
-    id="chat">
-
-
-    <div class="message uni">
-
-        <div class="bubble">
-
-            👋 Hi! I'm
-            <strong>UNI</strong>
-            — Ujjwal Neural Intelligence.
-
-            <br><br>
-
-            You can now send me
-            <strong>photos</strong>
-            or use my
-            <strong>camera</strong>. 📷✨
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     IMAGE PREVIEW
-========================= -->
-
-<div
-    class="image-preview"
-    id="imagePreview">
-
-    <img
-        id="previewImage"
-        alt="Selected image">
-
-    <button
-        class="remove-image"
-        id="removeImage">
-
-        ×
-
-    </button>
-
-</div>
-
-
-
-<!-- =========================
-     INPUT
-========================= -->
-
-<div class="input-area">
-
-
-    <button
-        class="action"
-        id="micButton"
-        title="Voice input">
-
-        🎤
-
-    </button>
-
-
-    <button
-        class="action"
-        id="cameraButton"
-        title="Open camera">
-
-        📷
-
-    </button>
-
-
-    <button
-        class="action"
-        id="photoButton"
-        title="Choose photo">
-
-        🖼️
-
-    </button>
-
-
-    <input
-        type="file"
-        id="photoInput"
-        accept="image/png,image/jpeg,image/webp,image/gif"
-        hidden>
-
-
-    <input
-        type="text"
-        id="userInput"
-        placeholder="Ask UNI anything..."
-        autocomplete="off">
-
-
-    <button
-        class="action"
-        id="speakButton"
-        title="Speak last answer">
-
-        🔊
-
-    </button>
-
-
-    <button
-        class="action"
-        id="searchButton"
-        title="Search web">
-
-        🌐
-
-    </button>
-
-
-    <button
-        class="action send"
-        id="sendButton"
-        title="Send">
-
-        ➤
-
-    </button>
-
-</div>
-
-
-
-<footer class="footer">
-
-    <strong>
-        UNI AI
-    </strong>
-
-    • Ujjwal Neural Intelligence
-
-    <br>
-
-    Smart. Simple. Yours. ✨
-
-</footer>
-
-
-</div>
-
-
-
-<!-- =========================
-     CAMERA MODAL
-========================= -->
-
-<div
-    class="camera-modal"
-    id="cameraModal">
-
-
-    <div class="camera-box">
-
-        <h3>
-            📷 UNI Camera
-        </h3>
-
-
-        <video
-            id="cameraVideo"
-            autoplay
-            playsinline>
-        </video>
-
-
-        <div class="camera-buttons">
-
-            <button
-                class="capture"
-                id="captureButton">
-
-                📸 Take Photo
-
-            </button>
-
-
-            <button
-                class="close-camera"
-                id="closeCamera">
-
-                Close
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
 
 <script>
 
+/* =====================================
+   UNI AI SETTINGS
+===================================== */
 
-/* =========================
-   BACKEND
-========================= */
+/*
+IMPORTANT:
+This is your Render backend.
+Your OpenAI API key stays on the backend.
+DO NOT put your API key in this file.
+*/
 
 const BACKEND_URL =
     "https://uni-ai-3mg0.onrender.com/ask";
 
 
-/* =========================
+/* =====================================
    VARIABLES
-========================= */
+===================================== */
 
-let currentMode =
-    "general";
-
-let lastAnswer =
-    "";
-
-let selectedImage =
-    null;
-
-let cameraStream =
-    null;
-
+let currentMode = "general";
+let lastAnswer = "";
+let typingElement = null;
 
 const input =
-    document.getElementById(
-        "userInput"
-    );
+    document.getElementById("userInput");
 
+const sendButton =
+    document.getElementById("sendButton");
+
+const micButton =
+    document.getElementById("micButton");
+
+const speakButton =
+    document.getElementById("speakButton");
+
+const searchButton =
+    document.getElementById("searchButton");
 
 const chat =
-    document.getElementById(
-        "chat"
-    );
+    document.getElementById("chat");
+
+const themeButton =
+    document.getElementById("themeButton");
+
+const clearButton =
+    document.getElementById("clearButton");
+
+const modeButtons =
+    document.querySelectorAll(".mode-btn");
+
+const quickCards =
+    document.querySelectorAll(".quick-card");
 
 
-const imagePreview =
-    document.getElementById(
-        "imagePreview"
-    );
+/* =====================================
+   THEME
+===================================== */
 
+const savedTheme =
+    localStorage.getItem("uni-theme");
 
-const previewImage =
-    document.getElementById(
-        "previewImage"
-    );
+if (savedTheme === "light") {
+    document.body.classList.add("light");
+    themeButton.textContent = "☀️";
+}
 
+themeButton.addEventListener("click", function() {
 
-const photoInput =
-    document.getElementById(
-        "photoInput"
-    );
+    document.body.classList.toggle("light");
 
+    if (document.body.classList.contains("light")) {
 
-const cameraModal =
-    document.getElementById(
-        "cameraModal"
-    );
+        themeButton.textContent = "☀️";
 
-
-const cameraVideo =
-    document.getElementById(
-        "cameraVideo"
-    );
-
-
-/* =========================
-   ADD MESSAGE
-========================= */
-
-function addMessage(
-    text,
-    type
-) {
-
-    const message =
-        document.createElement(
-            "div"
+        localStorage.setItem(
+            "uni-theme",
+            "light"
         );
 
+    } else {
+
+        themeButton.textContent = "🌙";
+
+        localStorage.setItem(
+            "uni-theme",
+            "dark"
+        );
+    }
+
+});
+
+
+/* =====================================
+   MODE
+===================================== */
+
+modeButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        modeButtons.forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        currentMode =
+            button.dataset.mode;
+
+        input.placeholder =
+            "Ask UNI anything...";
+
+        if (currentMode === "study") {
+            input.placeholder =
+                "Ask a study question...";
+        }
+
+        if (currentMode === "coding") {
+            input.placeholder =
+                "Ask a coding question...";
+        }
+
+        if (currentMode === "search") {
+            input.placeholder =
+                "Type something to search...";
+        }
+
+    });
+
+});
+
+
+/* =====================================
+   ADD MESSAGE
+===================================== */
+
+function addMessage(text, type) {
+
+    const message =
+        document.createElement("div");
 
     message.className =
         "message " + type;
 
-
     const bubble =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     bubble.className =
         "bubble";
 
-
     bubble.innerHTML =
         formatText(text);
 
+    message.appendChild(bubble);
 
-    message.appendChild(
-        bubble
-    );
-
-
-    chat.appendChild(
-        message
-    );
-
+    chat.appendChild(message);
 
     chat.scrollTop =
         chat.scrollHeight;
@@ -1772,27 +1053,21 @@ function addMessage(
 }
 
 
-/* =========================
-   TEXT FORMAT
-========================= */
+/* =====================================
+   BASIC TEXT FORMAT
+===================================== */
 
 function formatText(text) {
 
-    let safe =
-        String(text || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        );
+    if (!text) {
+        return "";
+    }
 
+    let safe =
+        String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 
     safe =
         safe.replace(
@@ -1800,62 +1075,48 @@ function formatText(text) {
             "<strong>$1</strong>"
         );
 
-
     safe =
         safe.replace(
             /\n/g,
             "<br>"
         );
 
-
     return safe;
-
 }
 
 
-/* =========================
-   THINKING
-========================= */
+/* =====================================
+   TYPING MESSAGE
+===================================== */
 
 function showThinking() {
 
     const message =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     message.className =
         "message uni";
 
-
     message.id =
-        "thinking";
-
+        "thinkingMessage";
 
     const bubble =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     bubble.className =
         "bubble";
 
+    bubble.innerHTML = `
+        <div class="typing">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
 
-    bubble.innerHTML =
-        "🤖 UNI is thinking...";
+    message.appendChild(bubble);
 
-
-    message.appendChild(
-        bubble
-    );
-
-
-    chat.appendChild(
-        message
-    );
-
+    chat.appendChild(message);
 
     chat.scrollTop =
         chat.scrollHeight;
@@ -1865,122 +1126,40 @@ function showThinking() {
 
 function removeThinking() {
 
-    const element =
+    const thinking =
         document.getElementById(
-            "thinking"
+            "thinkingMessage"
         );
 
-
-    if (element) {
-        element.remove();
+    if (thinking) {
+        thinking.remove();
     }
 
 }
 
 
-/* =========================
-   SEND TO UNI
-========================= */
+/* =====================================
+   SEND MESSAGE TO UNI
+===================================== */
 
 async function sendMessage() {
 
     const question =
         input.value.trim();
 
-
-    if (
-        !question &&
-        !selectedImage
-    ) {
-
+    if (!question) {
         return;
-
     }
 
 
-    /* Show user message */
+    addMessage(
+        question,
+        "user"
+    );
 
-    if (question) {
-
-        addMessage(
-            question,
-            "user"
-        );
-
-    }
-
-
-    if (selectedImage) {
-
-        const imageMessage =
-            document.createElement(
-                "div"
-            );
-
-
-        imageMessage.className =
-            "message user";
-
-
-        const bubble =
-            document.createElement(
-                "div"
-            );
-
-
-        bubble.className =
-            "bubble";
-
-
-        bubble.innerHTML =
-            "🖼️ Photo sent to UNI";
-
-
-        const img =
-            document.createElement(
-                "img"
-            );
-
-
-        img.src =
-            selectedImage;
-
-
-        img.style.maxWidth =
-            "220px";
-
-
-        img.style.borderRadius =
-            "14px";
-
-
-        img.style.marginTop =
-            "8px";
-
-
-        bubble.appendChild(
-            img
-        );
-
-
-        imageMessage.appendChild(
-            bubble
-        );
-
-
-        chat.appendChild(
-            imageMessage
-        );
-
-    }
-
-
-    input.value =
-        "";
-
+    input.value = "";
 
     showThinking();
-
 
     try {
 
@@ -1988,35 +1167,34 @@ async function sendMessage() {
             await fetch(
                 BACKEND_URL,
                 {
-
-                    method:
-                        "POST",
+                    method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
-                    body:
-                        JSON.stringify({
+                    body: JSON.stringify({
 
-                            question:
+                        question:
+                            "You are UNI, Ujjwal Neural Intelligence. " +
 
-                                "Current UNI mode: "
-                                + currentMode
-                                + "\n\n"
-                                + (
-                                    question ||
-                                    "Please analyze this photo."
-                                ),
+                            "The user is using UNI AI. " +
 
-                            image:
-                                selectedImage
+                            "Never introduce yourself as OpenAI. " +
 
-                        })
+                            "If asked your name, say UNI. " +
 
+                            "If asked your full form, say " +
+                            "Ujjwal Neural Intelligence. " +
+
+                            "Current mode: " +
+                            currentMode +
+
+                            "\n\nUser question: " +
+                            question
+
+                    })
                 }
             );
 
@@ -2038,75 +1216,65 @@ async function sendMessage() {
         }
 
 
-        lastAnswer =
+        const answer =
             data.answer ||
-            "UNI could not generate an answer.";
+            "Sorry, UNI could not generate an answer.";
+
+        lastAnswer =
+            answer;
 
 
         addMessage(
-            lastAnswer,
+            answer,
             "uni"
         );
 
 
-        speak(
-            lastAnswer
-        );
+        speak(answer);
 
 
     } catch (error) {
 
         removeThinking();
 
+        console.error(error);
 
-        console.error(
-            error
-        );
+        const errorMessage =
+            "⚠️ UNI could not connect to the AI server.\n\n" +
+            "Please check that your Render backend is running.";
 
+        lastAnswer =
+            errorMessage;
 
         addMessage(
-
-            "⚠️ UNI could not connect to the AI server.\n\n" +
-            "Please check your Render backend.",
-
+            errorMessage,
             "uni"
-
         );
 
     }
 
-
-    clearSelectedImage();
-
 }
 
 
-/* =========================
+/* =====================================
    SEND BUTTON
-========================= */
+===================================== */
 
-document
-    .getElementById(
-        "sendButton"
-    )
-    .addEventListener(
-        "click",
-        sendMessage
-    );
+sendButton.addEventListener(
+    "click",
+    sendMessage
+);
 
 
-/* =========================
-   ENTER
-========================= */
+/* =====================================
+   ENTER KEY
+===================================== */
 
 input.addEventListener(
     "keydown",
     function(event) {
 
-        if (
-            event.key ===
-            "Enter"
-        ) {
+        if (event.key === "Enter") {
 
             event.preventDefault();
 
@@ -2118,552 +1286,24 @@ input.addEventListener(
 );
 
 
-/* =========================
-   IMAGE COMPRESSION
-========================= */
-
-function compressImage(
-    file
-) {
-
-    return new Promise(
-        function(resolve, reject) {
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function(event) {
-
-                    const img =
-                        new Image();
-
-
-                    img.onload =
-                        function() {
-
-                            const canvas =
-                                document.createElement(
-                                    "canvas"
-                                );
-
-
-                            const maxSize =
-                                1200;
-
-
-                            let width =
-                                img.width;
-
-
-                            let height =
-                                img.height;
-
-
-                            if (
-                                width >
-                                height &&
-                                width >
-                                maxSize
-                            ) {
-
-                                height =
-                                    height *
-                                    maxSize /
-                                    width;
-
-                                width =
-                                    maxSize;
-
-                            }
-
-                            else if (
-                                height >
-                                maxSize
-                            ) {
-
-                                width =
-                                    width *
-                                    maxSize /
-                                    height;
-
-                                height =
-                                    maxSize;
-
-                            }
-
-
-                            canvas.width =
-                                width;
-
-                            canvas.height =
-                                height;
-
-
-                            const ctx =
-                                canvas.getContext(
-                                    "2d"
-                                );
-
-
-                            ctx.drawImage(
-                                img,
-                                0,
-                                0,
-                                width,
-                                height
-                            );
-
-
-                            resolve(
-
-                                canvas.toDataURL(
-                                    "image/jpeg",
-                                    0.82
-                                )
-
-                            );
-
-                        };
-
-
-                    img.onerror =
-                        reject;
-
-
-                    img.src =
-                        event.target.result;
-
-                };
-
-
-            reader.onerror =
-                reject;
-
-
-            reader.readAsDataURL(
-                file
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================
-   SELECT PHOTO
-========================= */
-
-async function handlePhoto(
-    file
-) {
-
-    if (!file) {
-        return;
-    }
-
-
-    try {
-
-        selectedImage =
-            await compressImage(
-                file
-            );
-
-
-        previewImage.src =
-            selectedImage;
-
-
-        imagePreview.classList.add(
-            "show"
-        );
-
-
-        input.placeholder =
-            "Ask UNI about this photo...";
-
-
-    } catch (error) {
-
-        alert(
-            "UNI could not read this photo."
-        );
-
-    }
-
-}
-
-
-photoInput.addEventListener(
-    "change",
-    function() {
-
-        const file =
-            photoInput.files[0];
-
-        handlePhoto(file);
-
-    }
-);
-
-
-/* =========================
-   PHOTO BUTTON
-========================= */
-
-document
-    .getElementById(
-        "photoButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            photoInput.click();
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "photoQuick"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            photoInput.click();
-
-        }
-    );
-
-
-/* =========================
-   REMOVE PHOTO
-========================= */
-
-function clearSelectedImage() {
-
-    selectedImage =
-        null;
-
-
-    imagePreview.classList.remove(
-        "show"
-    );
-
-
-    previewImage.src =
-        "";
-
-
-    photoInput.value =
-        "";
-
-
-    input.placeholder =
-        "Ask UNI anything...";
-
-}
-
-
-document
-    .getElementById(
-        "removeImage"
-    )
-    .addEventListener(
-        "click",
-        clearSelectedImage
-    );
-
-
-/* =========================
-   CAMERA
-========================= */
-
-async function openCamera() {
-
-    try {
-
-        cameraStream =
-            await navigator
-            .mediaDevices
-            .getUserMedia({
-
-                video: {
-                    facingMode:
-                        "environment"
-                },
-
-                audio:
-                    false
-
-            });
-
-
-        cameraVideo.srcObject =
-            cameraStream;
-
-
-        cameraModal.classList.add(
-            "show"
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            error
-        );
-
-
-        alert(
-            "UNI could not access the camera. Please allow camera permission in your browser."
-        );
-
-    }
-
-}
-
-
-function closeCamera() {
-
-    if (cameraStream) {
-
-        cameraStream
-            .getTracks()
-            .forEach(
-                function(track) {
-                    track.stop();
-                }
-            );
-
-        cameraStream =
-            null;
-
-    }
-
-
-    cameraVideo.srcObject =
-        null;
-
-
-    cameraModal.classList.remove(
-        "show"
-    );
-
-}
-
-
-document
-    .getElementById(
-        "cameraButton"
-    )
-    .addEventListener(
-        "click",
-        openCamera
-    );
-
-
-document
-    .querySelector(
-        "[data-camera='true']"
-    )
-    .addEventListener(
-        "click",
-        openCamera
-    );
-
-
-document
-    .getElementById(
-        "closeCamera"
-    )
-    .addEventListener(
-        "click",
-        closeCamera
-    );
-
-
-/* =========================
-   TAKE PHOTO
-========================= */
-
-document
-    .getElementById(
-        "captureButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            const canvas =
-                document.createElement(
-                    "canvas"
-                );
-
-
-            canvas.width =
-                cameraVideo.videoWidth;
-
-
-            canvas.height =
-                cameraVideo.videoHeight;
-
-
-            const ctx =
-                canvas.getContext(
-                    "2d"
-                );
-
-
-            ctx.drawImage(
-                cameraVideo,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-
-            selectedImage =
-                canvas.toDataURL(
-                    "image/jpeg",
-                    0.82
-                );
-
-
-            previewImage.src =
-                selectedImage;
-
-
-            imagePreview.classList.add(
-                "show"
-            );
-
-
-            input.placeholder =
-                "Ask UNI about this photo...";
-
-
-            closeCamera();
-
-        }
-    );
-
-
-/* =========================
-   MODE BUTTONS
-========================= */
-
-document
-    .querySelectorAll(
-        ".mode-btn"
-    )
-    .forEach(
-        function(button) {
-
-            button.addEventListener(
-                "click",
-                function() {
-
-                    document
-                        .querySelectorAll(
-                            ".mode-btn"
-                        )
-                        .forEach(
-                            function(btn) {
-
-                                btn.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    currentMode =
-                        button.dataset.mode;
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================
-   QUICK ACTIONS
-========================= */
-
-document
-    .querySelectorAll(
-        ".quick-card[data-question]"
-    )
-    .forEach(
-        function(card) {
-
-            card.addEventListener(
-                "click",
-                function() {
-
-                    input.value =
-                        card.dataset.question;
-
-                    sendMessage();
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================
-   SPEECH
-========================= */
+/* =====================================
+   SPEECH OUTPUT
+===================================== */
 
 function speak(text) {
 
-    if (
-        !("speechSynthesis"
-        in window)
-    ) {
-
+    if (!("speechSynthesis" in window)) {
         return;
-
     }
-
 
     speechSynthesis.cancel();
 
-
     const speech =
-        new SpeechSynthesisUtterance(
-            text
-        );
+        new SpeechSynthesisUtterance(text);
 
-
-    speech.rate =
-        0.95;
-
-
-    speech.pitch =
-        1;
-
-
-    speech.volume =
-        1;
-
+    speech.rate = 0.95;
+    speech.pitch = 1;
+    speech.volume = 1;
 
     speechSynthesis.speak(
         speech
@@ -2672,48 +1312,48 @@ function speak(text) {
 }
 
 
-document
-    .getElementById(
-        "speakButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
+/* =====================================
+   SPEAKER BUTTON
+===================================== */
 
-            if (lastAnswer) {
+speakButton.addEventListener(
+    "click",
+    function() {
 
-                speak(
-                    lastAnswer
-                );
+        if (lastAnswer) {
 
-            }
+            speak(
+                lastAnswer
+            );
 
         }
-    );
+
+    }
+);
 
 
-/* =========================
+/* =====================================
    VOICE INPUT
-========================= */
+===================================== */
 
 const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
 
+let recognition = null;
+
+
 if (SpeechRecognition) {
 
-    const recognition =
+    recognition =
         new SpeechRecognition();
-
 
     recognition.lang =
         "en-IN";
 
-
     recognition.continuous =
         false;
-
 
     recognition.interimResults =
         false;
@@ -2722,11 +1362,7 @@ if (SpeechRecognition) {
     recognition.onstart =
         function() {
 
-            document
-                .getElementById(
-                    "micButton"
-                )
-                .textContent =
+            micButton.textContent =
                 "🔴";
 
         };
@@ -2735,11 +1371,16 @@ if (SpeechRecognition) {
     recognition.onend =
         function() {
 
-            document
-                .getElementById(
-                    "micButton"
-                )
-                .textContent =
+            micButton.textContent =
+                "🎤";
+
+        };
+
+
+    recognition.onerror =
+        function() {
+
+            micButton.textContent =
                 "🎤";
 
         };
@@ -2748,140 +1389,184 @@ if (SpeechRecognition) {
     recognition.onresult =
         function(event) {
 
+            const transcript =
+                event.results[0][0].transcript;
+
             input.value =
-                event.results[0][0]
-                .transcript;
+                transcript;
 
             sendMessage();
 
         };
 
 
-    document
-        .getElementById(
-            "micButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                recognition.start();
-
-            }
-        );
-
-}
-
-
-/* =========================
-   WEB SEARCH
-========================= */
-
-document
-    .getElementById(
-        "searchButton"
-    )
-    .addEventListener(
+    micButton.addEventListener(
         "click",
         function() {
 
-            const query =
-                input.value.trim();
+            try {
 
+                recognition.start();
 
-            if (!query) {
-                return;
+            } catch (error) {
+
+                console.log(error);
+
             }
 
+        }
+    );
 
-            window.open(
+} else {
 
-                "https://www.google.com/search?q="
-                +
-                encodeURIComponent(
-                    query
-                ),
+    micButton.addEventListener(
+        "click",
+        function() {
 
-                "_blank"
-
+            alert(
+                "Voice input is not supported by this browser."
             );
 
         }
     );
 
+}
 
-/* =========================
-   THEME
-========================= */
 
-const themeButton =
-    document.getElementById(
-        "themeButton"
+/* =====================================
+   GOOGLE SEARCH
+===================================== */
+
+function searchWeb(query) {
+
+    if (!query.trim()) {
+        return;
+    }
+
+    const url =
+        "https://www.google.com/search?q=" +
+        encodeURIComponent(query);
+
+    window.open(
+        url,
+        "_blank"
     );
 
+}
 
-themeButton.addEventListener(
+
+searchButton.addEventListener(
     "click",
     function() {
 
-        document.body
-            .classList
-            .toggle(
-                "light"
-            );
+        const query =
+            input.value.trim();
 
-
-        themeButton.textContent =
-            document.body
-            .classList
-            .contains("light")
-                ? "☀️"
-                : "🌙";
+        if (query) {
+            searchWeb(query);
+        }
 
     }
 );
 
 
-/* =========================
+/* =====================================
+   QUICK ACTION CARDS
+===================================== */
+
+quickCards.forEach(
+    function(card) {
+
+        card.addEventListener(
+            "click",
+            function() {
+
+                const question =
+                    card.dataset.question;
+
+                const search =
+                    card.dataset.search;
+
+
+                if (search) {
+
+                    searchWeb(search);
+
+                    return;
+
+                }
+
+
+                if (question) {
+
+                    input.value =
+                        question;
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================
    CLEAR CHAT
-========================= */
+===================================== */
 
-document
-    .getElementById(
-        "clearButton"
-    )
-    .addEventListener(
-        "click",
-        function() {
+clearButton.addEventListener(
+    "click",
+    function() {
 
-            chat.innerHTML = `
+        chat.innerHTML = `
 
-                <div class="message uni">
+            <div class="message uni">
 
-                    <div class="bubble">
+                <div class="bubble">
 
-                        👋 Hi! I'm
-                        <strong>UNI</strong>
-                        — Ujjwal Neural Intelligence.
+                    👋 Hi! I'm <strong>UNI</strong> —
+                    Ujjwal Neural Intelligence.
+                    <br><br>
 
-                        <br><br>
-
-                        What would you like
-                        to do? ✨
-
-                    </div>
+                    Chat cleared! ✨
+                    What would you like to do?
 
                 </div>
 
-            `;
+            </div>
 
+        `;
 
-            lastAnswer =
-                "";
+        lastAnswer = "";
 
+        if ("speechSynthesis" in window) {
+            speechSynthesis.cancel();
         }
-    );
 
+    }
+);
+
+
+/* =====================================
+   FOCUS INPUT
+===================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        setTimeout(
+            function() {
+                input.focus();
+            },
+            300
+        );
+
+    }
+);
 
 </script>
 
