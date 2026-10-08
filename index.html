@@ -6,719 +6,507 @@
 <title>UNI AI — Ujjwal Neural Intelligence</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,Helvetica,sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-:root{
-  --bg:#07030f;
-  --panel:rgba(18,8,35,.78);
-  --panel2:rgba(30,12,55,.7);
-  --border:rgba(180,80,255,.28);
-  --purple:#a855f7;
-  --violet:#7c3aed;
-  --pink:#ec4899;
-  --text:#f8f5ff;
-  --muted:#a99bbd;
-  --green:#4ade80;
-}
-
-body{
-  height:100vh;
-  overflow:hidden;
-  background:var(--bg);
-  color:var(--text);
-}
-
-/* FUTURISTIC BACKGROUND */
-
-body::before,
-body::after{
-  content:"";
-  position:fixed;
-  width:420px;
-  height:420px;
-  border-radius:50%;
-  filter:blur(100px);
-  opacity:.20;
-  pointer-events:none;
-  z-index:-1;
-}
-
-body::before{
-  background:#9333ea;
-  top:-150px;
-  left:-100px;
-  animation:float1 9s infinite alternate;
-}
-
-body::after{
-  background:#ec4899;
-  right:-150px;
-  bottom:-180px;
-  animation:float2 11s infinite alternate;
-}
-
-@keyframes float1{
-  from{transform:translate(0,0)}
-  to{transform:translate(100px,80px)}
-}
-
-@keyframes float2{
-  from{transform:translate(0,0)}
-  to{transform:translate(-100px,-80px)}
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+  background:
+    radial-gradient(circle at 20% 20%, #32105c 0%, transparent 35%),
+    radial-gradient(circle at 90% 90%, #4a0b38 0%, transparent 35%),
+    #08030f;
 }
 
 button,
-input,
-textarea{
-  font:inherit;
+textarea,
+input {
+  font-family: inherit;
 }
 
-button{
-  cursor:pointer;
-}
-
-/* LOGIN */
-
-.login-screen{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:
-    radial-gradient(circle at 30% 20%,rgba(168,85,247,.20),transparent 35%),
-    radial-gradient(circle at 70% 80%,rgba(236,72,153,.16),transparent 35%),
-    #07030f;
-}
-
-.login-card{
-  width:100%;
-  max-width:430px;
-  padding:34px;
-  border:1px solid rgba(190,90,255,.35);
-  border-radius:26px;
-  background:rgba(20,8,38,.82);
-  backdrop-filter:blur(22px);
-  box-shadow:
-    0 0 40px rgba(168,85,247,.14),
-    inset 0 0 30px rgba(168,85,247,.04);
-}
-
-.login-logo{
-  text-align:center;
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:white;
-  text-shadow:
-    0 0 10px #a855f7,
-    0 0 30px #7c3aed;
-}
-
-.login-logo span{
-  color:#d946ef;
-}
-
-.login-sub{
-  text-align:center;
-  margin:8px 0 28px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.login-input{
-  width:100%;
-  padding:14px;
-  margin-bottom:11px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  outline:none;
-  background:rgba(5,2,15,.75);
-  color:white;
-}
-
-.login-input:focus{
-  border-color:#a855f7;
-  box-shadow:0 0 15px rgba(168,85,247,.25);
-}
-
-.login-btn,
-.google-btn{
-  width:100%;
-  padding:13px;
-  border-radius:12px;
-  margin-bottom:10px;
-  font-weight:bold;
-}
-
-.login-btn{
-  border:1px solid #a855f7;
-  color:white;
-  background:linear-gradient(135deg,#7c3aed,#c026d3);
-  box-shadow:0 0 18px rgba(168,85,247,.25);
-}
-
-.google-btn{
-  border:1px solid #4b3761;
-  color:white;
-  background:rgba(40,20,60,.7);
-}
-
-.login-btn:hover,
-.google-btn:hover{
-  transform:translateY(-1px);
-}
-
-.login-message{
-  min-height:20px;
-  margin-top:8px;
-  text-align:center;
-  color:#fb7185;
-  font-size:12px;
-}
-
-.signup-link{
-  display:block;
-  margin:15px auto 0;
-  border:0;
-  background:transparent;
-  color:#c084fc;
-  font-size:12px;
+button {
+  cursor: pointer;
 }
 
 /* APP */
 
-.app{
-  display:flex;
-  width:100%;
-  height:100vh;
+#app {
+  display: flex;
+  width: 100%;
+  height: 100vh;
 }
 
 /* SIDEBAR */
 
-.sidebar{
-  width:285px;
-  height:100vh;
-  flex-shrink:0;
-  display:flex;
-  flex-direction:column;
-  background:rgba(11,5,22,.84);
-  backdrop-filter:blur(20px);
-  border-right:1px solid var(--border);
-  box-shadow:8px 0 35px rgba(100,30,160,.08);
-  z-index:20;
+.sidebar {
+  width: 300px;
+  background: rgba(10, 4, 18, 0.95);
+  border-right: 1px solid #42205c;
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar-head{
-  padding:20px;
-  border-bottom:1px solid var(--border);
+.logo {
+  padding: 25px;
 }
 
-.logo{
-  font-size:26px;
-  font-weight:900;
-  letter-spacing:2px;
-  text-shadow:0 0 15px rgba(168,85,247,.7);
+.logo h1 {
+  margin: 0;
+  font-size: 30px;
 }
 
-.logo span{
-  color:#d946ef;
+.logo h1 span {
+  color: #d14cff;
 }
 
-.subtitle{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:4px;
+.logo p {
+  margin: 5px 0 0;
+  color: #9d91a9;
+  font-size: 12px;
 }
 
-.new-chat{
-  width:100%;
-  margin-top:18px;
-  padding:12px;
-  border:1px solid #a855f7;
-  border-radius:12px;
-  color:white;
-  background:linear-gradient(135deg,#6d28d9,#be185d);
-  box-shadow:0 0 18px rgba(168,85,247,.18);
+.new-chat {
+  margin: 0 22px 25px;
+  padding: 17px;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 17px;
+  background: linear-gradient(135deg, #762cff, #d92a91);
+  box-shadow: 0 0 25px rgba(180, 50, 255, .25);
 }
 
-.history-label{
-  padding:16px 18px 8px;
-  color:#8f80a5;
-  font-size:10px;
-  letter-spacing:1.5px;
-  font-weight:bold;
-  text-transform:uppercase;
+.history-title {
+  padding: 18px 22px 10px;
+  border-top: 1px solid #32183f;
+  color: #91839c;
+  font-size: 12px;
+  letter-spacing: 1.5px;
 }
 
-.history{
-  flex:1;
-  overflow-y:auto;
-  padding:5px 10px;
+#historyList {
+  overflow-y: auto;
+  padding: 0 12px;
+  flex: 1;
 }
 
-.history-empty{
-  padding:18px 10px;
-  color:#6f6380;
-  font-size:12px;
-  text-align:center;
+.history-item {
+  display: flex;
+  gap: 5px;
+  margin: 5px 0;
 }
 
-.history-row{
-  display:flex;
-  gap:5px;
-  margin-bottom:5px;
-}
-
-.history-open{
-  flex:1;
-  min-width:0;
-  padding:11px;
-  text-align:left;
-  border:1px solid transparent;
-  border-radius:10px;
-  color:#d9cbea;
-  background:transparent;
+.history-open {
+  flex: 1;
+  padding: 13px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #eee;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .history-open:hover,
-.history-open.active{
-  border-color:rgba(168,85,247,.22);
-  background:rgba(168,85,247,.10);
-  color:white;
+.history-open.active {
+  background: #21102e;
+  border-color: #61307c;
 }
 
-.history-name{
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  font-size:13px;
+.delete-history {
+  width: 35px;
+  border: none;
+  background: transparent;
+  color: #87788e;
+  font-size: 20px;
 }
 
-.history-delete{
-  width:34px;
-  border:0;
-  border-radius:9px;
-  color:#806f91;
-  background:transparent;
-}
-
-.history-delete:hover{
-  color:#fb7185;
-  background:rgba(251,113,133,.08);
-}
-
-.user-area{
-  padding:14px;
-  border-top:1px solid var(--border);
-}
-
-.user-email{
-  margin-bottom:10px;
-  color:#9c8cac;
-  font-size:11px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.user-buttons{
-  display:flex;
-  gap:7px;
-}
-
-.small-btn{
-  flex:1;
-  padding:8px;
-  border:1px solid #453258;
-  border-radius:9px;
-  color:#d8c9e8;
-  background:rgba(40,18,60,.45);
-  font-size:11px;
+.delete-history:hover {
+  color: #ff557d;
 }
 
 /* MAIN */
 
-.main{
-  flex:1;
-  min-width:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.topbar{
-  height:68px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  border-bottom:1px solid var(--border);
-  background:rgba(8,3,17,.68);
-  backdrop-filter:blur(18px);
+/* TOP */
+
+.topbar {
+  height: 80px;
+  flex-shrink: 0;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #392044;
+  background: rgba(7, 2, 13, .8);
 }
 
-.top-left{
-  display:flex;
-  align-items:center;
-  gap:11px;
+.chat-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.menu-btn{
-  display:none;
-  border:0;
-  color:white;
-  background:transparent;
-  font-size:23px;
+.online {
+  margin-top: 5px;
+  color: #48e69c;
+  font-size: 12px;
 }
 
-.chat-title{
-  font-size:15px;
-  font-weight:bold;
-}
-
-.status{
-  margin-top:3px;
-  color:#4ade80;
-  font-size:10px;
-  letter-spacing:.4px;
-}
-
-.top-actions{
-  display:flex;
-  gap:7px;
-}
-
-.top-btn{
-  padding:8px 11px;
-  border:1px solid #49325c;
-  border-radius:9px;
-  color:#d7c8e6;
-  background:rgba(35,15,50,.45);
-  font-size:11px;
-}
-
-.top-btn:hover{
-  border-color:#a855f7;
-  box-shadow:0 0 12px rgba(168,85,247,.15);
+.top-btn {
+  padding: 10px 14px;
+  border: 1px solid #5c3274;
+  border-radius: 11px;
+  background: #170b21;
+  color: #ddd;
 }
 
 /* CHAT */
 
-.chat{
-  flex:1;
-  overflow-y:auto;
-  padding:28px;
+#chatBox {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 30px 7%;
 }
 
-.welcome{
-  max-width:720px;
-  margin:65px auto;
-  text-align:center;
+.welcome {
+  max-width: 850px;
+  margin: 25px auto;
+  text-align: center;
 }
 
-.ai-orb{
-  width:82px;
-  height:82px;
-  margin:0 auto 22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid #c084fc;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#d946ef 0%,#7c3aed 35%,#19072d 70%);
-  box-shadow:
-    0 0 20px #a855f7,
-    0 0 55px rgba(168,85,247,.35),
-    inset 0 0 25px rgba(255,255,255,.15);
-  animation:orbPulse 2.4s infinite alternate;
+.orb {
+  width: 100px;
+  height: 100px;
+  margin: auto auto 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, #9a3cff, #31075b, #0b0312);
+  border: 1px solid #c176ff;
+  box-shadow: 0 0 40px #9b3cff;
+  font-size: 35px;
 }
 
-@keyframes orbPulse{
-  from{transform:scale(.96);box-shadow:0 0 18px #a855f7}
-  to{transform:scale(1.04);box-shadow:0 0 40px #c026d3}
+.welcome h1 {
+  font-size: 52px;
+  margin: 0;
 }
 
-.welcome h1{
-  font-size:42px;
-  letter-spacing:1px;
+.welcome h1 span {
+  color: #cf4cff;
 }
 
-.welcome h1 span{
-  background:linear-gradient(90deg,#a855f7,#ec4899,#c084fc);
-  -webkit-background-clip:text;
-  color:transparent;
+.welcome p {
+  color: #a99bb4;
+  font-size: 17px;
 }
 
-.welcome p{
-  margin-top:10px;
-  color:#9889aa;
-  line-height:1.6;
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 35px;
 }
 
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-top:28px;
+.feature {
+  padding: 20px;
+  border: 1px solid #382047;
+  border-radius: 17px;
+  background: rgba(35, 12, 50, .45);
+  text-align: left;
 }
 
-.feature{
-  padding:16px;
-  text-align:left;
-  border:1px solid rgba(168,85,247,.18);
-  border-radius:14px;
-  background:rgba(22,8,40,.55);
-  backdrop-filter:blur(10px);
+.feature strong {
+  color: #d6b1ff;
+  font-size: 18px;
 }
 
-.feature b{
-  display:block;
-  margin-bottom:5px;
-  color:#d8b4fe;
-}
-
-.feature span{
-  color:#8f809f;
-  font-size:12px;
+.feature p {
+  font-size: 13px;
 }
 
 /* MESSAGES */
 
-.message-row{
-  display:flex;
-  margin-bottom:18px;
-  animation:messageIn .2s ease;
+.message {
+  max-width: 900px;
+  margin: 15px auto;
+  display: flex;
 }
 
-@keyframes messageIn{
-  from{
-    opacity:0;
-    transform:translateY(7px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+.message.user {
+  justify-content: flex-end;
 }
 
-.message-row.user{
-  justify-content:flex-end;
+.bubble {
+  max-width: 80%;
+  padding: 14px 17px;
+  border-radius: 17px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
 }
 
-.message{
-  max-width:800px;
-  padding:14px 17px;
-  line-height:1.6;
-  white-space:pre-wrap;
-  word-break:break-word;
-  border-radius:17px;
+.user .bubble {
+  background: linear-gradient(135deg, #7029dc, #b6297d);
+  border-bottom-right-radius: 5px;
 }
 
-.message.user{
-  color:white;
-  border:1px solid rgba(236,72,153,.45);
-  background:linear-gradient(135deg,#6d28d9,#be185d);
-  box-shadow:0 0 20px rgba(168,85,247,.10);
+.assistant .bubble {
+  background: #1b0d27;
+  border: 1px solid #40234f;
+  border-bottom-left-radius: 5px;
 }
 
-.message.ai{
-  border:1px solid rgba(168,85,247,.20);
-  background:rgba(24,10,42,.72);
-  backdrop-filter:blur(12px);
-  box-shadow:inset 0 0 20px rgba(168,85,247,.025);
+.label {
+  color: #8f809a;
+  font-size: 10px;
+  margin-bottom: 5px;
 }
 
-/* THINKING */
+/* COMPOSER */
 
-.thinking{
-  display:flex;
-  gap:5px;
-  align-items:center;
+.composer-area {
+  flex-shrink: 0;
+  padding: 10px 18px 14px;
+  border-top: 1px solid #3b2148;
+  background: rgba(7, 2, 13, .95);
 }
 
-.dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#c084fc;
-  animation:dot 1s infinite alternate;
+/* MODES */
+
+.modes {
+  display: flex;
+  gap: 8px;
+  max-width: 1100px;
+  margin: 0 auto 10px;
+  overflow-x: auto;
 }
 
-.dot:nth-child(2){
-  animation-delay:.2s;
+.mode {
+  padding: 9px 16px;
+  border-radius: 30px;
+  border: 1px solid #56306b;
+  background: #13081c;
+  color: #a99bae;
+  white-space: nowrap;
 }
 
-.dot:nth-child(3){
-  animation-delay:.4s;
+.mode.active {
+  color: white;
+  border: none;
+  background: linear-gradient(135deg, #792cff, #dd2c91);
 }
 
-@keyframes dot{
-  from{opacity:.25;transform:translateY(0)}
-  to{opacity:1;transform:translateY(-4px)}
+/* WRITING BOX */
+
+.composer {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
 }
 
-/* INPUT */
-
-.bottom{
-  flex-shrink:0;
-  padding:11px 18px 17px;
-  border-top:1px solid var(--border);
-  background:rgba(7,3,15,.76);
-  backdrop-filter:blur(18px);
+#messageInput {
+  flex: 1;
+  min-width: 0;
+  min-height: 54px;
+  max-height: 150px;
+  resize: none;
+  outline: none;
+  padding: 15px;
+  border-radius: 16px;
+  border: 1px solid #66347e;
+  background: #1a0b25;
+  color: white;
+  font-size: 16px;
 }
 
-.modebar{
-  max-width:1050px;
-  margin:0 auto 9px;
-  display:flex;
-  gap:7px;
-  overflow-x:auto;
+#messageInput:focus {
+  border-color: #bd4cff;
+  box-shadow: 0 0 18px rgba(190, 76, 255, .2);
 }
 
-.mode{
-  flex-shrink:0;
-  padding:7px 12px;
-  border:1px solid #49325c;
-  border-radius:20px;
-  color:#a998b8;
-  background:rgba(35,15,50,.4);
-  font-size:11px;
-}
-
-.mode.active{
-  color:white;
-  border-color:#a855f7;
-  background:linear-gradient(135deg,#7c3aed,#be185d);
-  box-shadow:0 0 14px rgba(168,85,247,.18);
-}
-
-.input-wrap{
-  max-width:1050px;
-  margin:auto;
-  display:flex;
-  align-items:flex-end;
-  gap:8px;
-}
-
-#question{
-  flex:1;
-  min-height:48px;
-  max-height:150px;
-  resize:none;
-  padding:13px 15px;
-  outline:none;
-  border:1px solid #49325c;
-  border-radius:15px;
-  color:white;
-  background:rgba(14,5,25,.85);
-}
-
-#question:focus{
-  border-color:#a855f7;
-  box-shadow:0 0 18px rgba(168,85,247,.12);
+#messageInput::placeholder {
+  color: #918399;
 }
 
 .voice-btn,
-.send-btn{
-  width:50px;
-  height:48px;
-  border-radius:14px;
+.send-btn {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 15px;
 }
 
-.voice-btn{
-  border:1px solid #49325c;
-  color:#d5c4e4;
-  background:rgba(35,15,50,.5);
+.voice-btn {
+  border: 1px solid #613578;
+  background: #180b23;
+  color: white;
+  font-size: 20px;
 }
 
-.voice-btn.active{
-  border-color:#ec4899;
-  color:white;
-  background:#9d174d;
-  box-shadow:0 0 20px rgba(236,72,153,.3);
+.send-btn {
+  border: none;
+  background: linear-gradient(135deg, #7b2cff, #df2c91);
+  color: white;
+  font-size: 23px;
 }
 
-.send-btn{
-  border:1px solid #c084fc;
-  color:white;
-  background:linear-gradient(135deg,#7c3aed,#c026d3);
-  box-shadow:0 0 18px rgba(168,85,247,.2);
-  font-size:18px;
+.voice-btn.listening {
+  background: #7b153e;
 }
 
-.send-btn:disabled{
-  opacity:.55;
+.status {
+  max-width: 1100px;
+  margin: 5px auto 0;
+  color: #897a94;
+  font-size: 11px;
+  min-height: 14px;
 }
 
-.footer{
-  margin-top:7px;
-  text-align:center;
-  color:#5f536d;
-  font-size:9px;
+/* LOGIN */
+
+#authScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #08030f;
+  padding: 20px;
 }
 
-/* HIDDEN */
+.auth-card {
+  width: min(420px, 100%);
+  padding: 30px;
+  border-radius: 22px;
+  border: 1px solid #58306d;
+  background: #12071c;
+  box-shadow: 0 0 60px rgba(140, 45, 220, .2);
+}
 
-.hidden{
-  display:none !important;
+.auth-card h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.auth-card h1 span {
+  color: #d04cff;
+}
+
+.auth-sub {
+  text-align: center;
+  color: #9e91a9;
+  margin: 8px 0 25px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 10px;
+  border-radius: 11px;
+  border: 1px solid #4b285e;
+  background: #0e0615;
+  color: white;
+  outline: none;
+}
+
+.auth-main,
+.google {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+.auth-main {
+  border: none;
+  background: linear-gradient(135deg, #7b2cff, #df2c91);
+  color: white;
+}
+
+.google {
+  border: 1px solid #56306b;
+  background: #190b24;
+  color: white;
+}
+
+.switch {
+  text-align: center;
+  color: #97899f;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.switch button {
+  border: none;
+  background: none;
+  color: #c66aff;
+}
+
+#error {
+  min-height: 18px;
+  color: #ff6d91;
+  text-align: center;
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* MOBILE */
 
-@media(max-width:760px){
-
-  .sidebar{
-    position:fixed;
-    left:-295px;
-    top:0;
-    bottom:0;
-    transition:left .2s;
+@media(max-width: 700px) {
+  .sidebar {
+    display: none;
   }
 
-  .sidebar.open{
-    left:0;
+  .welcome h1 {
+    font-size: 37px;
   }
 
-  .menu-btn{
-    display:block;
+  .features {
+    grid-template-columns: 1fr;
   }
 
-  .topbar{
-    padding:0 10px;
+  #chatBox {
+    padding: 20px 12px;
   }
 
-  .top-btn{
-    padding:7px 8px;
+  .composer-area {
+    padding: 8px;
   }
 
-  .chat{
-    padding:16px;
+  .bubble {
+    max-width: 90%;
   }
 
-  .welcome{
-    margin:35px auto;
+  .voice-btn,
+  .send-btn {
+    width: 48px;
+    height: 48px;
   }
 
-  .welcome h1{
-    font-size:31px;
-  }
-
-  .feature-grid{
-    grid-template-columns:1fr;
-  }
-
-  .bottom{
-    padding:9px 10px 12px;
+  #messageInput {
+    min-height: 48px;
+    font-size: 15px;
   }
 }
 </style>
@@ -727,46 +515,36 @@ button{
 <body>
 
 <!-- LOGIN -->
+<div id="authScreen">
 
-<div id="loginScreen" class="login-screen">
+  <div class="auth-card">
 
-  <div class="login-card">
+    <h1>UNI <span>AI</span></h1>
 
-    <div class="login-logo">
-      UNI <span>AI</span>
-    </div>
-
-    <div class="login-sub">
+    <div class="auth-sub">
       Ujjwal Neural Intelligence
     </div>
 
-    <input
-      id="email"
-      class="login-input"
-      type="email"
-      placeholder="Email"
-    >
+    <input id="email" type="email" placeholder="Email">
 
-    <input
-      id="password"
-      class="login-input"
-      type="password"
-      placeholder="Password"
-    >
+    <input id="password" type="password" placeholder="Password">
 
-    <button id="emailBtn" class="login-btn">
-      SIGN IN
+    <div id="error"></div>
+
+    <button id="authBtn" class="auth-main">
+      Sign In
     </button>
 
-    <button id="googleBtn" class="google-btn">
-      CONTINUE WITH GOOGLE
+    <button id="googleBtn" class="google">
+      Continue with Google
     </button>
 
-    <div id="loginMessage" class="login-message"></div>
-
-    <button id="signupBtn" class="signup-link">
-      Create a new account
-    </button>
+    <div class="switch">
+      <span id="switchText">New user?</span>
+      <button id="switchBtn">
+        Create account
+      </button>
+    </div>
 
   </div>
 
@@ -774,138 +552,142 @@ button{
 
 
 <!-- APP -->
-
-<div id="app" class="app hidden">
+<div id="app" class="hidden">
 
   <!-- SIDEBAR -->
+  <aside class="sidebar">
 
-  <aside id="sidebar" class="sidebar">
-
-    <div class="sidebar-head">
-
-      <div class="logo">
-        UNI <span>AI</span>
-      </div>
-
-      <div class="subtitle">
-        UJJWAL NEURAL INTELLIGENCE
-      </div>
-
-      <button id="newChatBtn" class="new-chat">
-        ＋ NEW CHAT
-      </button>
-
+    <div class="logo">
+      <h1>UNI <span>AI</span></h1>
+      <p>UJJWAL NEURAL INTELLIGENCE</p>
     </div>
 
-    <div class="history-label">
-      Chat History
+    <button id="newChat" class="new-chat">
+      ＋ NEW CHAT
+    </button>
+
+    <div class="history-title">
+      CHAT HISTORY
     </div>
 
-    <div id="history" class="history"></div>
-
-    <div class="user-area">
-
-      <div id="userEmail" class="user-email">
-        Not signed in
-      </div>
-
-      <div class="user-buttons">
-
-        <button id="themeBtn" class="small-btn">
-          ◐ Theme
-        </button>
-
-        <button id="logoutBtn" class="small-btn">
-          Logout
-        </button>
-
-      </div>
-
-    </div>
+    <div id="historyList"></div>
 
   </aside>
 
 
   <!-- MAIN -->
-
   <main class="main">
 
     <header class="topbar">
 
-      <div class="top-left">
+      <div>
+        <div id="chatTitle" class="chat-title">
+          New Chat
+        </div>
 
-        <button id="menuBtn" class="menu-btn">
-          ☰
+        <div class="online">
+          ● SYSTEM ONLINE
+        </div>
+      </div>
+
+      <div>
+        <button id="clearBtn" class="top-btn">
+          CLEAR
         </button>
 
-        <div>
+        <button id="logoutBtn" class="top-btn">
+          LOGOUT
+        </button>
+      </div>
 
-          <div id="chatTitle" class="chat-title">
-            New Chat
+    </header>
+
+
+    <!-- CHAT AREA -->
+    <section id="chatBox">
+
+      <div id="welcome" class="welcome">
+
+        <div class="orb">
+          ✦
+        </div>
+
+        <h1>
+          Welcome to <span>UNI AI</span>
+        </h1>
+
+        <p>
+          Ujjwal Neural Intelligence
+        </p>
+
+        <p>
+          Your futuristic personal AI assistant.
+        </p>
+
+        <div class="features">
+
+          <div class="feature">
+            <strong>◇ Study</strong>
+            <p>Simple explanations and homework help.</p>
           </div>
 
-          <div class="status">
-            ● SYSTEM ONLINE
+          <div class="feature">
+            <strong>◇ Coding</strong>
+            <p>Build and debug your projects.</p>
+          </div>
+
+          <div class="feature">
+            <strong>◇ Search</strong>
+            <p>Use UNI's search mode.</p>
+          </div>
+
+          <div class="feature">
+            <strong>◇ General</strong>
+            <p>Ask UNI anything.</p>
           </div>
 
         </div>
 
       </div>
 
-      <div class="top-actions">
-
-        <button id="clearBtn" class="top-btn">
-          CLEAR
-        </button>
-
-        <button id="historyBtn" class="top-btn">
-          HISTORY
-        </button>
-
-      </div>
-
-    </header>
+    </section>
 
 
-    <!-- CHAT -->
+    <!-- WRITING SECTION -->
+    <section class="composer-area">
 
-    <section id="chat" class="chat"></section>
-
-
-    <!-- INPUT -->
-
-    <div class="bottom">
-
-      <div class="modebar">
+      <div class="modes">
 
         <button class="mode active" data-mode="General">
-          ◈ General
+          ◇ General
         </button>
 
         <button class="mode" data-mode="Study">
-          ◈ Study
+          ◇ Study
         </button>
 
         <button class="mode" data-mode="Coding">
-          ◈ Coding
+          ◇ Coding
         </button>
 
         <button class="mode" data-mode="Search">
-          ◈ Search
+          ◇ Search
         </button>
 
       </div>
 
-      <div class="input-wrap">
+
+      <!-- THIS IS THE WRITING BOX -->
+      <div class="composer">
 
         <button id="voiceBtn" class="voice-btn">
           🎤
         </button>
 
         <textarea
-          id="question"
+          id="messageInput"
           rows="1"
-          placeholder="Message UNI..."
+          placeholder="Write your message..."
         ></textarea>
 
         <button id="sendBtn" class="send-btn">
@@ -914,11 +696,9 @@ button{
 
       </div>
 
-      <div class="footer">
-        UNI AI • UJJWAL NEURAL INTELLIGENCE
-      </div>
+      <div id="status" class="status"></div>
 
-    </div>
+    </section>
 
   </main>
 
@@ -927,9 +707,7 @@ button{
 
 <script type="module">
 
-/* =========================================
-   FIREBASE
-========================================= */
+/* FIREBASE */
 
 import {
   initializeApp
@@ -948,293 +726,248 @@ import {
 import {
   getFirestore,
   collection,
-  doc,
+  addDoc,
   setDoc,
   getDoc,
   deleteDoc,
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp
+  serverTimestamp,
+  doc
 } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
 
-/* =========================================
+/* =========================
    FIREBASE CONFIG
-========================================= */
+   ========================= */
 
 const firebaseConfig = {
+
+  /*
+    IMPORTANT:
+    Put your CURRENT Firebase Web API key here.
+    Do NOT put your OpenAI API key here.
+  */
+
   apiKey: "AIzaSyC8ncItbw_DrCDm182bjCRF6Ivx5Zi2xas",
+
   authDomain: "uni-ai-a00c6.firebaseapp.com",
+
   projectId: "uni-ai-a00c6",
+
   storageBucket: "uni-ai-a00c6.firebasestorage.app",
+
   messagingSenderId: "322740324379",
+
   appId: "1:322740324379:web:686f2301fe6fbe2ed550be",
+
   measurementId: "G-6QZ0LNXTQ3"
 };
 
 
-const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth(firebaseApp);
-const db = getFirestore(firebaseApp);
-const googleProvider = new GoogleAuthProvider();
+const BACKEND_URL =
+  "https://uni-ai-3mg0.onrender.com/ask";
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
+const firebaseApp =
+  initializeApp(firebaseConfig);
 
-const loginScreen = document.getElementById("loginScreen");
-const appScreen = document.getElementById("app");
+const auth =
+  getAuth(firebaseApp);
 
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+const db =
+  getFirestore(firebaseApp);
 
-const emailBtn = document.getElementById("emailBtn");
-const googleBtn = document.getElementById("googleBtn");
-const signupBtn = document.getElementById("signupBtn");
-
-const loginMessage = document.getElementById("loginMessage");
-
-const sidebar = document.getElementById("sidebar");
-const historyBox = document.getElementById("history");
-
-const chatBox = document.getElementById("chat");
-const chatTitle = document.getElementById("chatTitle");
-
-const question = document.getElementById("question");
-const sendBtn = document.getElementById("sendBtn");
-const voiceBtn = document.getElementById("voiceBtn");
-
-const newChatBtn = document.getElementById("newChatBtn");
-const clearBtn = document.getElementById("clearBtn");
-const historyBtn = document.getElementById("historyBtn");
-const menuBtn = document.getElementById("menuBtn");
-
-const themeBtn = document.getElementById("themeBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-
-const userEmail = document.getElementById("userEmail");
+const googleProvider =
+  new GoogleAuthProvider();
 
 
-/* =========================================
-   STATE
-========================================= */
+/* VARIABLES */
 
 let currentUser = null;
 let currentChatId = null;
-let currentMessages = [];
-let selectedMode = "General";
-let unsubscribeHistory = null;
-let sending = false;
+let messages = [];
+let currentMode = "General";
+let signupMode = false;
+let recognition = null;
 
 
-/* =========================================
-   THEME
-========================================= */
+/* ELEMENTS */
 
-if(localStorage.getItem("uniTheme") === "light"){
-  document.body.classList.add("light");
-}
+const authScreen =
+  document.getElementById("authScreen");
 
-themeBtn.onclick = function(){
+const app =
+  document.getElementById("app");
 
-  document.body.classList.toggle("light");
+const email =
+  document.getElementById("email");
 
-  localStorage.setItem(
-    "uniTheme",
-    document.body.classList.contains("light")
-      ? "light"
-      : "dark"
-  );
+const password =
+  document.getElementById("password");
 
+const error =
+  document.getElementById("error");
+
+const authBtn =
+  document.getElementById("authBtn");
+
+const switchBtn =
+  document.getElementById("switchBtn");
+
+const switchText =
+  document.getElementById("switchText");
+
+const googleBtn =
+  document.getElementById("googleBtn");
+
+const messageInput =
+  document.getElementById("messageInput");
+
+const sendBtn =
+  document.getElementById("sendBtn");
+
+const voiceBtn =
+  document.getElementById("voiceBtn");
+
+const chatBox =
+  document.getElementById("chatBox");
+
+const welcome =
+  document.getElementById("welcome");
+
+const historyList =
+  document.getElementById("historyList");
+
+const chatTitle =
+  document.getElementById("chatTitle");
+
+const status =
+  document.getElementById("status");
+
+
+/* AUTH MODE */
+
+switchBtn.onclick = () => {
+
+  signupMode = !signupMode;
+
+  if (signupMode) {
+
+    authBtn.textContent =
+      "Create Account";
+
+    switchText.textContent =
+      "Already have an account?";
+
+    switchBtn.textContent =
+      "Sign in";
+
+  } else {
+
+    authBtn.textContent =
+      "Sign In";
+
+    switchText.textContent =
+      "New user?";
+
+    switchBtn.textContent =
+      "Create account";
+  }
+
+  error.textContent = "";
 };
 
 
-/* =========================================
-   AUTH ERROR
-========================================= */
+/* EMAIL AUTH */
 
-function authError(error){
+authBtn.onclick = async () => {
 
-  const code = error.code || "";
+  const userEmail =
+    email.value.trim();
 
-  if(code.includes("invalid-credential")){
-    return "Incorrect email or password.";
-  }
+  const userPassword =
+    password.value;
 
-  if(code.includes("user-not-found")){
-    return "No account found.";
-  }
+  if (!userEmail || !userPassword) {
 
-  if(code.includes("wrong-password")){
-    return "Incorrect password.";
-  }
-
-  if(code.includes("email-already-in-use")){
-    return "This email already has an account.";
-  }
-
-  if(code.includes("weak-password")){
-    return "Password should be at least 6 characters.";
-  }
-
-  if(code.includes("popup-closed-by-user")){
-    return "Google login was cancelled.";
-  }
-
-  return error.message || "Something went wrong.";
-}
-
-
-/* =========================================
-   LOGIN
-========================================= */
-
-emailBtn.onclick = async function(){
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  if(!email || !password){
-    loginMessage.textContent =
+    error.textContent =
       "Enter email and password.";
+
     return;
   }
 
-  loginMessage.textContent = "Signing in...";
+  try {
 
-  try{
+    if (signupMode) {
 
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+      await createUserWithEmailAndPassword(
+        auth,
+        userEmail,
+        userPassword
+      );
 
-    loginMessage.textContent = "";
+    } else {
 
-  }catch(error){
+      await signInWithEmailAndPassword(
+        auth,
+        userEmail,
+        userPassword
+      );
 
-    loginMessage.textContent =
-      authError(error);
+    }
+
+    error.textContent = "";
+
+  } catch (e) {
+
+    console.error(e);
+
+    error.textContent =
+      e.message;
 
   }
 
 };
 
 
-/* =========================================
-   SIGN UP
-========================================= */
+/* GOOGLE LOGIN */
 
-signupBtn.onclick = async function(){
+googleBtn.onclick = async () => {
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  if(!email || !password){
-    loginMessage.textContent =
-      "Enter email and password first.";
-    return;
-  }
-
-  if(password.length < 6){
-    loginMessage.textContent =
-      "Password must have at least 6 characters.";
-    return;
-  }
-
-  loginMessage.textContent =
-    "Creating account...";
-
-  try{
-
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    loginMessage.textContent = "";
-
-  }catch(error){
-
-    loginMessage.textContent =
-      authError(error);
-
-  }
-
-};
-
-
-/* =========================================
-   GOOGLE
-========================================= */
-
-googleBtn.onclick = async function(){
-
-  loginMessage.textContent =
-    "Opening Google...";
-
-  try{
+  try {
 
     await signInWithPopup(
       auth,
       googleProvider
     );
 
-    loginMessage.textContent = "";
+  } catch (e) {
 
-  }catch(error){
+    console.error(e);
 
-    loginMessage.textContent =
-      authError(error);
+    error.textContent =
+      e.message;
 
   }
 
 };
 
 
-/* =========================================
-   AUTH STATE
-========================================= */
+/* LOGOUT */
 
-onAuthStateChanged(auth, async function(user){
+document.getElementById("logoutBtn").onclick =
+  async () => {
 
-  currentUser = user;
+    await signOut(auth);
 
-  if(!user){
-
-    loginScreen.classList.remove("hidden");
-    appScreen.classList.add("hidden");
-
-    if(unsubscribeHistory){
-      unsubscribeHistory();
-      unsubscribeHistory = null;
-    }
-
-    return;
-  }
-
-  loginScreen.classList.add("hidden");
-  appScreen.classList.remove("hidden");
-
-  userEmail.textContent =
-    user.email || "Google User";
-
-  startHistory();
-
-  await createNewChat();
-
-});
+  };
 
 
-/* =========================================
-   FIRESTORE COLLECTION
-========================================= */
+/* FIRESTORE PATH */
 
-function chatCollection(){
+function chatsRef() {
 
   return collection(
     db,
@@ -1246,688 +979,453 @@ function chatCollection(){
 }
 
 
-/* =========================================
-   HISTORY
-========================================= */
+/* NEW CHAT */
 
-function startHistory(){
+async function createChat() {
 
-  if(!currentUser) return;
+  if (!currentUser) return;
 
-  if(unsubscribeHistory){
-    unsubscribeHistory();
-  }
+  const ref =
+    await addDoc(
+      chatsRef(),
+      {
 
-  const q = query(
-    chatCollection(),
-    orderBy("updatedAt","desc")
-  );
+        userId:
+          currentUser.uid,
 
-  unsubscribeHistory = onSnapshot(
-    q,
-    function(snapshot){
+        title:
+          "New Chat",
 
-      historyBox.innerHTML = "";
+        mode:
+          currentMode,
 
-      if(snapshot.empty){
+        messages:
+          [],
 
-        const empty =
-          document.createElement("div");
+        createdAt:
+          serverTimestamp(),
 
-        empty.className =
-          "history-empty";
+        updatedAt:
+          serverTimestamp()
 
-        empty.textContent =
-          "No saved chats yet.";
-
-        historyBox.appendChild(empty);
-
-        return;
       }
+    );
 
-      snapshot.forEach(function(item){
+  currentChatId =
+    ref.id;
 
-        const data = item.data();
-
-        const row =
-          document.createElement("div");
-
-        row.className =
-          "history-row";
-
-        const open =
-          document.createElement("button");
-
-        open.className =
-          "history-open";
-
-        if(item.id === currentChatId){
-          open.classList.add("active");
-        }
-
-        const name =
-          document.createElement("div");
-
-        name.className =
-          "history-name";
-
-        name.textContent =
-          data.title || "New Chat";
-
-        open.appendChild(name);
-
-        open.onclick = function(){
-
-          openChat(item.id);
-
-          sidebar.classList.remove("open");
-
-        };
-
-
-        const remove =
-          document.createElement("button");
-
-        remove.className =
-          "history-delete";
-
-        remove.textContent = "×";
-
-        remove.title = "Delete chat";
-
-        remove.onclick = function(event){
-
-          event.stopPropagation();
-
-          deleteChat(item.id);
-
-        };
-
-
-        row.appendChild(open);
-        row.appendChild(remove);
-
-        historyBox.appendChild(row);
-
-      });
-
-    },
-    function(error){
-
-      console.error(
-        "Firestore history error:",
-        error
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   NEW CHAT
-========================================= */
-
-async function createNewChat(){
-
-  if(!currentUser) return;
-
-  const chatRef =
-    doc(chatCollection());
-
-  currentChatId = chatRef.id;
-
-  currentMessages = [];
+  messages = [];
 
   chatTitle.textContent =
     "New Chat";
 
-  renderChat();
-
-  try{
-
-    await setDoc(
-      chatRef,
-      {
-        userId:currentUser.uid,
-        title:"New Chat",
-        messages:[],
-        mode:selectedMode,
-        createdAt:serverTimestamp(),
-        updatedAt:serverTimestamp()
-      }
-    );
-
-  }catch(error){
-
-    console.error(
-      "Create chat error:",
-      error
-    );
-
-  }
+  renderMessages();
 
 }
 
 
-/* =========================================
-   OPEN CHAT
-========================================= */
+/* SAVE CHAT */
 
-async function openChat(chatId){
+async function saveChat() {
 
-  if(!currentUser) return;
+  if (!currentUser ||
+      !currentChatId) return;
 
-  try{
+  let title =
+    "New Chat";
 
-    const chatRef =
-      doc(
-        db,
-        "users",
-        currentUser.uid,
-        "chats",
-        chatId
-      );
-
-    const snap =
-      await getDoc(chatRef);
-
-    if(!snap.exists()) return;
-
-    const data = snap.data();
-
-    currentChatId = chatId;
-
-    currentMessages =
-      Array.isArray(data.messages)
-        ? data.messages
-        : [];
-
-    chatTitle.textContent =
-      data.title || "New Chat";
-
-    selectedMode =
-      data.mode || "General";
-
-    updateModes();
-
-    renderChat();
-
-  }catch(error){
-
-    console.error(
-      "Open chat error:",
-      error
+  const first =
+    messages.find(
+      m => m.role === "user"
     );
 
+  if (first) {
+
+    title =
+      first.content
+        .replace(/\s+/g, " ")
+        .slice(0, 45);
+
   }
 
-}
+  await setDoc(
 
-
-/* =========================================
-   SAVE CHAT
-========================================= */
-
-async function saveChat(){
-
-  if(!currentUser || !currentChatId){
-    return;
-  }
-
-  const chatRef =
     doc(
       db,
       "users",
       currentUser.uid,
       "chats",
       currentChatId
-    );
+    ),
 
-  const title =
-    getChatTitle();
+    {
 
-  try{
-
-    await setDoc(
-      chatRef,
-      {
-        userId:currentUser.uid,
-        title:title,
-        messages:currentMessages,
-        mode:selectedMode,
-        updatedAt:serverTimestamp()
-      },
-      {
-        merge:true
-      }
-    );
-
-    chatTitle.textContent = title;
-
-  }catch(error){
-
-    console.error(
-      "Save chat error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   CHAT TITLE
-========================================= */
-
-function getChatTitle(){
-
-  const first =
-    currentMessages.find(
-      function(message){
-        return message.role === "user";
-      }
-    );
-
-  if(!first){
-    return "New Chat";
-  }
-
-  let title =
-    String(first.text || "")
-      .replace(/\s+/g," ")
-      .trim();
-
-  if(title.length > 45){
-    title =
-      title.substring(0,45) + "...";
-  }
-
-  return title || "New Chat";
-}
-
-
-/* =========================================
-   DELETE CHAT
-========================================= */
-
-async function deleteChat(chatId){
-
-  if(!currentUser) return;
-
-  const okay =
-    confirm("Delete this chat?");
-
-  if(!okay) return;
-
-  try{
-
-    await deleteDoc(
-      doc(
-        db,
-        "users",
+      userId:
         currentUser.uid,
-        "chats",
-        chatId
-      )
+
+      title:
+        title || "New Chat",
+
+      mode:
+        currentMode,
+
+      messages:
+        messages,
+
+      updatedAt:
+        serverTimestamp()
+
+    },
+
+    { merge: true }
+
+  );
+
+  chatTitle.textContent =
+    title || "New Chat";
+}
+
+
+/* OPEN CHAT */
+
+async function openChat(id) {
+
+  const ref =
+    doc(
+      db,
+      "users",
+      currentUser.uid,
+      "chats",
+      id
     );
 
-    if(chatId === currentChatId){
+  const snap =
+    await getDoc(ref);
 
-      await createNewChat();
+  if (!snap.exists()) return;
 
-    }
+  const data =
+    snap.data();
 
-  }catch(error){
+  currentChatId =
+    id;
 
-    console.error(
-      "Delete chat error:",
-      error
-    );
+  messages =
+    data.messages || [];
 
-  }
+  currentMode =
+    data.mode || "General";
+
+  chatTitle.textContent =
+    data.title || "New Chat";
+
+  updateModes();
+
+  renderMessages();
 
 }
 
 
-/* =========================================
-   RENDER CHAT
-========================================= */
+/* RENDER */
 
-function renderChat(){
+function renderMessages() {
 
-  chatBox.innerHTML = "";
+  chatBox
+    .querySelectorAll(".message")
+    .forEach(
+      element => element.remove()
+    );
 
-  if(currentMessages.length === 0){
+  if (messages.length === 0) {
 
-    renderWelcome();
+    welcome.classList.remove(
+      "hidden"
+    );
 
     return;
 
   }
 
-  currentMessages.forEach(
-    function(message){
+  welcome.classList.add(
+    "hidden"
+  );
 
-      addMessage(
+  messages.forEach(
+    message => {
+
+      addMessageToScreen(
         message.role,
-        message.text
+        message.content
       );
 
     }
   );
 
-  scrollBottom();
-
 }
 
 
-/* =========================================
-   WELCOME
-========================================= */
+/* ADD MESSAGE */
 
-function renderWelcome(){
+function addMessageToScreen(
+  role,
+  content
+) {
 
-  const welcome =
-    document.createElement("div");
-
-  welcome.className = "welcome";
-
-  welcome.innerHTML = `
-    <div class="ai-orb">✦</div>
-
-    <h1>
-      Welcome to <span>UNI AI</span>
-    </h1>
-
-    <p>
-      Ujjwal Neural Intelligence<br>
-      Your futuristic personal AI assistant.
-    </p>
-
-    <div class="feature-grid">
-
-      <div class="feature">
-        <b>◈ Study</b>
-        <span>Simple explanations and homework help.</span>
-      </div>
-
-      <div class="feature">
-        <b>◈ Coding</b>
-        <span>Build and debug your projects.</span>
-      </div>
-
-      <div class="feature">
-        <b>◈ Search</b>
-        <span>Use UNI's search mode.</span>
-      </div>
-
-      <div class="feature">
-        <b>◈ General</b>
-        <span>Ask UNI anything.</span>
-      </div>
-
-    </div>
-  `;
-
-  chatBox.appendChild(welcome);
-
-}
-
-
-/* =========================================
-   ADD MESSAGE
-========================================= */
-
-function addMessage(role,text){
+  welcome.classList.add(
+    "hidden"
+  );
 
   const row =
     document.createElement("div");
 
   row.className =
-    "message-row " +
-    (role === "user"
-      ? "user"
-      : "ai");
+    "message " + role;
+
+  const wrapper =
+    document.createElement("div");
+
+  const label =
+    document.createElement("div");
+
+  label.className =
+    "label";
+
+  label.textContent =
+    role === "user"
+      ? "YOU"
+      : "UNI";
 
   const bubble =
     document.createElement("div");
 
   bubble.className =
-    "message " +
-    (role === "user"
-      ? "user"
-      : "ai");
+    "bubble";
 
-  bubble.textContent = text;
+  bubble.textContent =
+    content;
 
-  row.appendChild(bubble);
+  wrapper.appendChild(label);
 
-  chatBox.appendChild(row);
+  wrapper.appendChild(bubble);
 
-}
-
-
-/* =========================================
-   THINKING MESSAGE
-========================================= */
-
-function showThinking(){
-
-  const row =
-    document.createElement("div");
-
-  row.className =
-    "message-row ai";
-
-  row.id = "thinkingMessage";
-
-  const bubble =
-    document.createElement("div");
-
-  bubble.className =
-    "message ai";
-
-  bubble.innerHTML = `
-    <div class="thinking">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  `;
-
-  row.appendChild(bubble);
+  row.appendChild(wrapper);
 
   chatBox.appendChild(row);
 
-  scrollBottom();
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
 
 }
 
 
-/* =========================================
-   REMOVE THINKING SAFELY
-========================================= */
+/* SEND MESSAGE */
 
-function removeThinking(){
-
-  const element =
-    document.getElementById(
-      "thinkingMessage"
-    );
-
-  if(element){
-
-    element.remove();
-
-  }
-
-}
-
-
-/* =========================================
-   SEND MESSAGE
-========================================= */
-
-async function sendMessage(){
-
-  if(sending) return;
+async function sendMessage() {
 
   const text =
-    question.value.trim();
+    messageInput.value.trim();
 
-  if(!text) return;
+  if (!text) return;
 
-  if(!currentUser){
+  if (!currentUser) {
 
-    alert("Please sign in first.");
+    status.textContent =
+      "Please sign in first.";
 
     return;
 
   }
 
-  sending = true;
+  if (!currentChatId) {
 
-  sendBtn.disabled = true;
+    await createChat();
 
-  question.value = "";
+  }
 
-  resizeTextarea();
+  messageInput.value = "";
 
+  autoResize();
 
-  currentMessages.push({
-    role:"user",
-    text:text
+  messages.push({
+
+    role: "user",
+
+    content: text,
+
+    time:
+      new Date().toISOString()
+
   });
 
-  renderChat();
+  addMessageToScreen(
+    "user",
+    text
+  );
 
   await saveChat();
 
-  showThinking();
+  status.textContent =
+    "UNI is thinking...";
 
+  sendBtn.disabled = true;
 
-  try{
+  try {
 
     const prompt =
-`You are UNI AI.
 
-UNI means Ujjwal Neural Intelligence.
+      "You are UNI AI, which stands for Ujjwal Neural Intelligence. " +
 
-Never introduce yourself as OpenAI.
+      "You are a helpful personal AI assistant. " +
 
-You are a helpful AI assistant.
+      "Never introduce yourself as OpenAI. " +
 
-Current mode: ${selectedMode}
+      "Current mode: " +
+      currentMode +
+      ". " +
 
-User:
-${text}`;
+      "Answer the user's question clearly.\n\n" +
+
+      "User: " +
+      text;
 
 
     const response =
       await fetch(
-        "https://uni-ai-3mg0.onrender.com/ask",
+        BACKEND_URL,
         {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
+
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
           },
-          body:JSON.stringify({
-            question:prompt
-          })
+
+          body:
+            JSON.stringify({
+
+              question:
+                prompt,
+
+              mode:
+                currentMode
+
+            })
+
         }
       );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
 
 
     const data =
       await response.json();
 
 
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Backend error"
+      );
+
+    }
+
+
     const answer =
       data.answer ||
       data.response ||
       data.output ||
-      "UNI could not generate an answer.";
+      data.text;
 
 
-    removeThinking();
+    if (!answer) {
+
+      throw new Error(
+        "UNI returned no answer."
+      );
+
+    }
 
 
-    currentMessages.push({
-      role:"assistant",
-      text:String(answer)
+    messages.push({
+
+      role: "assistant",
+
+      content:
+        String(answer),
+
+      time:
+        new Date().toISOString()
+
     });
 
 
-    renderChat();
-
-    await saveChat();
-
-    speak(answer);
-
-
-  }catch(error){
-
-    console.error(
-      "AI error:",
-      error
+    addMessageToScreen(
+      "assistant",
+      String(answer)
     );
 
-    removeThinking();
-
-
-    currentMessages.push({
-      role:"assistant",
-      text:
-        "Sorry, UNI could not connect to the AI server right now."
-    });
-
-
-    renderChat();
 
     await saveChat();
+
+    speak(
+      String(answer)
+    );
+
+    status.textContent = "";
+
+
+  } catch (e) {
+
+    console.error(e);
+
+    const msg =
+      "Sorry, UNI could not connect to the backend.";
+
+    messages.push({
+
+      role: "assistant",
+
+      content:
+        msg
+
+    });
+
+    addMessageToScreen(
+      "assistant",
+      msg
+    );
+
+    await saveChat();
+
+    status.textContent =
+      e.message || "Connection error.";
 
   }
 
 
-  sending = false;
-
   sendBtn.disabled = false;
+
+  messageInput.focus();
 
 }
 
 
-/* =========================================
-   SEND BUTTON
-========================================= */
+/* SEND BUTTON */
 
-sendBtn.onclick = sendMessage;
+sendBtn.onclick =
+  sendMessage;
 
 
-/* =========================================
-   ENTER
-========================================= */
+/* ENTER TO SEND */
 
-question.addEventListener(
+messageInput.addEventListener(
   "keydown",
-  function(event){
+  event => {
 
-    if(
+    if (
       event.key === "Enter" &&
       !event.shiftKey
-    ){
+    ) {
 
       event.preventDefault();
 
@@ -1939,117 +1437,36 @@ question.addEventListener(
 );
 
 
-/* =========================================
-   TEXTAREA
-========================================= */
+/* TEXTAREA SIZE */
 
-question.addEventListener(
-  "input",
-  resizeTextarea
-);
+function autoResize() {
 
-function resizeTextarea(){
+  messageInput.style.height =
+    "auto";
 
-  question.style.height = "auto";
-
-  question.style.height =
+  messageInput.style.height =
     Math.min(
-      question.scrollHeight,
+      messageInput.scrollHeight,
       150
     ) + "px";
 
 }
 
-
-/* =========================================
-   NEW CHAT
-========================================= */
-
-newChatBtn.onclick = async function(){
-
-  await createNewChat();
-
-  sidebar.classList.remove("open");
-
-};
+messageInput.addEventListener(
+  "input",
+  autoResize
+);
 
 
-/* =========================================
-   CLEAR
-========================================= */
-
-clearBtn.onclick = async function(){
-
-  if(!currentChatId) return;
-
-  const okay =
-    confirm(
-      "Clear messages from this chat?"
-    );
-
-  if(!okay) return;
-
-  currentMessages = [];
-
-  renderChat();
-
-  await saveChat();
-
-};
-
-
-/* =========================================
-   HISTORY BUTTON
-========================================= */
-
-historyBtn.onclick = function(){
-
-  sidebar.classList.toggle("open");
-
-};
-
-
-/* =========================================
-   MOBILE MENU
-========================================= */
-
-menuBtn.onclick = function(){
-
-  sidebar.classList.toggle("open");
-
-};
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-logoutBtn.onclick = async function(){
-
-  try{
-
-    await signOut(auth);
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-};
-
-
-/* =========================================
-   MODES
-========================================= */
+/* MODES */
 
 document
   .querySelectorAll(".mode")
-  .forEach(function(button){
+  .forEach(button => {
 
-    button.onclick = function(){
+    button.onclick = () => {
 
-      selectedMode =
+      currentMode =
         button.dataset.mode;
 
       updateModes();
@@ -2059,15 +1476,16 @@ document
   });
 
 
-function updateModes(){
+function updateModes() {
 
   document
     .querySelectorAll(".mode")
-    .forEach(function(button){
+    .forEach(button => {
 
       button.classList.toggle(
         "active",
-        button.dataset.mode === selectedMode
+        button.dataset.mode ===
+          currentMode
       );
 
     });
@@ -2075,135 +1493,371 @@ function updateModes(){
 }
 
 
-/* =========================================
-   VOICE INPUT
-========================================= */
+/* NEW CHAT BUTTON */
 
-const SpeechRecognition =
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
+document.getElementById(
+  "newChat"
+).onclick =
+  async () => {
 
-let recognition = null;
-
-if(SpeechRecognition){
-
-  recognition =
-    new SpeechRecognition();
-
-  recognition.lang = "en-IN";
-
-  recognition.continuous = false;
-
-  recognition.interimResults = false;
-
-
-  recognition.onstart = function(){
-
-    voiceBtn.classList.add("active");
+    await createChat();
 
   };
 
 
-  recognition.onend = function(){
+/* CLEAR */
 
-    voiceBtn.classList.remove("active");
+document.getElementById(
+  "clearBtn"
+).onclick =
+  async () => {
+
+    messages = [];
+
+    renderMessages();
+
+    await saveChat();
 
   };
 
 
-  recognition.onresult =
-    function(event){
+/* CHAT HISTORY */
 
-      question.value =
-        event.results[0][0].transcript;
+function startHistory() {
 
-      resizeTextarea();
+  const q =
+    query(
+      chatsRef(),
+      orderBy(
+        "updatedAt",
+        "desc"
+      )
+    );
 
-    };
+
+  onSnapshot(
+    q,
+    snapshot => {
+
+      historyList.innerHTML = "";
+
+      snapshot.forEach(
+        snap => {
+
+          const data =
+            snap.data();
+
+          const row =
+            document.createElement(
+              "div"
+            );
+
+          row.className =
+            "history-item";
 
 
-  recognition.onerror =
-    function(error){
+          const open =
+            document.createElement(
+              "button"
+            );
 
-      console.log(
-        "Voice error:",
-        error
+          open.className =
+            "history-open";
+
+          open.textContent =
+            data.title ||
+            "New Chat";
+
+          open.onclick =
+            () => openChat(
+              snap.id
+            );
+
+
+          const del =
+            document.createElement(
+              "button"
+            );
+
+          del.className =
+            "delete-history";
+
+          del.textContent =
+            "×";
+
+          del.onclick =
+            async event => {
+
+              event.stopPropagation();
+
+              await deleteDoc(
+                doc(
+                  db,
+                  "users",
+                  currentUser.uid,
+                  "chats",
+                  snap.id
+                )
+              );
+
+              if (
+                currentChatId ===
+                snap.id
+              ) {
+
+                currentChatId =
+                  null;
+
+                messages = [];
+
+                await createChat();
+
+              }
+
+            };
+
+
+          row.appendChild(
+            open
+          );
+
+          row.appendChild(
+            del
+          );
+
+          historyList.appendChild(
+            row
+          );
+
+        }
       );
 
-      voiceBtn.classList.remove("active");
+    },
 
-    };
+    error => {
 
+      console.error(error);
 
-  voiceBtn.onclick = function(){
-
-    try{
-
-      recognition.start();
-
-    }catch(error){
-
-      console.log(error);
+      status.textContent =
+        "Firestore error. Check your rules.";
 
     }
 
-  };
-
-}else{
-
-  voiceBtn.disabled = true;
-
-  voiceBtn.title =
-    "Voice input is not supported.";
-
-}
-
-
-/* =========================================
-   TEXT TO SPEECH
-========================================= */
-
-function speak(text){
-
-  if(!("speechSynthesis" in window)){
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-
-  const clean =
-    String(text)
-      .replace(/[*#`_]/g,"")
-      .replace(/\n+/g," ");
-
-  const speech =
-    new SpeechSynthesisUtterance(clean);
-
-  speech.lang = "en-IN";
-  speech.rate = 1;
-  speech.pitch = 1;
-
-  window.speechSynthesis.speak(
-    speech
   );
 
 }
 
 
-/* =========================================
-   SCROLL
-========================================= */
+/* VOICE INPUT */
 
-function scrollBottom(){
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
 
-  requestAnimationFrame(function(){
 
-    chatBox.scrollTop =
-      chatBox.scrollHeight;
+if (SpeechRecognition) {
 
-  });
+  recognition =
+    new SpeechRecognition();
+
+  recognition.lang =
+    "en-IN";
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.onstart =
+    () => {
+
+      voiceBtn.classList.add(
+        "listening"
+      );
+
+      voiceBtn.textContent =
+        "⏺";
+
+      status.textContent =
+        "Listening...";
+
+    };
+
+
+  recognition.onresult =
+    event => {
+
+      const text =
+        event
+          .results[0][0]
+          .transcript;
+
+      messageInput.value +=
+        (
+          messageInput.value
+            ? " "
+            : ""
+        ) + text;
+
+      autoResize();
+
+    };
+
+
+  recognition.onend =
+    () => {
+
+      voiceBtn.classList.remove(
+        "listening"
+      );
+
+      voiceBtn.textContent =
+        "🎤";
+
+      status.textContent =
+        "";
+
+    };
+
+
+  voiceBtn.onclick =
+    () => {
+
+      recognition.start();
+
+    };
+
+} else {
+
+  voiceBtn.onclick =
+    () => {
+
+      status.textContent =
+        "Voice input is not supported.";
+
+    };
 
 }
+
+
+/* VOICE REPLY */
+
+function speak(text) {
+
+  if (
+    !("speechSynthesis" in window)
+  ) return;
+
+  speechSynthesis.cancel();
+
+  const voice =
+    new SpeechSynthesisUtterance(
+      text
+    );
+
+  voice.lang =
+    "en-IN";
+
+  voice.rate =
+    1;
+
+  speechSynthesis.speak(
+    voice
+  );
+
+}
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if (!user) {
+
+      currentUser =
+        null;
+
+      app.classList.add(
+        "hidden"
+      );
+
+      authScreen.classList.remove(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    currentUser =
+      user;
+
+    authScreen.classList.add(
+      "hidden"
+    );
+
+    app.classList.remove(
+      "hidden"
+    );
+
+
+    startHistory();
+
+
+    if (!currentChatId) {
+
+      const q =
+        query(
+          chatsRef(),
+          orderBy(
+            "updatedAt",
+            "desc"
+          )
+        );
+
+
+      onSnapshot(
+        q,
+        async snapshot => {
+
+          if (
+            !currentChatId &&
+            snapshot.empty
+          ) {
+
+            await createChat();
+
+          } else if (
+            !currentChatId &&
+            !snapshot.empty
+          ) {
+
+            await openChat(
+              snapshot.docs[0].id
+            );
+
+          }
+
+        },
+        error => {
+
+          console.error(error);
+
+        }
+      );
+
+    }
+
+
+    messageInput.focus();
+
+  }
+);
 
 </script>
 
