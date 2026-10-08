@@ -7,1506 +7,1378 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial, sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  min-height:100vh;
-  color:white;
-  background:
-    radial-gradient(circle at top left,#302b63,transparent 40%),
-    radial-gradient(circle at bottom right,#24243e,transparent 45%),
-    #080812;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at top left,#15112d,transparent 35%),
+      radial-gradient(circle at bottom right,#061b2d,transparent 35%),
+      #050509;
+    color:white;
 }
 
-button,input,textarea{
-  font:inherit;
-}
+/* LOGIN */
 
-button{
-  cursor:pointer;
-}
-
-.app{
-  min-height:100vh;
-  padding:18px;
-}
-
-.topbar{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 18px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:20px;
-  background:rgba(255,255,255,.07);
-  backdrop-filter:blur(15px);
-}
-
-.logo{
-  font-size:24px;
-  font-weight:bold;
-}
-
-.logo small{
-  display:block;
-  font-size:10px;
-  opacity:.65;
-  letter-spacing:1px;
-}
-
-.account{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.userEmail{
-  font-size:12px;
-  opacity:.75;
-  max-width:180px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.btn{
-  border:0;
-  border-radius:12px;
-  padding:10px 15px;
-  color:white;
-  background:linear-gradient(135deg,#7c4dff,#00c6ff);
-  font-weight:bold;
-}
-
-.btn.secondary{
-  background:rgba(255,255,255,.1);
-}
-
-.main{
-  max-width:1100px;
-  margin:25px auto;
-}
-
-.hero{
-  text-align:center;
-  padding:25px 10px;
-}
-
-.orb{
-  width:110px;
-  height:110px;
-  margin:auto;
-  border-radius:50%;
-  background:radial-gradient(circle,#ffffff,#8c7bff 30%,#00c6ff 65%,transparent 70%);
-  box-shadow:0 0 45px #655cff;
-  animation:pulse 2.5s infinite;
-}
-
-@keyframes pulse{
-  50%{transform:scale(1.07)}
-}
-
-.hero h1{
-  margin-top:20px;
-  font-size:40px;
-}
-
-.hero p{
-  margin-top:8px;
-  opacity:.7;
-}
-
-.modes{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:15px 0;
-}
-
-.mode{
-  padding:9px 15px;
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:20px;
-  background:rgba(255,255,255,.06);
-  color:white;
-}
-
-.mode.active{
-  background:linear-gradient(135deg,#7c4dff,#00c6ff);
-}
-
-.chat{
-  min-height:390px;
-  max-height:500px;
-  overflow-y:auto;
-  padding:18px;
-  border-radius:22px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-}
-
-.message{
-  max-width:82%;
-  margin:10px 0;
-  padding:13px 15px;
-  border-radius:17px;
-  line-height:1.5;
-  white-space:pre-wrap;
-}
-
-.user{
-  margin-left:auto;
-  background:linear-gradient(135deg,#6255ff,#367cff);
-}
-
-.ai{
-  background:rgba(255,255,255,.1);
-}
-
-.inputArea{
-  margin-top:15px;
-  display:flex;
-  gap:8px;
-  padding:10px;
-  border-radius:20px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-}
-
-textarea{
-  flex:1;
-  min-height:50px;
-  max-height:130px;
-  resize:none;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:white;
-  padding:13px;
-}
-
-.iconBtn{
-  width:48px;
-  height:48px;
-  border:0;
-  border-radius:14px;
-  background:rgba(255,255,255,.1);
-  color:white;
-  font-size:19px;
-}
-
-.send{
-  background:linear-gradient(135deg,#7c4dff,#00c6ff);
-}
-
-.tools{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:12px;
-}
-
-.status{
-  text-align:center;
-  margin:10px;
-  font-size:12px;
-  opacity:.6;
-}
-
-/* AUTH */
-
-.authOverlay{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(12px);
+#authScreen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
 }
 
 .authBox{
-  width:min(420px,100%);
-  padding:28px;
-  border-radius:25px;
-  background:#11111f;
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 20px 70px rgba(0,0,0,.5);
+    width:100%;
+    max-width:540px;
+    padding:38px;
+    border-radius:28px;
+    background:rgba(20,18,32,.94);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 0 50px rgba(80,70,255,.16);
 }
 
-.authBox h2{
-  text-align:center;
-  font-size:28px;
+.logo{
+    text-align:center;
+    font-size:38px;
+    font-weight:800;
+    margin-bottom:5px;
 }
 
-.authSub{
-  text-align:center;
-  opacity:.65;
-  margin:7px 0 22px;
-  font-size:13px;
+.subtitle{
+    text-align:center;
+    color:#aaa;
+    margin-bottom:30px;
 }
 
 .authInput{
-  width:100%;
-  padding:14px;
-  margin:7px 0;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.12);
-  outline:0;
-  background:rgba(255,255,255,.07);
-  color:white;
+    width:100%;
+    padding:17px;
+    margin:8px 0;
+    border-radius:16px;
+    border:1px solid #3a3947;
+    outline:none;
+    background:#24232e;
+    color:white;
+    font-size:16px;
 }
 
-.authBtn{
-  width:100%;
-  padding:13px;
-  margin-top:8px;
-  border:0;
-  border-radius:12px;
-  background:linear-gradient(135deg,#7c4dff,#00c6ff);
-  color:white;
-  font-weight:bold;
+.authInput:focus{
+    border-color:#6d5cff;
+}
+
+.mainBtn{
+    width:100%;
+    padding:17px;
+    border:none;
+    border-radius:16px;
+    margin-top:10px;
+    background:linear-gradient(90deg,#7250ff,#00bfff);
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .googleBtn{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:12px;
-  background:white;
-  color:#222;
-  font-weight:bold;
+    width:100%;
+    padding:16px;
+    margin-top:12px;
+    border:none;
+    border-radius:16px;
+    background:white;
+    color:#222;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.divider{
-  text-align:center;
-  margin:17px 0;
-  opacity:.5;
-  font-size:12px;
-}
-
-.authSwitch{
-  text-align:center;
-  margin-top:15px;
-  font-size:13px;
-}
-
-.authSwitch span{
-  color:#7db7ff;
-  cursor:pointer;
-  font-weight:bold;
+.switch{
+    text-align:center;
+    margin-top:22px;
+    color:#82b9ff;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 .authError{
-  color:#ff8c8c;
-  font-size:12px;
-  margin-top:8px;
-  text-align:center;
+    color:#ff7777;
+    text-align:center;
+    margin-top:15px;
+    font-size:14px;
 }
 
-.hidden{
-  display:none !important;
+/* APP */
+
+#app{
+    display:none;
+    min-height:100vh;
+    flex-direction:column;
 }
 
-.cameraModal{
-  position:fixed;
-  inset:0;
-  z-index:1100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.85);
-  padding:20px;
+header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    background:rgba(7,7,12,.75);
+    backdrop-filter:blur(15px);
 }
 
-.cameraBox{
-  width:min(600px,100%);
-  background:#11111f;
-  padding:18px;
-  border-radius:20px;
-  text-align:center;
+.brand{
+    font-size:24px;
+    font-weight:800;
 }
 
-video{
-  width:100%;
-  border-radius:15px;
-  background:black;
+.brand span{
+    color:#7d6aff;
 }
 
-@media(max-width:600px){
-  .hero h1{font-size:30px}
-  .message{max-width:92%}
-  .userEmail{display:none}
+.headerRight{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.userEmail{
+    color:#aaa;
+    font-size:13px;
+}
+
+.smallBtn{
+    padding:9px 13px;
+    border-radius:10px;
+    border:1px solid #444;
+    background:#191923;
+    color:white;
+    cursor:pointer;
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:25px 15px 110px;
+}
+
+.welcome{
+    text-align:center;
+    margin:25px 0;
+}
+
+.welcome h1{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.welcome p{
+    color:#999;
+}
+
+/* MODE BUTTONS */
+
+.modes{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.mode{
+    padding:10px 18px;
+    border-radius:20px;
+    border:1px solid #393944;
+    background:#15151d;
+    color:#ccc;
+    cursor:pointer;
+}
+
+.mode.active{
+    background:linear-gradient(90deg,#684eff,#00aeea);
+    color:white;
+    border-color:transparent;
+}
+
+/* CHAT */
+
+#chat{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-height:250px;
+}
+
+.message{
+    max-width:85%;
+    padding:14px 17px;
+    border-radius:18px;
+    line-height:1.5;
+    white-space:pre-wrap;
+}
+
+.user{
+    align-self:flex-end;
+    background:linear-gradient(135deg,#6048ed,#287be8);
+}
+
+.ai{
+    align-self:flex-start;
+    background:#171720;
+    border:1px solid #2d2d39;
+}
+
+.preview{
+    max-width:250px;
+    max-height:250px;
+    border-radius:15px;
+    margin-top:8px;
+}
+
+/* INPUT */
+
+.inputArea{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:13px;
+    background:rgba(5,5,9,.92);
+    backdrop-filter:blur(18px);
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+.inputBox{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+#question{
+    flex:1;
+    min-width:0;
+    resize:none;
+    height:52px;
+    padding:15px;
+    border-radius:17px;
+    border:1px solid #383844;
+    outline:none;
+    background:#171720;
+    color:white;
+    font-size:16px;
+}
+
+.iconBtn{
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:15px;
+    background:#20202b;
+    color:white;
+    font-size:21px;
+    cursor:pointer;
+}
+
+.sendBtn{
+    width:70px;
+    height:50px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(90deg,#7052ff,#00b7ed);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#photoInput{
+    display:none;
+}
+
+.typing{
+    color:#888;
+    font-style:italic;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+    .authBox{
+        padding:25px 18px;
+    }
+
+    .logo{
+        font-size:32px;
+    }
+
+    .welcome h1{
+        font-size:29px;
+    }
+
+    .userEmail{
+        display:none;
+    }
+
+    .brand{
+        font-size:20px;
+    }
+
+    .message{
+        max-width:92%;
+    }
+
+    .inputBox{
+        gap:5px;
+    }
+
+    .iconBtn{
+        width:44px;
+        height:50px;
+    }
+
+    .sendBtn{
+        width:58px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= AUTH ================= -->
+<!-- ================= LOGIN SCREEN ================= -->
 
-<div id="authOverlay" class="authOverlay">
+<div id="authScreen">
 
-  <div class="authBox">
+<div class="authBox">
 
-    <h2 id="authTitle">Welcome to UNI</h2>
+<div class="logo">Welcome to UNI</div>
+<div class="subtitle">Ujjwal Neural Intelligence</div>
 
-    <div class="authSub">
-      Ujjwal Neural Intelligence
-    </div>
+<input
+    id="email"
+    class="authInput"
+    type="email"
+    placeholder="Email"
+>
 
-    <input
-      id="authEmail"
-      class="authInput"
-      type="email"
-      placeholder="Email"
-      autocomplete="email"
-    >
+<input
+    id="password"
+    class="authInput"
+    type="password"
+    placeholder="Password"
+>
 
-    <input
-      id="authPassword"
-      class="authInput"
-      type="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
+<button id="authBtn" class="mainBtn">
+    Login
+</button>
 
-    <button id="emailBtn" class="authBtn">
-      Login
-    </button>
+<button id="googleBtn" class="googleBtn">
+    🔵 Continue with Google
+</button>
 
-    <button id="googleBtn" class="googleBtn">
-      🔵 Continue with Google
-    </button>
+<div class="switch" id="switchMode">
+    Don't have an account? Sign Up
+</div>
 
-    <div class="divider">OR</div>
+<div id="authError" class="authError"></div>
 
-    <div class="authSwitch">
-      <span id="switchText">Don't have an account?</span>
-      <span id="switchBtn"> Sign Up</span>
-    </div>
-
-    <div id="authError" class="authError"></div>
-
-  </div>
+</div>
 </div>
 
 
 <!-- ================= MAIN APP ================= -->
 
-<div id="app" class="app hidden">
+<div id="app">
 
-  <div class="topbar">
+<header>
 
-    <div class="logo">
-      UNI
-      <small>UJJWAL NEURAL INTELLIGENCE</small>
-    </div>
+<div class="brand">
+    <span>UNI</span> AI
+</div>
 
-    <div class="account">
-      <span id="userEmail" class="userEmail"></span>
-      <button id="logoutBtn" class="btn secondary">
-        Logout
-      </button>
-    </div>
+<div class="headerRight">
 
-  </div>
+<div id="userEmail" class="userEmail"></div>
 
-  <main class="main">
+<button id="logoutBtn" class="smallBtn">
+    Logout
+</button>
 
-    <section class="hero">
+</div>
 
-      <div class="orb"></div>
-
-      <h1>UNI AI</h1>
-
-      <p>Your intelligent AI assistant</p>
-
-    </section>
+</header>
 
 
-    <div class="modes">
+<div class="container">
 
-      <button class="mode active" data-mode="General">
-        General
-      </button>
+<div class="welcome">
 
-      <button class="mode" data-mode="Study">
-        📚 Study
-      </button>
+<h1>How can UNI help you?</h1>
 
-      <button class="mode" data-mode="Coding">
-        💻 Coding
-      </button>
-
-      <button class="mode" data-mode="Search">
-        🔎 Search
-      </button>
-
-    </div>
-
-
-    <div id="chat" class="chat">
-
-      <div class="message ai">
-        Hello! I am UNI — Ujjwal Neural Intelligence. 🤖
-        <br><br>
-        Ask me anything!
-      </div>
-
-    </div>
-
-
-    <div id="status" class="status">
-      UNI is ready
-    </div>
-
-
-    <div class="inputArea">
-
-      <textarea
-        id="question"
-        placeholder="Ask UNI anything..."
-      ></textarea>
-
-      <button id="micBtn" class="iconBtn">
-        🎤
-      </button>
-
-      <button id="cameraBtn" class="iconBtn">
-        📷
-      </button>
-
-      <button id="sendBtn" class="iconBtn send">
-        ➤
-      </button>
-
-    </div>
-
-
-    <div class="tools">
-
-      <button id="speakBtn" class="btn secondary">
-        🔊 Speak
-      </button>
-
-      <button id="searchBtn" class="btn secondary">
-        🔎 Google Search
-      </button>
-
-      <button id="clearBtn" class="btn secondary">
-        🗑 Clear
-      </button>
-
-    </div>
-
-  </main>
+<p>
+Ujjwal Neural Intelligence
+</p>
 
 </div>
 
 
-<!-- ================= CAMERA ================= -->
+<!-- MODES -->
 
-<div id="cameraModal" class="cameraModal">
+<div class="modes">
 
-  <div class="cameraBox">
+<button class="mode active" data-mode="General">
+    General
+</button>
 
-    <video id="cameraVideo" autoplay playsinline></video>
+<button class="mode" data-mode="Study">
+    Study
+</button>
 
-    <br><br>
+<button class="mode" data-mode="Coding">
+    Coding
+</button>
 
-    <button id="captureBtn" class="btn">
-      📸 Capture
-    </button>
+<button class="mode" data-mode="Search">
+    Search
+</button>
 
-    <button id="closeCameraBtn" class="btn secondary">
-      Close
-    </button>
+</div>
 
-  </div>
+
+<!-- CHAT -->
+
+<div id="chat">
+
+<div class="message ai">
+Hello! I am UNI — Ujjwal Neural Intelligence. 👋
+<br><br>
+Ask me anything!
+</div>
+
+</div>
+
+</div>
+
+
+<!-- INPUT -->
+
+<div class="inputArea">
+
+<div class="inputBox">
+
+<button
+    class="iconBtn"
+    id="cameraBtn"
+    title="Upload photo"
+>
+    📷
+</button>
+
+<button
+    class="iconBtn"
+    id="voiceBtn"
+    title="Voice input"
+>
+    🎤
+</button>
+
+<textarea
+    id="question"
+    placeholder="Message UNI..."
+></textarea>
+
+<button
+    class="sendBtn"
+    id="sendBtn"
+>
+    Send
+</button>
+
+</div>
+
+</div>
 
 </div>
 
 
 <input
-  id="photoInput"
-  type="file"
-  accept="image/*"
-  capture="environment"
-  style="display:none"
+    type="file"
+    id="photoInput"
+    accept="image/*"
+    capture="environment"
 >
 
 
-<!-- ================= FIREBASE + APP ================= -->
+<!-- ================= FIREBASE + APP SCRIPT ================= -->
 
 <script type="module">
+
+/* =========================================================
+   FIREBASE IMPORTS
+========================================================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signOut
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signOut
 }
 from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
 
-/* =========================================
+/* =========================================================
    FIREBASE CONFIG
-========================================= */
+========================================================= */
+
+/*
+   IMPORTANT:
+
+   Replace ONLY the values below with the CURRENT
+   configuration from:
+
+   Firebase Console
+   → UNI-AI
+   → Project settings
+   → Your apps
+   → UNI AI Web
+   → SDK setup and configuration
+   → Config
+*/
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSy8yConC1tbw_DrCDm182bjCRF6Ivx5Zi2xas",
+    apiKey: "AIzaSyC8ncItbw_DrCDm182bjCRF6Ivx5Zi2xas",
 
-  authDomain: "uni-ai-a00c6.firebaseapp.com",
+    authDomain: "uni-ai-a00c6.firebaseapp.com",
 
-  projectId: "uni-ai-a00c6",
+    projectId: "uni-ai-a00c6",
 
-  storageBucket: "uni-ai-a00c6.firebasestorage.app",
+    storageBucket: "uni-ai-a00c6.firebasestorage.app",
 
-  messagingSenderId: "322740324379",
+    messagingSenderId: "322740324379",
 
-  appId: "1:322740324379:web:686f2301fe6fbe2ed550be",
+    appId: "1:322740324379:web:686f2301fe6fbe2ed550be",
 
-  measurementId: "G-6QZ0LNXTQ3"
+    measurementId: "G-6QZ0LNXTQ3"
 };
 
 
-const firebaseApp = initializeApp(firebaseConfig);
+/* =========================================================
+   START FIREBASE
+========================================================= */
 
-const auth = getAuth(firebaseApp);
+let firebaseApp;
+let auth;
 
-const googleProvider = new GoogleAuthProvider();
+try {
 
+    firebaseApp = initializeApp(firebaseConfig);
 
-/* =========================================
-   ELEMENTS
-========================================= */
+    auth = getAuth(firebaseApp);
 
-const authOverlay =
-  document.getElementById("authOverlay");
+} catch(error) {
 
-const app =
-  document.getElementById("app");
+    console.error(error);
 
-const authTitle =
-  document.getElementById("authTitle");
-
-const authEmail =
-  document.getElementById("authEmail");
-
-const authPassword =
-  document.getElementById("authPassword");
-
-const emailBtn =
-  document.getElementById("emailBtn");
-
-const googleBtn =
-  document.getElementById("googleBtn");
-
-const switchBtn =
-  document.getElementById("switchBtn");
-
-const switchText =
-  document.getElementById("switchText");
-
-const authError =
-  document.getElementById("authError");
-
-const userEmail =
-  document.getElementById("userEmail");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const chat =
-  document.getElementById("chat");
-
-const question =
-  document.getElementById("question");
-
-const status =
-  document.getElementById("status");
-
-const sendBtn =
-  document.getElementById("sendBtn");
-
-const micBtn =
-  document.getElementById("micBtn");
-
-const cameraBtn =
-  document.getElementById("cameraBtn");
-
-const speakBtn =
-  document.getElementById("speakBtn");
-
-const searchBtn =
-  document.getElementById("searchBtn");
-
-const clearBtn =
-  document.getElementById("clearBtn");
-
-const cameraModal =
-  document.getElementById("cameraModal");
-
-const cameraVideo =
-  document.getElementById("cameraVideo");
-
-const captureBtn =
-  document.getElementById("captureBtn");
-
-const closeCameraBtn =
-  document.getElementById("closeCameraBtn");
-
-const photoInput =
-  document.getElementById("photoInput");
-
-
-/* =========================================
-   LOGIN / SIGNUP
-========================================= */
-
-let signupMode = false;
-
-
-function showError(message){
-
-  authError.textContent = message;
+    document.getElementById("authError").textContent =
+        "Firebase setup error. Check your Firebase configuration.";
 
 }
 
 
-switchBtn.addEventListener("click", () => {
+/* =========================================================
+   LOGIN VARIABLES
+========================================================= */
 
-  signupMode = !signupMode;
+let signUpMode = false;
 
-  showError("");
+const emailInput =
+    document.getElementById("email");
 
-  if(signupMode){
+const passwordInput =
+    document.getElementById("password");
 
-    authTitle.textContent = "Create your UNI account";
+const authBtn =
+    document.getElementById("authBtn");
 
-    emailBtn.textContent = "Sign Up";
+const googleBtn =
+    document.getElementById("googleBtn");
 
-    switchText.textContent =
-      "Already have an account?";
+const switchMode =
+    document.getElementById("switchMode");
 
-    switchBtn.textContent =
-      " Login";
+const authError =
+    document.getElementById("authError");
 
-    authPassword.autocomplete =
-      "new-password";
+const authScreen =
+    document.getElementById("authScreen");
 
-  }else{
+const app =
+    document.getElementById("app");
 
-    authTitle.textContent =
-      "Welcome to UNI";
-
-    emailBtn.textContent =
-      "Login";
-
-    switchText.textContent =
-      "Don't have an account?";
-
-    switchBtn.textContent =
-      " Sign Up";
-
-    authPassword.autocomplete =
-      "current-password";
-
-  }
-
-});
+const userEmail =
+    document.getElementById("userEmail");
 
 
-emailBtn.addEventListener("click", async () => {
+/* =========================================================
+   SIGN UP / LOGIN SWITCH
+========================================================= */
 
-  const email =
-    authEmail.value.trim();
+switchMode.addEventListener("click", () => {
 
-  const password =
-    authPassword.value;
+    signUpMode = !signUpMode;
 
-  if(!email || !password){
+    authError.textContent = "";
 
-    showError("Please enter email and password.");
+    if(signUpMode){
 
-    return;
+        authBtn.textContent = "Sign Up";
 
-  }
-
-  if(password.length < 6){
-
-    showError("Password must be at least 6 characters.");
-
-    return;
-
-  }
-
-  try{
-
-    emailBtn.disabled = true;
-
-    if(signupMode){
-
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+        switchMode.textContent =
+            "Already have an account? Login";
 
     }else{
 
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+        authBtn.textContent = "Login";
+
+        switchMode.textContent =
+            "Don't have an account? Sign Up";
+    }
+
+});
+
+
+/* =========================================================
+   EMAIL LOGIN / SIGNUP
+========================================================= */
+
+authBtn.addEventListener("click", async () => {
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+    authError.textContent = "";
+
+    if(!email || !password){
+
+        authError.textContent =
+            "Please enter email and password.";
+
+        return;
+    }
+
+    if(password.length < 6){
+
+        authError.textContent =
+            "Password must be at least 6 characters.";
+
+        return;
+    }
+
+    authBtn.disabled = true;
+
+    try{
+
+        if(signUpMode){
+
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+        }else{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        let message = error.message;
+
+        if(error.code === "auth/invalid-credential"){
+
+            message =
+                "Email or password is incorrect.";
+
+        }
+
+        if(error.code === "auth/email-already-in-use"){
+
+            message =
+                "This email already has an account. Please Login.";
+
+        }
+
+        if(error.code === "auth/invalid-email"){
+
+            message =
+                "Please enter a valid email.";
+
+        }
+
+        if(error.code === "auth/api-key-not-valid-please-pass-a-valid-api-key"){
+
+            message =
+                "Firebase API key is invalid. Copy the current API key from Firebase Console.";
+
+        }
+
+        authError.textContent =
+            "Firebase: " + message;
+
+    }finally{
+
+        authBtn.disabled = false;
 
     }
 
-  }catch(error){
-
-    console.error(error);
-
-    showError(getFirebaseError(error));
-
-  }finally{
-
-    emailBtn.disabled = false;
-
-  }
-
 });
 
 
-/* =========================================
+/* =========================================================
    GOOGLE LOGIN
-========================================= */
+========================================================= */
 
 googleBtn.addEventListener("click", async () => {
 
-  try{
+    authError.textContent = "";
 
-    showError("");
+    try{
 
-    googleBtn.disabled = true;
+        const provider =
+            new GoogleAuthProvider();
 
-    await signInWithPopup(
-      auth,
-      googleProvider
+        await signInWithPopup(
+            auth,
+            provider
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        if(
+            error.code ===
+            "auth/api-key-not-valid-please-pass-a-valid-api-key"
+        ){
+
+            authError.textContent =
+                "Firebase API key is invalid. Update the Firebase config.";
+
+        }else{
+
+            authError.textContent =
+                "Google Login error: " +
+                error.message;
+        }
+
+    }
+
+});
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+if(auth){
+
+    onAuthStateChanged(
+        auth,
+        (user) => {
+
+            if(user){
+
+                authScreen.style.display =
+                    "none";
+
+                app.style.display =
+                    "flex";
+
+                userEmail.textContent =
+                    user.email || "Google User";
+
+            }else{
+
+                authScreen.style.display =
+                    "flex";
+
+                app.style.display =
+                    "none";
+
+            }
+
+        }
     );
-
-  }catch(error){
-
-    console.error(error);
-
-    showError(getFirebaseError(error));
-
-  }finally{
-
-    googleBtn.disabled = false;
-
-  }
-
-});
-
-
-/* =========================================
-   FIREBASE AUTH STATE
-========================================= */
-
-onAuthStateChanged(auth, (user) => {
-
-  if(user){
-
-    authOverlay.classList.add("hidden");
-
-    app.classList.remove("hidden");
-
-    userEmail.textContent =
-      user.displayName
-      ? user.displayName
-      : user.email;
-
-    status.textContent =
-      "Signed in as " +
-      (user.email || "UNI user");
-
-  }else{
-
-    authOverlay.classList.remove("hidden");
-
-    app.classList.add("hidden");
-
-    userEmail.textContent = "";
-
-  }
-
-});
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-logoutBtn.addEventListener("click", async () => {
-
-  await signOut(auth);
-
-});
-
-
-/* =========================================
-   FIREBASE ERROR MESSAGES
-========================================= */
-
-function getFirebaseError(error){
-
-  switch(error.code){
-
-    case "auth/invalid-email":
-      return "Please enter a valid email.";
-
-    case "auth/email-already-in-use":
-      return "This email already has an account.";
-
-    case "auth/weak-password":
-      return "Password is too weak.";
-
-    case "auth/invalid-credential":
-      return "Email or password is incorrect.";
-
-    case "auth/popup-closed-by-user":
-      return "Google sign-in was cancelled.";
-
-    case "auth/popup-blocked":
-      return "Your browser blocked the Google login popup.";
-
-    case "auth/operation-not-allowed":
-      return "This login method is not enabled in Firebase.";
-
-    default:
-      return error.message || "Something went wrong.";
-
-  }
 
 }
 
 
-/* =========================================
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+    try{
+
+        await signOut(auth);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+});
+
+
+/* =========================================================
    UNI CHAT
-========================================= */
+========================================================= */
+
+const BACKEND_URL =
+    "https://uni-ai-3mg0.onrender.com/ask";
+
+const chat =
+    document.getElementById("chat");
+
+const question =
+    document.getElementById("question");
+
+const sendBtn =
+    document.getElementById("sendBtn");
 
 let currentMode = "General";
 
 let selectedImage = null;
 
 
-document.querySelectorAll(".mode")
+/* =========================================================
+   MODE BUTTONS
+========================================================= */
+
+document
+.querySelectorAll(".mode")
 .forEach(button => {
 
-  button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
 
-    document.querySelectorAll(".mode")
-    .forEach(b =>
-      b.classList.remove("active")
-    );
+        document
+        .querySelectorAll(".mode")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
 
-    button.classList.add("active");
+        button.classList.add("active");
 
-    currentMode =
-      button.dataset.mode;
+        currentMode =
+            button.dataset.mode;
 
-    status.textContent =
-      "Mode: " + currentMode;
-
-  });
+    });
 
 });
 
 
-function addMessage(text, type){
+/* =========================================================
+   ADD MESSAGE
+========================================================= */
 
-  const div =
-    document.createElement("div");
+function addMessage(
+    text,
+    type = "ai",
+    image = null
+){
 
-  div.className =
-    "message " + type;
+    const message =
+        document.createElement("div");
 
-  div.textContent =
-    text;
+    message.className =
+        "message " + type;
 
-  chat.appendChild(div);
+    message.textContent =
+        text;
 
-  chat.scrollTop =
-    chat.scrollHeight;
+    if(image){
 
-}
+        const img =
+            document.createElement("img");
 
+        img.src = image;
 
-async function askUNI(){
+        img.className =
+            "preview";
 
-  const text =
-    question.value.trim();
+        message.appendChild(
+            document.createElement("br")
+        );
 
-  if(!text && !selectedImage){
-
-    return;
-
-  }
-
-  if(!auth.currentUser){
-
-    alert("Please login first.");
-
-    return;
-
-  }
-
-  if(text){
-
-    addMessage(text, "user");
-
-  }else{
-
-    addMessage("📷 Image sent to UNI", "user");
-
-  }
-
-  question.value = "";
-
-  status.textContent =
-    "UNI is thinking...";
-
-  sendBtn.disabled = true;
-
-
-  try{
-
-    const response =
-      await fetch(
-        "https://uni-ai-3mg0.onrender.com/ask",
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":"application/json"
-          },
-
-          body:JSON.stringify({
-
-            question:
-              "Current mode: " +
-              currentMode +
-              "\n\nUser question: " +
-              (text || "Please analyze this image."),
-
-            image:
-              selectedImage
-
-          })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        "Backend error"
-      );
+        message.appendChild(img);
 
     }
 
+    chat.appendChild(message);
 
-    addMessage(
-      data.answer ||
-      "UNI could not answer.",
-      "ai"
+    window.scrollTo(
+        0,
+        document.body.scrollHeight
     );
 
-    status.textContent =
-      "UNI is ready";
+    return message;
+}
 
+
+/* =========================================================
+   SEND QUESTION
+========================================================= */
+
+async function sendQuestion(){
+
+    const text =
+        question.value.trim();
+
+    if(!text && !selectedImage){
+
+        return;
+    }
+
+    const imageToSend =
+        selectedImage;
+
+    if(text){
+
+        addMessage(
+            text,
+            "user",
+            imageToSend
+        );
+
+    }else{
+
+        addMessage(
+            "📷 Image",
+            "user",
+            imageToSend
+        );
+
+    }
+
+    question.value = "";
 
     selectedImage = null;
 
+    const typing =
+        addMessage(
+            "UNI is thinking...",
+            "ai"
+        );
 
-  }catch(error){
+    typing.classList.add("typing");
 
-    console.error(error);
+    sendBtn.disabled = true;
 
-    addMessage(
-      "Sorry, UNI could not connect to the AI server.",
-      "ai"
-    );
+    try{
 
-    status.textContent =
-      "Connection error";
+        const userQuestion =
+            text ||
+            "Please analyze this image.";
 
-  }finally{
+        const response =
+            await fetch(
+                BACKEND_URL,
+                {
+                    method:"POST",
 
-    sendBtn.disabled = false;
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
 
-  }
+                    body:JSON.stringify({
+
+                        question:
+                            "You are UNI, Ujjwal Neural Intelligence." +
+                            "\nCurrent mode: " +
+                            currentMode +
+                            "\n\nUser question: " +
+                            userQuestion,
+
+                        image:
+                            imageToSend
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        typing.remove();
+
+
+        if(!response.ok){
+
+            addMessage(
+                "Backend error: " +
+                (data.error ||
+                "Something went wrong."),
+                "ai"
+            );
+
+            return;
+        }
+
+
+        addMessage(
+            data.answer ||
+            data.output ||
+            "UNI could not generate an answer.",
+            "ai"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        typing.remove();
+
+        addMessage(
+            "Could not connect to UNI backend. Please try again.",
+            "ai"
+        );
+
+    }finally{
+
+        sendBtn.disabled = false;
+
+    }
 
 }
 
+
+/* =========================================================
+   SEND BUTTON
+========================================================= */
 
 sendBtn.addEventListener(
-  "click",
-  askUNI
+    "click",
+    sendQuestion
 );
 
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
 
 question.addEventListener(
-  "keydown",
-  event => {
+    "keydown",
+    (event) => {
 
-    if(
-      event.key === "Enter" &&
-      !event.shiftKey
-    ){
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
 
-      event.preventDefault();
+            event.preventDefault();
 
-      askUNI();
+            sendQuestion();
+
+        }
 
     }
-
-  }
 );
 
 
-/* =========================================
-   GOOGLE SEARCH
-========================================= */
+/* =========================================================
+   PHOTO UPLOAD
+========================================================= */
 
-searchBtn.addEventListener("click", () => {
+const photoInput =
+    document.getElementById("photoInput");
 
-  const q =
-    question.value.trim();
+document
+.getElementById("cameraBtn")
+.addEventListener("click", () => {
 
-  if(!q){
-
-    alert("Type something to search.");
-
-    return;
-
-  }
-
-  window.open(
-    "https://www.google.com/search?q=" +
-    encodeURIComponent(q),
-    "_blank"
-  );
-
-});
-
-
-/* =========================================
-   CLEAR CHAT
-========================================= */
-
-clearBtn.addEventListener("click", () => {
-
-  chat.innerHTML = `
-    <div class="message ai">
-      Chat cleared. Hello again! I am UNI. 🤖
-    </div>
-  `;
-
-});
-
-
-/* =========================================
-   TEXT TO SPEECH
-========================================= */
-
-speakBtn.addEventListener("click", () => {
-
-  const messages =
-    chat.querySelectorAll(".message.ai");
-
-  if(!messages.length){
-
-    return;
-
-  }
-
-  const last =
-    messages[messages.length - 1];
-
-  const speech =
-    new SpeechSynthesisUtterance(
-      last.textContent
-    );
-
-  speech.rate = 1;
-
-  speech.pitch = 1;
-
-  speechSynthesis.cancel();
-
-  speechSynthesis.speak(speech);
-
-});
-
-
-/* =========================================
-   VOICE INPUT
-========================================= */
-
-const SpeechRecognition =
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
-
-
-if(SpeechRecognition){
-
-  const recognition =
-    new SpeechRecognition();
-
-  recognition.lang = "en-IN";
-
-  recognition.continuous = false;
-
-  recognition.interimResults = false;
-
-
-  micBtn.addEventListener(
-    "click",
-    () => {
-
-      status.textContent =
-        "Listening... 🎤";
-
-      recognition.start();
-
-    }
-  );
-
-
-  recognition.onresult =
-    event => {
-
-      question.value =
-        event.results[0][0].transcript;
-
-      status.textContent =
-        "Voice captured";
-
-    };
-
-
-  recognition.onerror =
-    () => {
-
-      status.textContent =
-        "Voice input error";
-
-    };
-
-}else{
-
-  micBtn.addEventListener(
-    "click",
-    () => {
-
-      alert(
-        "Voice input is not supported by this browser."
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   CAMERA
-========================================= */
-
-let cameraStream = null;
-
-
-cameraBtn.addEventListener("click", () => {
-
-  photoInput.click();
+    photoInput.click();
 
 });
 
 
 photoInput.addEventListener(
-  "change",
-  async event => {
+    "change",
+    async (event) => {
 
-    const file =
-      event.target.files[0];
+        const file =
+            event.target.files[0];
 
-    if(!file){
+        if(!file){
 
-      return;
+            return;
+        }
+
+        try{
+
+            selectedImage =
+                await compressImage(file);
+
+            addMessage(
+                "📷 Photo selected. Now type your question and press Send.",
+                "ai"
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+            addMessage(
+                "Could not read the image.",
+                "ai"
+            );
+
+        }
 
     }
-
-    try{
-
-      selectedImage =
-        await compressImage(file);
-
-      status.textContent =
-        "Photo selected 📷 — press Send";
-
-    }catch(error){
-
-      console.error(error);
-
-      status.textContent =
-        "Could not process image";
-
-    }
-
-  }
 );
 
 
-/* =========================================
-   CAMERA FUNCTION
-========================================= */
-
-async function openCamera(){
-
-  try{
-
-    cameraStream =
-      await navigator.mediaDevices
-      .getUserMedia({
-        video:true
-      });
-
-    cameraVideo.srcObject =
-      cameraStream;
-
-    cameraModal.style.display =
-      "flex";
-
-  }catch(error){
-
-    console.error(error);
-
-    photoInput.click();
-
-  }
-
-}
-
-
-captureBtn.addEventListener(
-  "click",
-  () => {
-
-    const canvas =
-      document.createElement("canvas");
-
-    canvas.width =
-      cameraVideo.videoWidth;
-
-    canvas.height =
-      cameraVideo.videoHeight;
-
-    const ctx =
-      canvas.getContext("2d");
-
-    ctx.drawImage(
-      cameraVideo,
-      0,
-      0
-    );
-
-    selectedImage =
-      canvas.toDataURL(
-        "image/jpeg",
-        0.75
-      );
-
-    closeCamera();
-
-    status.textContent =
-      "Photo captured 📷 — press Send";
-
-  }
-);
-
-
-closeCameraBtn.addEventListener(
-  "click",
-  closeCamera
-);
-
-
-function closeCamera(){
-
-  cameraModal.style.display =
-    "none";
-
-  if(cameraStream){
-
-    cameraStream
-    .getTracks()
-    .forEach(track =>
-      track.stop()
-    );
-
-    cameraStream = null;
-
-  }
-
-}
-
-
-/* =========================================
+/* =========================================================
    IMAGE COMPRESSION
-========================================= */
+========================================================= */
 
 function compressImage(file){
 
-  return new Promise(
-    (resolve,reject) => {
+    return new Promise(
+        (resolve,reject) => {
 
-      const reader =
-        new FileReader();
+            const reader =
+                new FileReader();
 
-      reader.onload =
-        event => {
+            reader.onload = () => {
 
-          const img =
-            new Image();
+                const img =
+                    new Image();
 
-          img.onload =
-            () => {
+                img.onload = () => {
 
-              const max =
-                1200;
+                    const maxSize =
+                        1200;
 
-              let width =
-                img.width;
+                    let width =
+                        img.width;
 
-              let height =
-                img.height;
+                    let height =
+                        img.height;
 
 
-              if(width > max){
+                    if(width > maxSize){
 
-                height =
-                  height *
-                  max /
-                  width;
+                        height =
+                            height *
+                            maxSize /
+                            width;
 
-                width =
-                  max;
-
-              }
-
-
-              if(height > max){
-
-                width =
-                  width *
-                  max /
-                  height;
-
-                height =
-                  max;
-
-              }
+                        width =
+                            maxSize;
+                    }
 
 
-              const canvas =
-                document.createElement(
-                  "canvas"
-                );
+                    if(height > maxSize){
 
-              canvas.width =
-                width;
+                        width =
+                            width *
+                            maxSize /
+                            height;
 
-              canvas.height =
-                height;
-
-
-              const ctx =
-                canvas.getContext("2d");
-
-              ctx.drawImage(
-                img,
-                0,
-                0,
-                width,
-                height
-              );
+                        height =
+                            maxSize;
+                    }
 
 
-              resolve(
-                canvas.toDataURL(
-                  "image/jpeg",
-                  0.75
-                )
-              );
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
+
+                    canvas.width =
+                        width;
+
+                    canvas.height =
+                        height;
+
+
+                    const ctx =
+                        canvas.getContext("2d");
+
+                    ctx.drawImage(
+                        img,
+                        0,
+                        0,
+                        width,
+                        height
+                    );
+
+
+                    resolve(
+                        canvas.toDataURL(
+                            "image/jpeg",
+                            0.75
+                        )
+                    );
+
+                };
+
+                img.onerror =
+                    reject;
+
+                img.src =
+                    reader.result;
 
             };
 
+            reader.onerror =
+                reject;
 
-          img.onerror =
-            reject;
+            reader.readAsDataURL(file);
 
-          img.src =
-            event.target.result;
+        }
+    );
+
+}
+
+
+/* =========================================================
+   VOICE INPUT
+========================================================= */
+
+const voiceBtn =
+    document.getElementById("voiceBtn");
+
+let recognition = null;
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+if(SpeechRecognition){
+
+    recognition =
+        new SpeechRecognition();
+
+    recognition.lang =
+        "en-IN";
+
+    recognition.continuous =
+        false;
+
+    recognition.interimResults =
+        false;
+
+
+    recognition.onstart = () => {
+
+        voiceBtn.textContent =
+            "🔴";
+
+    };
+
+
+    recognition.onend = () => {
+
+        voiceBtn.textContent =
+            "🎤";
+
+    };
+
+
+    recognition.onresult =
+        (event) => {
+
+            const result =
+                event.results[0][0].transcript;
+
+            question.value +=
+                result;
 
         };
 
 
-      reader.onerror =
-        reject;
+    recognition.onerror =
+        (event) => {
 
-      reader.readAsDataURL(file);
+            console.error(
+                "Voice error:",
+                event.error
+            );
 
-    }
-  );
+            voiceBtn.textContent =
+                "🎤";
+
+        };
+
+
+    voiceBtn.addEventListener(
+        "click",
+        () => {
+
+            recognition.start();
+
+        }
+    );
+
+}else{
+
+    voiceBtn.addEventListener(
+        "click",
+        () => {
+
+            addMessage(
+                "Voice input is not supported in this browser.",
+                "ai"
+            );
+
+        }
+    );
 
 }
 
 
-/* =========================================
-   CAMERA BUTTON
-   Long press / normal photo picker
-========================================= */
+/* =========================================================
+   WELCOME MESSAGE
+========================================================= */
 
-cameraBtn.addEventListener(
-  "dblclick",
-  openCamera
+console.log(
+    "UNI AI — Ujjwal Neural Intelligence started."
 );
 
 </script>
