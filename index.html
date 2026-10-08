@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>UNI AI — Ujjwal Neural Intelligence</title>
 
 <style>
@@ -13,578 +15,837 @@
   font-family:Arial,Helvetica,sans-serif;
 }
 
-:root{
-  --bg:#05060b;
-  --panel:rgba(18,20,32,.78);
-  --panel2:#11131e;
-  --text:#fff;
-  --muted:#9ba0b5;
-  --border:rgba(255,255,255,.10);
-  --accent:#7657ff;
-  --accent2:#00c8ff;
-  --user:#654cff;
-}
-
 body{
   min-height:100vh;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 10% 10%,rgba(113,75,255,.20),transparent 30%),
-    radial-gradient(circle at 90% 90%,rgba(0,190,255,.13),transparent 30%),
-    var(--bg);
-  transition:.3s;
+  background:#07111f;
+  color:#f5f7ff;
+  overflow:hidden;
 }
 
 body.light{
-  --bg:#f4f6fb;
-  --panel:rgba(255,255,255,.82);
-  --panel2:#fff;
-  --text:#151722;
-  --muted:#646979;
-  --border:rgba(0,0,0,.10);
-  --user:#6952ee;
-
-  background:
-    radial-gradient(circle at 10% 10%,rgba(113,75,255,.12),transparent 30%),
-    radial-gradient(circle at 90% 90%,rgba(0,190,255,.10),transparent 30%),
-    #f4f6fb;
+  background:#f4f7fb;
+  color:#111827;
 }
 
-/* LOGIN */
+button,input,textarea{
+  font:inherit;
+}
 
-#authScreen{
-  min-height:100vh;
+button{
+  cursor:pointer;
+}
+
+.app{
   display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+  height:100vh;
 }
 
-.authBox{
-  width:100%;
-  max-width:470px;
-  padding:38px;
-  border:1px solid var(--border);
-  border-radius:30px;
-  background:var(--panel);
-  backdrop-filter:blur(25px);
-  box-shadow:0 20px 70px rgba(0,0,0,.35);
+/* SIDEBAR */
+
+.sidebar{
+  width:290px;
+  background:#0b1729;
+  border-right:1px solid #20304a;
+  display:flex;
+  flex-direction:column;
+  transition:.25s;
+  z-index:20;
+}
+
+body.light .sidebar{
+  background:#ffffff;
+  border-color:#dce3ee;
+}
+
+.sidebar-top{
+  padding:18px;
+  border-bottom:1px solid #20304a;
+}
+
+body.light .sidebar-top{
+  border-color:#dce3ee;
 }
 
 .logo{
-  text-align:center;
-  font-size:46px;
-  font-weight:900;
-  background:linear-gradient(90deg,#8b70ff,#00d5ff);
-  -webkit-background-clip:text;
-  color:transparent;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:.5px;
 }
 
-.tagline{
-  text-align:center;
-  color:var(--muted);
-  margin:7px 0 30px;
+.logo span{
+  color:#55b8ff;
 }
 
-.authInput{
+.sublogo{
+  color:#94a3b8;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.new-chat{
   width:100%;
-  padding:16px;
-  margin:7px 0;
-  border:1px solid var(--border);
-  border-radius:15px;
-  outline:none;
-  background:var(--panel2);
-  color:var(--text);
-  font-size:16px;
-}
-
-.mainBtn,
-.googleBtn{
-  width:100%;
-  padding:16px;
-  margin-top:12px;
+  margin-top:18px;
+  padding:12px;
   border:0;
-  border-radius:15px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.mainBtn{
+  border-radius:12px;
+  background:#1683ff;
   color:white;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  font-weight:700;
 }
 
-.googleBtn{
-  background:white;
-  color:#222;
+.new-chat:hover{
+  background:#0d72e5;
 }
 
-.switch{
-  margin-top:20px;
-  text-align:center;
-  color:#7f9cff;
-  cursor:pointer;
+.history-title{
+  padding:16px 18px 8px;
+  color:#94a3b8;
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
 }
 
-.authError{
-  margin-top:14px;
-  text-align:center;
-  color:#ff7070;
+.history{
+  flex:1;
+  overflow-y:auto;
+  padding:6px 10px;
+}
+
+.history-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:6px;
+}
+
+.history-open{
+  flex:1;
+  min-width:0;
+  text-align:left;
+  border:0;
+  background:transparent;
+  color:inherit;
+  padding:11px;
+  border-radius:10px;
+}
+
+.history-open:hover,
+.history-open.active{
+  background:#16263e;
+}
+
+body.light .history-open:hover,
+body.light .history-open.active{
+  background:#edf3fb;
+}
+
+.history-name{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
   font-size:14px;
 }
 
-/* APP */
-
-#app{
-  display:none;
-  min-height:100vh;
-  flex-direction:column;
+.delete-chat{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:#94a3b8;
 }
 
-header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  height:72px;
-  padding:0 22px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  background:var(--panel);
-  backdrop-filter:blur(20px);
+.delete-chat:hover{
+  background:#2a1a20;
+  color:#ff6b7a;
 }
 
-.brand{
-  font-size:25px;
-  font-weight:900;
+.user-area{
+  border-top:1px solid #20304a;
+  padding:14px;
 }
 
-.brand span{
-  background:linear-gradient(90deg,#8b70ff,#00d5ff);
-  -webkit-background-clip:text;
-  color:transparent;
+body.light .user-area{
+  border-color:#dce3ee;
 }
 
-.headerButtons{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.topBtn{
-  border:1px solid var(--border);
-  background:var(--panel2);
-  color:var(--text);
-  padding:9px 12px;
-  border-radius:11px;
-  cursor:pointer;
-}
-
-#userEmail{
-  color:var(--muted);
+.user-email{
   font-size:12px;
-  max-width:160px;
+  color:#94a3b8;
+  white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  margin-bottom:10px;
+}
+
+.small-btns{
+  display:flex;
+  gap:7px;
+}
+
+.small-btn{
+  flex:1;
+  border:1px solid #30435f;
+  background:transparent;
+  color:inherit;
+  padding:8px;
+  border-radius:9px;
+  font-size:12px;
+}
+
+.small-btn:hover{
+  background:#16263e;
 }
 
 /* MAIN */
 
-.container{
-  width:100%;
-  max-width:1050px;
-  margin:auto;
-  padding:25px 15px 120px;
-}
-
-.hero{
-  text-align:center;
-  padding:25px 0 18px;
-}
-
-.hero h1{
-  font-size:40px;
-  margin-bottom:8px;
-}
-
-.hero h1 span{
-  background:linear-gradient(90deg,#8b70ff,#00d5ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  color:var(--muted);
-}
-
-/* MODE */
-
-.modes{
+.main{
+  flex:1;
   display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:18px 0 25px;
+  flex-direction:column;
+  min-width:0;
 }
 
-.mode{
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--muted);
-  padding:10px 17px;
-  border-radius:22px;
-  cursor:pointer;
-  transition:.2s;
+.topbar{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  border-bottom:1px solid #20304a;
+  background:#091525;
 }
 
-.mode:hover{
-  transform:translateY(-2px);
+body.light .topbar{
+  background:#ffffff;
+  border-color:#dce3ee;
 }
 
-.mode.active{
-  color:white;
-  border-color:transparent;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.menu-btn{
+  display:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font-size:24px;
+}
+
+.chat-title{
+  font-size:16px;
+  font-weight:700;
+}
+
+.status{
+  font-size:11px;
+  color:#42d392;
+  margin-top:3px;
+}
+
+.top-actions{
+  display:flex;
+  gap:7px;
+}
+
+.icon-btn{
+  border:1px solid #30435f;
+  background:transparent;
+  color:inherit;
+  padding:8px 10px;
+  border-radius:9px;
+}
+
+.icon-btn:hover{
+  background:#16263e;
 }
 
 /* CHAT */
 
-#chat{
-  min-height:320px;
+.chat{
+  flex:1;
+  overflow-y:auto;
+  padding:25px;
+}
+
+.message-row{
   display:flex;
-  flex-direction:column;
-  gap:13px;
+  margin-bottom:18px;
+}
+
+.message-row.user{
+  justify-content:flex-end;
 }
 
 .message{
-  max-width:82%;
-  padding:15px 18px;
-  border-radius:20px;
+  max-width:800px;
+  padding:13px 16px;
+  border-radius:16px;
   line-height:1.55;
   white-space:pre-wrap;
-  animation:appear .25s ease;
-}
-
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  word-wrap:break-word;
 }
 
 .message.ai{
-  align-self:flex-start;
-  background:var(--panel);
-  border:1px solid var(--border);
-  backdrop-filter:blur(15px);
+  background:#102039;
+  border:1px solid #203b60;
+}
+
+body.light .message.ai{
+  background:#eef4fb;
+  border-color:#d7e3f1;
 }
 
 .message.user{
-  align-self:flex-end;
+  background:#1683ff;
   color:white;
-  background:linear-gradient(135deg,#694eff,#347ff0);
 }
 
-.typing{
-  color:var(--muted);
+.welcome{
+  max-width:700px;
+  margin:70px auto;
+  text-align:center;
+}
+
+.welcome h1{
+  font-size:42px;
+  margin-bottom:8px;
+}
+
+.welcome h1 span{
+  color:#4caeff;
+}
+
+.welcome p{
+  color:#94a3b8;
+  line-height:1.6;
+}
+
+.welcome-card{
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.mode-card{
+  border:1px solid #263b58;
+  background:#0d1b2e;
+  padding:15px;
+  border-radius:13px;
+  text-align:left;
+  color:inherit;
+}
+
+body.light .mode-card{
+  background:#ffffff;
+  border-color:#dce3ee;
+}
+
+.mode-card b{
+  display:block;
+  margin-bottom:4px;
 }
 
 /* INPUT */
 
-.inputArea{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:20;
-  padding:12px;
-  border-top:1px solid var(--border);
-  background:var(--panel);
-  backdrop-filter:blur(22px);
+.bottom{
+  padding:12px 18px 18px;
+  border-top:1px solid #20304a;
+  background:#091525;
 }
 
-.inputBox{
-  max-width:1050px;
-  margin:auto;
+body.light .bottom{
+  background:#ffffff;
+  border-color:#dce3ee;
+}
+
+.modebar{
   display:flex;
+  gap:7px;
+  margin-bottom:9px;
+  overflow-x:auto;
+}
+
+.mode{
+  border:1px solid #30435f;
+  background:transparent;
+  color:inherit;
+  padding:7px 11px;
+  border-radius:20px;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.mode.active{
+  background:#1683ff;
+  border-color:#1683ff;
+  color:white;
+}
+
+.input-wrap{
+  display:flex;
+  align-items:flex-end;
   gap:8px;
+  max-width:1100px;
+  margin:auto;
 }
 
 #question{
   flex:1;
-  height:54px;
+  min-height:48px;
+  max-height:150px;
   resize:none;
-  outline:none;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:16px;
-  background:var(--panel2);
-  color:var(--text);
-  font-size:16px;
-}
-
-.iconBtn{
-  width:52px;
-  height:54px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:var(--panel2);
-  color:var(--text);
-  font-size:21px;
-  cursor:pointer;
-}
-
-.sendBtn{
-  width:75px;
-  height:54px;
-  border:0;
-  border-radius:16px;
+  border:1px solid #30435f;
+  border-radius:14px;
+  padding:13px;
+  background:#0c1a2c;
   color:white;
+  outline:none;
+}
+
+body.light #question{
+  background:#f8fafc;
+  color:#111827;
+  border-color:#cbd5e1;
+}
+
+#question:focus{
+  border-color:#1683ff;
+}
+
+.send-btn{
+  height:48px;
+  min-width:54px;
+  border:0;
+  border-radius:13px;
+  background:#1683ff;
+  color:white;
+  font-size:19px;
   font-weight:bold;
-  cursor:pointer;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
 }
 
-.sendBtn:disabled{
-  opacity:.5;
+.send-btn:hover{
+  background:#0d72e5;
 }
 
-/* CLEAR */
+.voice-btn{
+  height:48px;
+  min-width:48px;
+  border:1px solid #30435f;
+  border-radius:13px;
+  background:transparent;
+  color:inherit;
+  font-size:18px;
+}
 
-.clearBox{
+.voice-btn.active{
+  background:#d9465f;
+  color:white;
+  border-color:#d9465f;
+}
+
+.footer-note{
+  text-align:center;
+  color:#64748b;
+  font-size:10px;
+  margin-top:8px;
+}
+
+/* LOGIN */
+
+.login-screen{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#06101e;
   display:flex;
+  align-items:center;
   justify-content:center;
-  margin-top:18px;
+  padding:20px;
 }
 
-.clearBtn{
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--muted);
-  padding:9px 16px;
-  border-radius:12px;
-  cursor:pointer;
+.login-card{
+  width:100%;
+  max-width:430px;
+  background:#0d1b2e;
+  border:1px solid #29415f;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+.login-logo{
+  text-align:center;
+  font-size:34px;
+  font-weight:800;
+}
+
+.login-logo span{
+  color:#55b8ff;
+}
+
+.login-sub{
+  text-align:center;
+  color:#94a3b8;
+  font-size:13px;
+  margin:7px 0 24px;
+}
+
+.login-input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #30435f;
+  background:#081525;
+  color:white;
+  margin-bottom:10px;
+  outline:none;
+}
+
+.login-btn{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:#1683ff;
+  color:white;
+  font-weight:700;
+  margin-bottom:9px;
+}
+
+.google-btn{
+  width:100%;
+  padding:12px;
+  border:1px solid #405574;
+  border-radius:10px;
+  background:#14243a;
+  color:white;
+  font-weight:700;
+}
+
+.login-message{
+  text-align:center;
+  min-height:20px;
+  color:#ff8290;
+  font-size:12px;
+  margin-top:10px;
+}
+
+.login-switch{
+  text-align:center;
+  color:#94a3b8;
+  font-size:12px;
+  margin-top:16px;
+}
+
+.login-switch button{
+  border:0;
+  background:transparent;
+  color:#55b8ff;
+}
+
+.hidden{
+  display:none !important;
 }
 
 /* MOBILE */
 
-@media(max-width:650px){
+@media(max-width:750px){
 
-  header{
-    padding:0 12px;
+  .sidebar{
+    position:fixed;
+    left:-300px;
+    top:0;
+    bottom:0;
   }
 
-  .brand{
-    font-size:20px;
+  .sidebar.open{
+    left:0;
   }
 
-  #userEmail{
-    display:none;
+  .menu-btn{
+    display:block;
   }
 
-  .hero h1{
-    font-size:30px;
+  .chat{
+    padding:15px;
   }
 
-  .message{
-    max-width:92%;
+  .welcome{
+    margin:40px auto;
   }
 
-  .iconBtn{
-    width:46px;
+  .welcome h1{
+    font-size:34px;
   }
 
-  .sendBtn{
-    width:60px;
+  .welcome-card{
+    grid-template-columns:1fr;
   }
 
+  .topbar{
+    padding:0 10px;
+  }
+
+  .chat-title{
+    font-size:14px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
 
-<div id="authScreen">
+<div id="loginScreen" class="login-screen">
 
-  <div class="authBox">
+  <div class="login-card">
 
-    <div class="logo">UNI</div>
+    <div class="login-logo">
+      UNI <span>AI</span>
+    </div>
 
-    <div class="tagline">
+    <div class="login-sub">
       Ujjwal Neural Intelligence
     </div>
 
     <input
       id="email"
-      class="authInput"
+      class="login-input"
       type="email"
       placeholder="Email"
     >
 
     <input
       id="password"
-      class="authInput"
+      class="login-input"
       type="password"
       placeholder="Password"
     >
 
-    <button id="authBtn" class="mainBtn">
-      Login
+    <button id="emailBtn" class="login-btn">
+      Sign In
     </button>
 
-    <button id="googleBtn" class="googleBtn">
-      🔵 Continue with Google
+    <button id="googleBtn" class="google-btn">
+      Continue with Google
     </button>
 
-    <div id="switchMode" class="switch">
-      Don't have an account? Sign Up
-    </div>
+    <div id="loginMessage" class="login-message"></div>
 
-    <div id="authError" class="authError"></div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= MAIN APP ================= -->
-
-<div id="app">
-
-<header>
-
-  <div class="brand">
-    <span>UNI</span> AI
-  </div>
-
-  <div class="headerButtons">
-
-    <div id="userEmail"></div>
-
-    <button id="themeBtn" class="topBtn">
-      🌙
-    </button>
-
-    <button id="logoutBtn" class="topBtn">
-      Logout
-    </button>
-
-  </div>
-
-</header>
-
-
-<div class="container">
-
-  <div class="hero">
-
-    <h1>
-      Welcome to <span>UNI</span>
-    </h1>
-
-    <p>
-      Ujjwal Neural Intelligence
-    </p>
-
-  </div>
-
-
-  <!-- MODES -->
-
-  <div class="modes">
-
-    <button class="mode active" data-mode="General">
-      General
-    </button>
-
-    <button class="mode" data-mode="Study">
-      📚 Study
-    </button>
-
-    <button class="mode" data-mode="Coding">
-      💻 Coding
-    </button>
-
-    <button class="mode" data-mode="Search">
-      🔎 Search
-    </button>
-
-  </div>
-
-
-  <!-- CHAT -->
-
-  <div id="chat">
-
-    <div class="message ai">
-      Hello! 👋 I am UNI — Ujjwal Neural Intelligence.
-      
-      Ask me anything and I will try to help you.
+    <div class="login-switch">
+      New user?
+      <button id="signupBtn">Create account</button>
     </div>
 
   </div>
 
-
-  <!-- CLEAR -->
-
-  <div class="clearBox">
-
-    <button id="clearBtn" class="clearBtn">
-      🧹 Clear Chat
-    </button>
-
-  </div>
-
 </div>
 
 
-<!-- INPUT -->
+<!-- APP -->
 
-<div class="inputArea">
+<div id="app" class="app hidden">
 
-  <div class="inputBox">
+  <!-- SIDEBAR -->
 
-    <button
-      id="voiceBtn"
-      class="iconBtn"
-      title="Voice input"
-    >
-      🎤
-    </button>
+  <aside id="sidebar" class="sidebar">
 
-    <textarea
-      id="question"
-      placeholder="Message UNI..."
-    ></textarea>
+    <div class="sidebar-top">
 
-    <button
-      id="sendBtn"
-      class="sendBtn"
-    >
-      Send
-    </button>
+      <div class="logo">
+        UNI <span>AI</span>
+      </div>
 
-  </div>
+      <div class="sublogo">
+        Ujjwal Neural Intelligence
+      </div>
+
+      <button id="newChatBtn" class="new-chat">
+        + New Chat
+      </button>
+
+    </div>
+
+    <div class="history-title">
+      Chat History
+    </div>
+
+    <div id="history" class="history"></div>
+
+    <div class="user-area">
+
+      <div id="userEmail" class="user-email">
+        Not signed in
+      </div>
+
+      <div class="small-btns">
+
+        <button id="themeBtn" class="small-btn">
+          🌙 Theme
+        </button>
+
+        <button id="logoutBtn" class="small-btn">
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button id="menuBtn" class="menu-btn">
+          ☰
+        </button>
+
+        <div>
+          <div id="chatTitle" class="chat-title">
+            New Chat
+          </div>
+
+          <div class="status">
+            ● UNI AI Online
+          </div>
+        </div>
+
+      </div>
+
+      <div class="top-actions">
+
+        <button id="clearBtn" class="icon-btn">
+          Clear
+        </button>
+
+        <button id="historyBtn" class="icon-btn">
+          History
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- CHAT -->
+
+    <section id="chat" class="chat">
+
+      <div id="welcome" class="welcome">
+
+        <h1>
+          Welcome to <span>UNI AI</span>
+        </h1>
+
+        <p>
+          Ujjwal Neural Intelligence — your personal AI assistant.
+        </p>
+
+        <div class="welcome-card">
+
+          <div class="mode-card">
+            <b>📚 Study</b>
+            Class 8 friendly explanations and homework help.
+          </div>
+
+          <div class="mode-card">
+            <b>💻 Coding</b>
+            Programming and development assistance.
+          </div>
+
+          <div class="mode-card">
+            <b>🔎 Search</b>
+            Search mode for your AI workflow.
+          </div>
+
+          <div class="mode-card">
+            <b>💬 General</b>
+            Ask UNI anything.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INPUT -->
+
+    <div class="bottom">
+
+      <div class="modebar">
+
+        <button class="mode active" data-mode="General">
+          General
+        </button>
+
+        <button class="mode" data-mode="Study">
+          📚 Study
+        </button>
+
+        <button class="mode" data-mode="Coding">
+          💻 Coding
+        </button>
+
+        <button class="mode" data-mode="Search">
+          🔎 Search
+        </button>
+
+      </div>
+
+
+      <div class="input-wrap">
+
+        <button id="voiceBtn" class="voice-btn">
+          🎤
+        </button>
+
+        <textarea
+          id="question"
+          placeholder="Message UNI AI..."
+          rows="1"
+        ></textarea>
+
+        <button id="sendBtn" class="send-btn">
+          ➤
+        </button>
+
+      </div>
+
+      <div class="footer-note">
+        UNI AI • Ujjwal Neural Intelligence
+      </div>
+
+    </div>
+
+  </main>
 
 </div>
 
-</div>
-
-
-<!-- ================= FIREBASE ================= -->
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
@@ -594,459 +855,943 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut
-}
-from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-/* =====================================================
+/* =========================
    FIREBASE CONFIG
-   ONLY CHANGE THE API KEY IF NEEDED
-===================================================== */
+========================= */
 
 const firebaseConfig = {
-
   apiKey: "AIzaSyC8ncItbw_DrCDm182bjCRF6Ivx5Zi2xas",
-
   authDomain: "uni-ai-a00c6.firebaseapp.com",
-
   projectId: "uni-ai-a00c6",
-
   storageBucket: "uni-ai-a00c6.firebasestorage.app",
-
   messagingSenderId: "322740324379",
-
   appId: "1:322740324379:web:686f2301fe6fbe2ed550be",
-
   measurementId: "G-6QZ0LNXTQ3"
-
 };
 
 
-const firebaseApp =
-  initializeApp(firebaseConfig);
+/* =========================
+   INITIALIZE
+========================= */
 
-const auth =
-  getAuth(firebaseApp);
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+const googleProvider = new GoogleAuthProvider();
 
 
-/* =====================================================
+/* =========================
    ELEMENTS
-===================================================== */
+========================= */
 
-const authScreen =
-  document.getElementById("authScreen");
+const loginScreen = document.getElementById("loginScreen");
+const appScreen = document.getElementById("app");
 
-const app =
-  document.getElementById("app");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 
-const email =
-  document.getElementById("email");
+const emailBtn = document.getElementById("emailBtn");
+const signupBtn = document.getElementById("signupBtn");
+const googleBtn = document.getElementById("googleBtn");
 
-const password =
-  document.getElementById("password");
+const loginMessage = document.getElementById("loginMessage");
 
-const authBtn =
-  document.getElementById("authBtn");
+const historyBox = document.getElementById("history");
 
-const googleBtn =
-  document.getElementById("googleBtn");
+const chatBox = document.getElementById("chat");
 
-const switchMode =
-  document.getElementById("switchMode");
+const welcome = document.getElementById("welcome");
 
-const authError =
-  document.getElementById("authError");
+const question = document.getElementById("question");
 
-const userEmail =
-  document.getElementById("userEmail");
+const sendBtn = document.getElementById("sendBtn");
 
+const voiceBtn = document.getElementById("voiceBtn");
 
-let signUpMode = false;
+const clearBtn = document.getElementById("clearBtn");
 
+const newChatBtn = document.getElementById("newChatBtn");
 
-/* =====================================================
-   LOGIN / SIGNUP SWITCH
-===================================================== */
+const historyBtn = document.getElementById("historyBtn");
 
-switchMode.onclick = () => {
+const menuBtn = document.getElementById("menuBtn");
 
-  signUpMode =
-    !signUpMode;
+const sidebar = document.getElementById("sidebar");
 
-  authError.textContent = "";
+const themeBtn = document.getElementById("themeBtn");
 
-  if(signUpMode){
+const logoutBtn = document.getElementById("logoutBtn");
 
-    authBtn.textContent =
-      "Sign Up";
+const userEmail = document.getElementById("userEmail");
 
-    switchMode.textContent =
-      "Already have an account? Login";
+const chatTitle = document.getElementById("chatTitle");
 
-  }else{
 
-    authBtn.textContent =
-      "Login";
+/* =========================
+   STATE
+========================= */
 
-    switchMode.textContent =
-      "Don't have an account? Sign Up";
+let currentUser = null;
 
-  }
+let currentChatId = null;
 
-};
+let currentMessages = [];
 
+let selectedMode = "General";
 
-/* =====================================================
-   EMAIL AUTH
-===================================================== */
+let unsubscribeHistory = null;
 
-authBtn.onclick = async () => {
+let isSending = false;
 
-  const mail =
-    email.value.trim();
+let voiceEnabled = true;
 
-  const pass =
-    password.value;
 
-  authError.textContent = "";
-
-  if(!mail || !pass){
-
-    authError.textContent =
-      "Please enter email and password.";
-
-    return;
-  }
-
-  if(pass.length < 6){
-
-    authError.textContent =
-      "Password must be at least 6 characters.";
-
-    return;
-  }
-
-  try{
-
-    if(signUpMode){
-
-      await createUserWithEmailAndPassword(
-        auth,
-        mail,
-        pass
-      );
-
-    }else{
-
-      await signInWithEmailAndPassword(
-        auth,
-        mail,
-        pass
-      );
-
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-    if(
-      error.code ===
-      "auth/email-already-in-use"
-    ){
-
-      authError.textContent =
-        "This email already has an account.";
-
-    }else if(
-      error.code ===
-      "auth/invalid-credential"
-    ){
-
-      authError.textContent =
-        "Email or password is incorrect.";
-
-    }else{
-
-      authError.textContent =
-        error.message;
-
-    }
-
-  }
-
-};
-
-
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
-
-googleBtn.onclick = async () => {
-
-  authError.textContent = "";
-
-  try{
-
-    const provider =
-      new GoogleAuthProvider();
-
-    await signInWithPopup(
-      auth,
-      provider
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    authError.textContent =
-      "Google Login error: " +
-      error.message;
-
-  }
-
-};
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  user => {
-
-    if(user){
-
-      authScreen.style.display =
-        "none";
-
-      app.style.display =
-        "flex";
-
-      userEmail.textContent =
-        user.email || "User";
-
-    }else{
-
-      authScreen.style.display =
-        "flex";
-
-      app.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-document
-.getElementById("logoutBtn")
-.onclick = async () => {
-
-  await signOut(auth);
-
-};
-
-
-/* =====================================================
+/* =========================
    THEME
-===================================================== */
+========================= */
 
-const themeBtn =
-  document.getElementById("themeBtn");
-
-const savedTheme =
-  localStorage.getItem("uniTheme");
+const savedTheme = localStorage.getItem("uniTheme");
 
 if(savedTheme === "light"){
-
   document.body.classList.add("light");
+}
 
-  themeBtn.textContent =
-    "☀️";
+function updateThemeButton(){
+
+  if(document.body.classList.contains("light")){
+    themeBtn.textContent = "☀️ Theme";
+  }else{
+    themeBtn.textContent = "🌙 Theme";
+  }
 
 }
 
+updateThemeButton();
 
 themeBtn.onclick = () => {
 
   document.body.classList.toggle("light");
 
-  const light =
-    document.body.classList.contains("light");
-
   localStorage.setItem(
     "uniTheme",
-    light ? "light" : "dark"
+    document.body.classList.contains("light")
+      ? "light"
+      : "dark"
   );
 
-  themeBtn.textContent =
-    light ? "☀️" : "🌙";
+  updateThemeButton();
 
 };
 
 
-/* =====================================================
-   CHAT
-===================================================== */
+/* =========================
+   LOGIN MESSAGE
+========================= */
 
-const BACKEND_URL =
-  "https://uni-ai-3mg0.onrender.com/ask";
+function showLoginMessage(message){
 
-const chat =
-  document.getElementById("chat");
+  loginMessage.textContent = message;
 
-const question =
-  document.getElementById("question");
-
-const sendBtn =
-  document.getElementById("sendBtn");
-
-let currentMode =
-  "General";
+}
 
 
-/* =====================================================
-   MODES
-===================================================== */
+/* =========================
+   EMAIL SIGN IN
+========================= */
 
-document
-.querySelectorAll(".mode")
-.forEach(button => {
+emailBtn.onclick = async () => {
 
-  button.onclick = () => {
+  const email = emailInput.value.trim();
 
-    document
-    .querySelectorAll(".mode")
-    .forEach(btn =>
-      btn.classList.remove("active")
+  const password = passwordInput.value;
+
+  if(!email || !password){
+
+    showLoginMessage("Please enter email and password.");
+
+    return;
+
+  }
+
+  showLoginMessage("Signing in...");
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
     );
 
-    button.classList.add("active");
+    showLoginMessage("");
 
-    currentMode =
-      button.dataset.mode;
+  }catch(error){
 
-  };
+    showLoginMessage(
+      friendlyAuthError(error)
+    );
+
+  }
+
+};
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+signupBtn.onclick = async () => {
+
+  const email = emailInput.value.trim();
+
+  const password = passwordInput.value;
+
+  if(!email || !password){
+
+    showLoginMessage("Enter email and password first.");
+
+    return;
+
+  }
+
+  if(password.length < 6){
+
+    showLoginMessage(
+      "Password must be at least 6 characters."
+    );
+
+    return;
+
+  }
+
+  showLoginMessage("Creating account...");
+
+  try{
+
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    showLoginMessage("");
+
+  }catch(error){
+
+    showLoginMessage(
+      friendlyAuthError(error)
+    );
+
+  }
+
+};
+
+
+/* =========================
+   GOOGLE LOGIN
+========================= */
+
+googleBtn.onclick = async () => {
+
+  showLoginMessage("Opening Google login...");
+
+  try{
+
+    await signInWithPopup(
+      auth,
+      googleProvider
+    );
+
+    showLoginMessage("");
+
+  }catch(error){
+
+    showLoginMessage(
+      friendlyAuthError(error)
+    );
+
+  }
+
+};
+
+
+/* =========================
+   AUTH ERROR
+========================= */
+
+function friendlyAuthError(error){
+
+  const code = error.code || "";
+
+  if(code.includes("invalid-credential")){
+    return "Email or password is incorrect.";
+  }
+
+  if(code.includes("wrong-password")){
+    return "Incorrect password.";
+  }
+
+  if(code.includes("user-not-found")){
+    return "No account found with this email.";
+  }
+
+  if(code.includes("email-already-in-use")){
+    return "This email already has an account.";
+  }
+
+  if(code.includes("popup-closed-by-user")){
+    return "Google login was cancelled.";
+  }
+
+  if(code.includes("too-many-requests")){
+    return "Too many attempts. Try again later.";
+  }
+
+  return error.message || "Something went wrong.";
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth, async (user) => {
+
+  currentUser = user;
+
+  if(user){
+
+    loginScreen.classList.add("hidden");
+
+    appScreen.classList.remove("hidden");
+
+    userEmail.textContent =
+      user.email || "Google User";
+
+    startHistoryListener();
+
+    await createNewChat();
+
+  }else{
+
+    loginScreen.classList.remove("hidden");
+
+    appScreen.classList.add("hidden");
+
+    if(unsubscribeHistory){
+
+      unsubscribeHistory();
+
+      unsubscribeHistory = null;
+
+    }
+
+  }
 
 });
 
 
-/* =====================================================
-   ADD MESSAGE
-===================================================== */
+/* =========================
+   CHAT COLLECTION
+========================= */
 
-function addMessage(
-  text,
-  type
-){
+function chatsCollection(){
+
+  if(!currentUser) return null;
+
+  return collection(
+    db,
+    "users",
+    currentUser.uid,
+    "chats"
+  );
+
+}
+
+
+/* =========================
+   HISTORY LISTENER
+========================= */
+
+function startHistoryListener(){
+
+  if(!currentUser) return;
+
+  if(unsubscribeHistory){
+
+    unsubscribeHistory();
+
+  }
+
+  const q = query(
+    chatsCollection(),
+    orderBy("updatedAt", "desc")
+  );
+
+  unsubscribeHistory = onSnapshot(
+    q,
+    (snapshot) => {
+
+      historyBox.innerHTML = "";
+
+      if(snapshot.empty){
+
+        const empty = document.createElement("div");
+
+        empty.style.padding = "15px";
+        empty.style.color = "#64748b";
+        empty.style.fontSize = "12px";
+        empty.textContent = "No saved chats yet.";
+
+        historyBox.appendChild(empty);
+
+        return;
+
+      }
+
+      snapshot.forEach((chatDoc) => {
+
+        const data = chatDoc.data();
+
+        const row = document.createElement("div");
+
+        row.className = "history-item";
+
+
+        const openButton =
+          document.createElement("button");
+
+        openButton.className = "history-open";
+
+        if(chatDoc.id === currentChatId){
+
+          openButton.classList.add("active");
+
+        }
+
+
+        const name =
+          document.createElement("div");
+
+        name.className = "history-name";
+
+        name.textContent =
+          data.title || "New Chat";
+
+
+        openButton.appendChild(name);
+
+
+        openButton.onclick = () => {
+
+          openChat(chatDoc.id);
+
+          sidebar.classList.remove("open");
+
+        };
+
+
+        const deleteButton =
+          document.createElement("button");
+
+        deleteButton.className = "delete-chat";
+
+        deleteButton.textContent = "×";
+
+        deleteButton.title = "Delete chat";
+
+
+        deleteButton.onclick = async (event) => {
+
+          event.stopPropagation();
+
+          await deleteChat(chatDoc.id);
+
+        };
+
+
+        row.appendChild(openButton);
+
+        row.appendChild(deleteButton);
+
+        historyBox.appendChild(row);
+
+      });
+
+    },
+    (error) => {
+
+      console.error(
+        "History error:",
+        error
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   CREATE NEW CHAT
+========================= */
+
+async function createNewChat(){
+
+  if(!currentUser) return;
+
+  const newRef = doc(
+    chatsCollection()
+  );
+
+  currentChatId = newRef.id;
+
+  currentMessages = [];
+
+  chatTitle.textContent = "New Chat";
+
+  renderMessages();
+
+  try{
+
+    await setDoc(
+      newRef,
+      {
+        userId: currentUser.uid,
+        title: "New Chat",
+        messages: [],
+        mode: selectedMode,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      "Could not create chat:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   OPEN CHAT
+========================= */
+
+async function openChat(chatId){
+
+  if(!currentUser) return;
+
+  try{
+
+    const chatRef = doc(
+      db,
+      "users",
+      currentUser.uid,
+      "chats",
+      chatId
+    );
+
+    const snapshot =
+      await getDoc(chatRef);
+
+    if(!snapshot.exists()){
+
+      return;
+
+    }
+
+    const data = snapshot.data();
+
+    currentChatId = chatId;
+
+    currentMessages =
+      Array.isArray(data.messages)
+        ? data.messages
+        : [];
+
+    chatTitle.textContent =
+      data.title || "New Chat";
+
+    if(data.mode){
+
+      selectedMode = data.mode;
+
+      updateModeButtons();
+
+    }
+
+    renderMessages();
+
+  }catch(error){
+
+    console.error(
+      "Open chat error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SAVE CURRENT CHAT
+========================= */
+
+async function saveCurrentChat(){
+
+  if(!currentUser || !currentChatId){
+
+    return;
+
+  }
+
+  const title =
+    makeTitleFromMessages();
+
+  const chatRef = doc(
+    db,
+    "users",
+    currentUser.uid,
+    "chats",
+    currentChatId
+  );
+
+  try{
+
+    await setDoc(
+      chatRef,
+      {
+        userId: currentUser.uid,
+        title: title,
+        messages: currentMessages,
+        mode: selectedMode,
+        updatedAt: serverTimestamp()
+      },
+      {
+        merge: true
+      }
+    );
+
+    chatTitle.textContent = title;
+
+  }catch(error){
+
+    console.error(
+      "Save chat error:",
+      error
+    );
+
+    alert(
+      "Chat could not be saved. Check your Firestore Rules."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   CHAT TITLE
+========================= */
+
+function makeTitleFromMessages(){
+
+  const firstUser =
+    currentMessages.find(
+      item => item.role === "user"
+    );
+
+  if(!firstUser){
+
+    return "New Chat";
+
+  }
+
+  let title =
+    String(firstUser.text || "")
+      .replace(/\s+/g," ")
+      .trim();
+
+  if(title.length > 42){
+
+    title =
+      title.substring(0,42) + "...";
+
+  }
+
+  return title || "New Chat";
+
+}
+
+
+/* =========================
+   DELETE CHAT
+========================= */
+
+async function deleteChat(chatId){
+
+  if(!currentUser) return;
+
+  const okay =
+    confirm(
+      "Delete this chat permanently?"
+    );
+
+  if(!okay) return;
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "users",
+        currentUser.uid,
+        "chats",
+        chatId
+      )
+    );
+
+    if(chatId === currentChatId){
+
+      await createNewChat();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Delete error:",
+      error
+    );
+
+    alert(
+      "Could not delete this chat."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   RENDER MESSAGES
+========================= */
+
+function renderMessages(){
+
+  chatBox.innerHTML = "";
+
+  if(currentMessages.length === 0){
+
+    chatBox.appendChild(
+      createWelcome()
+    );
+
+    return;
+
+  }
+
+  currentMessages.forEach(
+    message => {
+
+      addMessageToScreen(
+        message.role,
+        message.text
+      );
+
+    }
+  );
+
+  scrollToBottom();
+
+}
+
+
+/* =========================
+   WELCOME
+========================= */
+
+function createWelcome(){
 
   const div =
     document.createElement("div");
 
-  div.className =
-    "message " + type;
+  div.className = "welcome";
 
-  div.textContent =
-    text;
+  div.innerHTML = `
+    <h1>Welcome to <span>UNI AI</span></h1>
+    <p>Ujjwal Neural Intelligence — your personal AI assistant.</p>
 
-  chat.appendChild(div);
+    <div class="welcome-card">
 
-  window.scrollTo(
-    0,
-    document.body.scrollHeight
-  );
+      <div class="mode-card">
+        <b>📚 Study</b>
+        Class 8 friendly explanations and homework help.
+      </div>
+
+      <div class="mode-card">
+        <b>💻 Coding</b>
+        Programming and development assistance.
+      </div>
+
+      <div class="mode-card">
+        <b>🔎 Search</b>
+        Search mode for your AI workflow.
+      </div>
+
+      <div class="mode-card">
+        <b>💬 General</b>
+        Ask UNI anything.
+      </div>
+
+    </div>
+  `;
 
   return div;
 
 }
 
 
-/* =====================================================
-   TEXT TO SPEECH
-===================================================== */
+/* =========================
+   ADD MESSAGE
+========================= */
 
-let voiceEnabled = true;
+function addMessageToScreen(
+  role,
+  text
+){
 
-function speak(text){
+  const row =
+    document.createElement("div");
 
-  if(!voiceEnabled)
-    return;
+  row.className =
+    "message-row " +
+    (role === "user"
+      ? "user"
+      : "ai");
 
-  if(!("speechSynthesis" in window))
-    return;
 
-  window.speechSynthesis.cancel();
+  const bubble =
+    document.createElement("div");
 
-  const cleanText =
-    text
-    .replace(/[*#`_]/g,"")
-    .replace(/\n+/g," ");
+  bubble.className =
+    "message " +
+    (role === "user"
+      ? "user"
+      : "ai");
 
-  const speech =
-    new SpeechSynthesisUtterance(
-      cleanText
-    );
+  bubble.textContent = text;
 
-  speech.lang =
-    "en-IN";
+  row.appendChild(bubble);
 
-  speech.rate =
-    1;
-
-  speech.pitch =
-    1;
-
-  window.speechSynthesis.speak(
-    speech
-  );
+  chatBox.appendChild(row);
 
 }
 
 
-/* =====================================================
-   SEND
-===================================================== */
+/* =========================
+   SEND MESSAGE
+========================= */
 
-async function sendQuestion(){
+async function sendMessage(){
+
+  if(isSending) return;
 
   const text =
     question.value.trim();
 
-  if(!text)
+  if(!text) return;
+
+  if(!currentUser){
+
+    alert("Please sign in first.");
+
     return;
 
-  addMessage(
-    text,
-    "user"
-  );
+  }
 
-  question.value = "";
+  if(!currentChatId){
 
-  const thinking =
-    addMessage(
-      "UNI is thinking...",
-      "ai"
-    );
+    await createNewChat();
 
-  thinking.classList.add(
-    "typing"
-  );
+  }
+
+  isSending = true;
 
   sendBtn.disabled = true;
 
+  sendBtn.textContent = "...";
+
+
+  currentMessages.push({
+    role:"user",
+    text:text
+  });
+
+  question.value = "";
+
+  autoResize();
+
+  renderMessages();
+
+  await saveCurrentChat();
+
+
+  const aiMessageIndex =
+    currentMessages.length;
+
+  currentMessages.push({
+    role:"assistant",
+    text:"UNI is thinking..."
+  });
+
+  renderMessages();
+
+
   try{
+
+    const prompt =
+`You are UNI AI, which stands for Ujjwal Neural Intelligence.
+
+Never introduce yourself as OpenAI.
+
+You are a helpful AI assistant.
+
+Current mode: ${selectedMode}
+
+User message:
+${text}`;
+
 
     const response =
       await fetch(
-        BACKEND_URL,
+        "https://uni-ai-3mg0.onrender.com/ask",
         {
           method:"POST",
 
@@ -1056,90 +1801,90 @@ async function sendQuestion(){
           },
 
           body:JSON.stringify({
-
-            question:
-              "You are UNI, Ujjwal Neural Intelligence." +
-              "\nCurrent mode: " +
-              currentMode +
-              "\n\nUser question: " +
-              text
-
+            question:prompt
           })
-
         }
       );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Backend returned " +
+        response.status
+      );
+
+    }
 
 
     const data =
       await response.json();
 
-    thinking.remove();
 
-
-    if(!response.ok){
-
-      addMessage(
-        "Backend error: " +
-        (data.error ||
-        "Something went wrong."),
-        "ai"
-      );
-
-      return;
-
-    }
-
-
-    const answer =
+    let answer =
       data.answer ||
       data.output ||
-      data.output_text ||
-      "UNI could not answer.";
+      data.response ||
+      "UNI could not generate an answer.";
 
-    addMessage(
-      answer,
-      "ai"
-    );
+
+    currentMessages[
+      aiMessageIndex
+    ].text = answer;
+
+
+    renderMessages();
+
+    await saveCurrentChat();
 
     speak(answer);
 
 
   }catch(error){
 
-    console.error(error);
-
-    thinking.remove();
-
-    addMessage(
-      "I could not connect to UNI. Please try again.",
-      "ai"
+    console.error(
+      "AI error:",
+      error
     );
+
+
+    currentMessages[
+      aiMessageIndex
+    ].text =
+      "Sorry, UNI could not connect to the AI server right now.";
+
+
+    renderMessages();
+
+    await saveCurrentChat();
 
   }finally{
 
-    sendBtn.disabled =
-      false;
+    isSending = false;
+
+    sendBtn.disabled = false;
+
+    sendBtn.textContent = "➤";
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================
    SEND BUTTON
-===================================================== */
+========================= */
 
-sendBtn.onclick =
-  sendQuestion;
+sendBtn.onclick = sendMessage;
 
 
-/* =====================================================
-   ENTER TO SEND
-===================================================== */
+/* =========================
+   ENTER KEY
+========================= */
 
 question.addEventListener(
   "keydown",
-  event => {
+  (event) => {
 
     if(
       event.key === "Enter" &&
@@ -1148,7 +1893,7 @@ question.addEventListener(
 
       event.preventDefault();
 
-      sendQuestion();
+      sendMessage();
 
     }
 
@@ -1156,112 +1901,266 @@ question.addEventListener(
 );
 
 
-/* =====================================================
-   VOICE INPUT
-===================================================== */
+/* =========================
+   AUTO RESIZE
+========================= */
 
-const voiceBtn =
-  document.getElementById("voiceBtn");
+question.addEventListener(
+  "input",
+  autoResize
+);
+
+function autoResize(){
+
+  question.style.height = "auto";
+
+  question.style.height =
+    Math.min(
+      question.scrollHeight,
+      150
+    ) + "px";
+
+}
+
+
+/* =========================
+   NEW CHAT
+========================= */
+
+newChatBtn.onclick = async () => {
+
+  await createNewChat();
+
+  sidebar.classList.remove("open");
+
+};
+
+
+/* =========================
+   CLEAR CHAT
+========================= */
+
+clearBtn.onclick = async () => {
+
+  if(!currentChatId) return;
+
+  const okay =
+    confirm(
+      "Clear all messages in this chat?"
+    );
+
+  if(!okay) return;
+
+  currentMessages = [];
+
+  renderMessages();
+
+  await saveCurrentChat();
+
+};
+
+
+/* =========================
+   HISTORY BUTTON
+========================= */
+
+historyBtn.onclick = () => {
+
+  sidebar.classList.toggle("open");
+
+};
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+menuBtn.onclick = () => {
+
+  sidebar.classList.toggle("open");
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.onclick = async () => {
+
+  try{
+
+    await signOut(auth);
+
+  }catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+  }
+
+};
+
+
+/* =========================
+   MODES
+========================= */
+
+document
+  .querySelectorAll(".mode")
+  .forEach(button => {
+
+    button.onclick = () => {
+
+      selectedMode =
+        button.dataset.mode;
+
+      updateModeButtons();
+
+    };
+
+  });
+
+
+function updateModeButtons(){
+
+  document
+    .querySelectorAll(".mode")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.mode === selectedMode
+      );
+
+    });
+
+}
+
+
+/* =========================
+   VOICE INPUT
+========================= */
+
+let recognition = null;
 
 const SpeechRecognition =
   window.SpeechRecognition ||
   window.webkitSpeechRecognition;
 
-
 if(SpeechRecognition){
 
-  const recognition =
+  recognition =
     new SpeechRecognition();
 
-  recognition.lang =
-    "en-IN";
+  recognition.lang = "en-IN";
 
-  recognition.continuous =
-    false;
+  recognition.continuous = false;
 
-  recognition.interimResults =
-    false;
+  recognition.interimResults = false;
 
 
   recognition.onstart = () => {
 
-    voiceBtn.textContent =
-      "🔴";
+    voiceBtn.classList.add("active");
 
   };
 
 
   recognition.onend = () => {
 
-    voiceBtn.textContent =
-      "🎤";
+    voiceBtn.classList.remove("active");
 
   };
 
 
-  recognition.onresult =
-    event => {
+  recognition.onresult = (event) => {
 
-      question.value =
-        event.results[0][0].transcript;
+    const spoken =
+      event.results[0][0].transcript;
 
-    };
+    question.value =
+      spoken;
+
+    autoResize();
+
+  };
 
 
-  recognition.onerror =
-    error => {
+  recognition.onerror = (event) => {
 
-      console.log(
-        "Voice:",
-        error.error
-      );
+    console.error(
+      "Voice error:",
+      event.error
+    );
 
-      voiceBtn.textContent =
-        "🎤";
+    voiceBtn.classList.remove("active");
 
-    };
+  };
 
 
   voiceBtn.onclick = () => {
 
-    recognition.start();
+    try{
+
+      recognition.start();
+
+    }catch(error){
+
+      console.log(error);
+
+    }
 
   };
 
 }else{
 
-  voiceBtn.onclick = () => {
+  voiceBtn.disabled = true;
 
-    addMessage(
-      "Voice input is not supported in this browser.",
-      "ai"
-    );
-
-  };
+  voiceBtn.title =
+    "Voice input is not supported in this browser.";
 
 }
 
 
-/* =====================================================
-   CLEAR CHAT
-===================================================== */
+/* =========================
+   TEXT TO SPEECH
+========================= */
 
-document
-.getElementById("clearBtn")
-.onclick = () => {
+function speak(text){
+
+  if(!voiceEnabled) return;
+
+  if(!("speechSynthesis" in window)) return;
 
   window.speechSynthesis.cancel();
 
-  chat.innerHTML = "";
+  const cleanText =
+    String(text)
+      .replace(/[*#`_]/g,"")
+      .replace(/\n+/g," ");
 
-  addMessage(
-    "Chat cleared. 👋 What would you like to ask UNI?",
-    "ai"
+  const speech =
+    new SpeechSynthesisUtterance(
+      cleanText
+    );
+
+  speech.lang = "en-IN";
+
+  speech.rate = 1;
+
+  speech.pitch = 1;
+
+  window.speechSynthesis.speak(
+    speech
   );
 
-};
+}
 
 </script>
 
 </body>
 </html>
+```
