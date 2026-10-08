@@ -3,1569 +3,1510 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>UNI AI — Ujjwal Neural Intelligence</title>
 
 <style>
-/* =========================
-   UNI AI — AESTHETIC UI
-========================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
 }
 
-:root {
-    --bg: #070914;
-    --card: rgba(20, 24, 45, 0.72);
-    --card2: rgba(31, 36, 64, 0.72);
-    --text: #f5f7ff;
-    --muted: #9da5c5;
-    --accent: #8b5cf6;
-    --accent2: #22d3ee;
-    --border: rgba(255,255,255,0.10);
-    --user: linear-gradient(135deg, #7c3aed, #2563eb);
-    --uni: rgba(255,255,255,0.07);
-    --shadow: 0 20px 60px rgba(0,0,0,.35);
+body{
+  min-height:100vh;
+  color:white;
+  background:
+    radial-gradient(circle at top left,#302b63,transparent 40%),
+    radial-gradient(circle at bottom right,#24243e,transparent 45%),
+    #080812;
 }
 
-body.light {
-    --bg: #eef2ff;
-    --card: rgba(255,255,255,.75);
-    --card2: rgba(255,255,255,.9);
-    --text: #171827;
-    --muted: #68708c;
-    --border: rgba(0,0,0,.08);
-    --uni: rgba(255,255,255,.8);
-    --shadow: 0 20px 50px rgba(80,90,140,.18);
+button,input,textarea{
+  font:inherit;
 }
 
-body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--text);
-    background:
-        radial-gradient(circle at 15% 15%, rgba(124,58,237,.25), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(34,211,238,.18), transparent 28%),
-        radial-gradient(circle at 50% 100%, rgba(99,102,241,.16), transparent 35%),
-        var(--bg);
-    overflow-x: hidden;
-    transition: .3s;
+button{
+  cursor:pointer;
 }
 
-/* Animated background */
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: -1;
-    animation: float 8s ease-in-out infinite alternate;
+.app{
+  min-height:100vh;
+  padding:18px;
 }
 
-body::before {
-    background: rgba(139,92,246,.20);
-    top: 5%;
-    left: -100px;
+.topbar{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 18px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(15px);
 }
 
-body::after {
-    background: rgba(34,211,238,.15);
-    right: -100px;
-    bottom: 5%;
-    animation-delay: 2s;
+.logo{
+  font-size:24px;
+  font-weight:bold;
 }
 
-@keyframes float {
-    from { transform: translateY(-20px); }
-    to { transform: translateY(30px); }
+.logo small{
+  display:block;
+  font-size:10px;
+  opacity:.65;
+  letter-spacing:1px;
 }
 
-/* =========================
-   APP
-========================= */
-
-.app {
-    width: min(1200px, 96%);
-    margin: auto;
-    padding: 18px 0 30px;
+.account{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    margin-bottom: 18px;
-
-    background: var(--card);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(20px);
-
-    border-radius: 24px;
-    box-shadow: var(--shadow);
+.userEmail{
+  font-size:12px;
+  opacity:.75;
+  max-width:180px;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:10px 15px;
+  color:white;
+  background:linear-gradient(135deg,#7c4dff,#00c6ff);
+  font-weight:bold;
 }
 
-.logo-small {
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 24px;
-
-    background: linear-gradient(
-        135deg,
-        var(--accent),
-        var(--accent2)
-    );
-
-    box-shadow:
-        0 0 25px rgba(139,92,246,.5);
+.btn.secondary{
+  background:rgba(255,255,255,.1);
 }
 
-.brand h1 {
-    font-size: 21px;
+.main{
+  max-width:1100px;
+  margin:25px auto;
 }
 
-.brand p {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 3px;
+.hero{
+  text-align:center;
+  padding:25px 10px;
 }
 
-.header-actions {
-    display: flex;
-    gap: 8px;
+.orb{
+  width:110px;
+  height:110px;
+  margin:auto;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffffff,#8c7bff 30%,#00c6ff 65%,transparent 70%);
+  box-shadow:0 0 45px #655cff;
+  animation:pulse 2.5s infinite;
 }
 
-.icon-btn {
-    width: 42px;
-    height: 42px;
-
-    border: 1px solid var(--border);
-    border-radius: 14px;
-
-    background: var(--card2);
-    color: var(--text);
-
-    cursor: pointer;
-    font-size: 18px;
-
-    transition: .25s;
+@keyframes pulse{
+  50%{transform:scale(1.07)}
 }
 
-.icon-btn:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
+.hero h1{
+  margin-top:20px;
+  font-size:40px;
 }
 
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    position: relative;
-    overflow: hidden;
-
-    text-align: center;
-
-    padding: 40px 20px 32px;
-    margin-bottom: 18px;
-
-    border: 1px solid var(--border);
-    border-radius: 30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(139,92,246,.14),
-            rgba(34,211,238,.07)
-        ),
-        var(--card);
-
-    backdrop-filter: blur(25px);
-    box-shadow: var(--shadow);
+.hero p{
+  margin-top:8px;
+  opacity:.7;
 }
 
-.hero-orb {
-    width: 105px;
-    height: 105px;
-
-    margin: 0 auto 20px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 48px;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #ffffff,
-            #a78bfa 18%,
-            #6366f1 45%,
-            #06b6d4 75%
-        );
-
-    box-shadow:
-        0 0 25px rgba(139,92,246,.65),
-        0 0 70px rgba(34,211,238,.25);
-
-    animation: orb 3s ease-in-out infinite;
+.modes{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:15px 0;
 }
 
-@keyframes orb {
-    0%,100% {
-        transform: scale(1);
-        box-shadow:
-            0 0 25px rgba(139,92,246,.65),
-            0 0 70px rgba(34,211,238,.25);
-    }
-
-    50% {
-        transform: scale(1.06);
-        box-shadow:
-            0 0 35px rgba(139,92,246,.8),
-            0 0 100px rgba(34,211,238,.35);
-    }
+.mode{
+  padding:9px 15px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  color:white;
 }
 
-.hero h2 {
-    font-size: clamp(28px, 5vw, 45px);
-    margin-bottom: 8px;
+.mode.active{
+  background:linear-gradient(135deg,#7c4dff,#00c6ff);
 }
 
-.gradient-text {
-    background: linear-gradient(
-        90deg,
-        #a78bfa,
-        #22d3ee,
-        #c084fc
-    );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.chat{
+  min-height:390px;
+  max-height:500px;
+  overflow-y:auto;
+  padding:18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
 }
 
-.hero p {
-    color: var(--muted);
-    max-width: 650px;
-    margin: auto;
-    line-height: 1.6;
+.message{
+  max-width:82%;
+  margin:10px 0;
+  padding:13px 15px;
+  border-radius:17px;
+  line-height:1.5;
+  white-space:pre-wrap;
 }
 
-/* Status */
-
-.status {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-
-    margin-top: 18px;
-
-    padding: 7px 13px;
-
-    border-radius: 50px;
-
-    background: rgba(34,211,238,.08);
-    border: 1px solid rgba(34,211,238,.18);
-
-    color: var(--muted);
-    font-size: 12px;
+.user{
+  margin-left:auto;
+  background:linear-gradient(135deg,#6255ff,#367cff);
 }
 
-.status-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #22c55e;
-
-    box-shadow: 0 0 10px #22c55e;
+.ai{
+  background:rgba(255,255,255,.1);
 }
 
-/* =========================
-   QUICK CARDS
-========================= */
-
-.quick-title {
-    font-size: 16px;
-    margin: 20px 4px 10px;
+.inputArea{
+  margin-top:15px;
+  display:flex;
+  gap:8px;
+  padding:10px;
+  border-radius:20px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
 }
 
-.quick-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 18px;
+textarea{
+  flex:1;
+  min-height:50px;
+  max-height:130px;
+  resize:none;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:13px;
 }
 
-.quick-card {
-    position: relative;
-    overflow: hidden;
-
-    padding: 18px;
-
-    min-height: 110px;
-
-    border-radius: 22px;
-
-    background: var(--card);
-    border: 1px solid var(--border);
-
-    backdrop-filter: blur(20px);
-
-    cursor: pointer;
-
-    transition: .25s;
+.iconBtn{
+  width:48px;
+  height:48px;
+  border:0;
+  border-radius:14px;
+  background:rgba(255,255,255,.1);
+  color:white;
+  font-size:19px;
 }
 
-.quick-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(139,92,246,.5);
-    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+.send{
+  background:linear-gradient(135deg,#7c4dff,#00c6ff);
 }
 
-.quick-icon {
-    font-size: 25px;
-    margin-bottom: 12px;
+.tools{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
 }
 
-.quick-card strong {
-    display: block;
-    margin-bottom: 5px;
+.status{
+  text-align:center;
+  margin:10px;
+  font-size:12px;
+  opacity:.6;
 }
 
-.quick-card span {
-    font-size: 12px;
-    color: var(--muted);
+/* AUTH */
+
+.authOverlay{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
 }
 
-/* =========================
-   MODE BAR
-========================= */
-
-.mode-bar {
-    display: flex;
-    gap: 8px;
-
-    overflow-x: auto;
-
-    padding: 8px;
-
-    margin-bottom: 12px;
-
-    border-radius: 20px;
-
-    background: var(--card);
-    border: 1px solid var(--border);
-
-    backdrop-filter: blur(20px);
+.authBox{
+  width:min(420px,100%);
+  padding:28px;
+  border-radius:25px;
+  background:#11111f;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 20px 70px rgba(0,0,0,.5);
 }
 
-.mode-bar::-webkit-scrollbar {
-    display: none;
+.authBox h2{
+  text-align:center;
+  font-size:28px;
 }
 
-.mode-btn {
-    flex: 1;
-
-    min-width: 105px;
-
-    border: 0;
-
-    border-radius: 14px;
-
-    padding: 11px 14px;
-
-    color: var(--muted);
-    background: transparent;
-
-    cursor: pointer;
-
-    transition: .2s;
+.authSub{
+  text-align:center;
+  opacity:.65;
+  margin:7px 0 22px;
+  font-size:13px;
 }
 
-.mode-btn.active {
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--accent),
-            #4f46e5
-        );
-
-    box-shadow: 0 8px 25px rgba(124,58,237,.25);
+.authInput{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  outline:0;
+  background:rgba(255,255,255,.07);
+  color:white;
 }
 
-/* =========================
-   CHAT
-========================= */
-
-.chat-box {
-    height: 420px;
-
-    overflow-y: auto;
-
-    padding: 18px;
-
-    border-radius: 26px;
-
-    background: var(--card);
-    border: 1px solid var(--border);
-
-    backdrop-filter: blur(20px);
-
-    box-shadow: var(--shadow);
-
-    scroll-behavior: smooth;
+.authBtn{
+  width:100%;
+  padding:13px;
+  margin-top:8px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#7c4dff,#00c6ff);
+  color:white;
+  font-weight:bold;
 }
 
-.message {
-    display: flex;
-    margin: 12px 0;
+.googleBtn{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;
+  background:white;
+  color:#222;
+  font-weight:bold;
 }
 
-.message.user {
-    justify-content: flex-end;
+.divider{
+  text-align:center;
+  margin:17px 0;
+  opacity:.5;
+  font-size:12px;
 }
 
-.bubble {
-    max-width: 80%;
-
-    padding: 12px 15px;
-
-    border-radius: 18px;
-
-    line-height: 1.5;
-
-    font-size: 14px;
-
-    white-space: pre-wrap;
+.authSwitch{
+  text-align:center;
+  margin-top:15px;
+  font-size:13px;
 }
 
-.message.uni .bubble {
-    background: var(--uni);
-    border: 1px solid var(--border);
-    border-bottom-left-radius: 5px;
+.authSwitch span{
+  color:#7db7ff;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.message.user .bubble {
-    color: white;
-
-    background: var(--user);
-
-    border-bottom-right-radius: 5px;
-
-    box-shadow: 0 8px 25px rgba(37,99,235,.18);
+.authError{
+  color:#ff8c8c;
+  font-size:12px;
+  margin-top:8px;
+  text-align:center;
 }
 
-/* =========================
-   INPUT
-========================= */
-
-.input-area {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-top: 12px;
-
-    padding: 8px;
-
-    border-radius: 22px;
-
-    background: var(--card);
-    border: 1px solid var(--border);
-
-    backdrop-filter: blur(20px);
-
-    box-shadow: var(--shadow);
+.hidden{
+  display:none !important;
 }
 
-.input-area input {
-    flex: 1;
-
-    min-width: 0;
-
-    border: 0;
-    outline: 0;
-
-    background: transparent;
-
-    color: var(--text);
-
-    padding: 13px;
-
-    font-size: 15px;
+.cameraModal{
+  position:fixed;
+  inset:0;
+  z-index:1100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.85);
+  padding:20px;
 }
 
-.input-area input::placeholder {
-    color: var(--muted);
+.cameraBox{
+  width:min(600px,100%);
+  background:#11111f;
+  padding:18px;
+  border-radius:20px;
+  text-align:center;
 }
 
-.action-btn {
-    width: 44px;
-    height: 44px;
-
-    flex-shrink: 0;
-
-    border: 1px solid var(--border);
-    border-radius: 14px;
-
-    background: var(--card2);
-    color: var(--text);
-
-    cursor: pointer;
-
-    transition: .2s;
+video{
+  width:100%;
+  border-radius:15px;
+  background:black;
 }
 
-.action-btn:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-}
-
-.send-btn {
-    width: 50px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--accent),
-            #2563eb
-        );
-
-    color: white;
-
-    border: 0;
-
-    font-size: 18px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
-    padding: 18px;
-}
-
-.footer strong {
-    color: var(--text);
-}
-
-/* =========================
-   TYPING
-========================= */
-
-.typing {
-    display: inline-flex;
-    gap: 4px;
-}
-
-.typing span {
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: var(--muted);
-
-    animation: typing 1s infinite;
-}
-
-.typing span:nth-child(2) {
-    animation-delay: .15s;
-}
-
-.typing span:nth-child(3) {
-    animation-delay: .3s;
-}
-
-@keyframes typing {
-    0%,60%,100% {
-        opacity: .25;
-        transform: translateY(0);
-    }
-
-    30% {
-        opacity: 1;
-        transform: translateY(-4px);
-    }
-}
-
-/* =========================
-   TABLET / MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    .app {
-        width: 94%;
-    }
-
-    .quick-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hero {
-        padding: 32px 15px 25px;
-    }
-
-    .hero-orb {
-        width: 85px;
-        height: 85px;
-        font-size: 38px;
-    }
-
-    .chat-box {
-        height: 390px;
-    }
-
-    .bubble {
-        max-width: 88%;
-    }
-
-    .input-area {
-        gap: 5px;
-    }
-
-    .action-btn {
-        width: 40px;
-        height: 40px;
-    }
-
-    .send-btn {
-        width: 44px;
-    }
-}
-
-@media (max-width: 420px) {
-
-    .brand p {
-        display: none;
-    }
-
-    .logo-small {
-        width: 42px;
-        height: 42px;
-    }
-
-    .quick-card {
-        padding: 14px;
-    }
+@media(max-width:600px){
+  .hero h1{font-size:30px}
+  .message{max-width:92%}
+  .userEmail{display:none}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- ================= AUTH ================= -->
 
-    <!-- HEADER -->
-    <header class="header">
+<div id="authOverlay" class="authOverlay">
 
-        <div class="brand">
+  <div class="authBox">
 
-            <div class="logo-small">
-                🤖
-            </div>
+    <h2 id="authTitle">Welcome to UNI</h2>
 
-            <div>
-                <h1>UNI AI</h1>
-                <p>Ujjwal Neural Intelligence</p>
-            </div>
+    <div class="authSub">
+      Ujjwal Neural Intelligence
+    </div>
 
-        </div>
+    <input
+      id="authEmail"
+      class="authInput"
+      type="email"
+      placeholder="Email"
+      autocomplete="email"
+    >
 
-        <div class="header-actions">
+    <input
+      id="authPassword"
+      class="authInput"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-            <button
-                class="icon-btn"
-                id="themeButton"
-                title="Change theme">
-                🌙
-            </button>
+    <button id="emailBtn" class="authBtn">
+      Login
+    </button>
 
-            <button
-                class="icon-btn"
-                id="clearButton"
-                title="Clear chat">
-                🗑️
-            </button>
+    <button id="googleBtn" class="googleBtn">
+      🔵 Continue with Google
+    </button>
 
-        </div>
+    <div class="divider">OR</div>
 
-    </header>
+    <div class="authSwitch">
+      <span id="switchText">Don't have an account?</span>
+      <span id="switchBtn"> Sign Up</span>
+    </div>
+
+    <div id="authError" class="authError"></div>
+
+  </div>
+</div>
 
 
-    <!-- HERO -->
+<!-- ================= MAIN APP ================= -->
+
+<div id="app" class="app hidden">
+
+  <div class="topbar">
+
+    <div class="logo">
+      UNI
+      <small>UJJWAL NEURAL INTELLIGENCE</small>
+    </div>
+
+    <div class="account">
+      <span id="userEmail" class="userEmail"></span>
+      <button id="logoutBtn" class="btn secondary">
+        Logout
+      </button>
+    </div>
+
+  </div>
+
+  <main class="main">
+
     <section class="hero">
 
-        <div class="hero-orb">
-            🤖
-        </div>
+      <div class="orb"></div>
 
-        <h2>
-            Welcome to
-            <span class="gradient-text">UNI</span>
-        </h2>
+      <h1>UNI AI</h1>
 
-        <p>
-            <strong>Ujjwal Neural Intelligence</strong><br>
-            Your smart personal AI assistant for studying,
-            coding, questions and ideas.
-        </p>
-
-        <div class="status">
-            <span class="status-dot"></span>
-            UNI is ready
-        </div>
+      <p>Your intelligent AI assistant</p>
 
     </section>
 
 
-    <!-- QUICK ACTIONS -->
-    <div class="quick-title">
-        ✨ Quick Actions
-    </div>
+    <div class="modes">
 
-    <section class="quick-grid">
+      <button class="mode active" data-mode="General">
+        General
+      </button>
 
-        <div class="quick-card" data-question="Explain photosynthesis in simple Class 8 language.">
-            <div class="quick-icon">📚</div>
-            <strong>Study with UNI</strong>
-            <span>Learn school topics easily</span>
-        </div>
+      <button class="mode" data-mode="Study">
+        📚 Study
+      </button>
 
-        <div class="quick-card" data-question="Help me write HTML code for a simple webpage.">
-            <div class="quick-icon">💻</div>
-            <strong>Code with UNI</strong>
-            <span>Build and learn coding</span>
-        </div>
+      <button class="mode" data-mode="Coding">
+        💻 Coding
+      </button>
 
-        <div class="quick-card" data-question="What can you help me with?">
-            <div class="quick-icon">🤖</div>
-            <strong>Ask UNI</strong>
-            <span>Ask anything you want</span>
-        </div>
-
-        <div class="quick-card" data-search="latest science news">
-            <div class="quick-icon">🌐</div>
-            <strong>Search Web</strong>
-            <span>Find information online</span>
-        </div>
-
-    </section>
-
-
-    <!-- MODES -->
-    <div class="mode-bar">
-
-        <button
-            class="mode-btn active"
-            data-mode="general">
-            🤖 General
-        </button>
-
-        <button
-            class="mode-btn"
-            data-mode="study">
-            📚 Study
-        </button>
-
-        <button
-            class="mode-btn"
-            data-mode="coding">
-            💻 Coding
-        </button>
-
-        <button
-            class="mode-btn"
-            data-mode="search">
-            🌐 Search
-        </button>
+      <button class="mode" data-mode="Search">
+        🔎 Search
+      </button>
 
     </div>
 
 
-    <!-- CHAT -->
-    <section
-        class="chat-box"
-        id="chat">
+    <div id="chat" class="chat">
 
-        <div class="message uni">
-
-            <div class="bubble">
-                👋 Hi! I'm <strong>UNI</strong> — Ujjwal Neural Intelligence.<br><br>
-                I'm ready to help you with studying, coding,
-                questions and ideas. ✨
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- INPUT -->
-    <div class="input-area">
-
-        <button
-            class="action-btn"
-            id="micButton"
-            title="Voice input">
-            🎤
-        </button>
-
-        <input
-            type="text"
-            id="userInput"
-            placeholder="Ask UNI anything..."
-            autocomplete="off">
-
-        <button
-            class="action-btn"
-            id="speakButton"
-            title="Speak last answer">
-            🔊
-        </button>
-
-        <button
-            class="action-btn"
-            id="searchButton"
-            title="Search Google">
-            🌐
-        </button>
-
-        <button
-            class="action-btn send-btn"
-            id="sendButton"
-            title="Send">
-            ➤
-        </button>
+      <div class="message ai">
+        Hello! I am UNI — Ujjwal Neural Intelligence. 🤖
+        <br><br>
+        Ask me anything!
+      </div>
 
     </div>
 
 
-    <footer class="footer">
-        <strong>UNI AI</strong> • Ujjwal Neural Intelligence
-        <br>
-        Your personal AI assistant ✨
-    </footer>
+    <div id="status" class="status">
+      UNI is ready
+    </div>
+
+
+    <div class="inputArea">
+
+      <textarea
+        id="question"
+        placeholder="Ask UNI anything..."
+      ></textarea>
+
+      <button id="micBtn" class="iconBtn">
+        🎤
+      </button>
+
+      <button id="cameraBtn" class="iconBtn">
+        📷
+      </button>
+
+      <button id="sendBtn" class="iconBtn send">
+        ➤
+      </button>
+
+    </div>
+
+
+    <div class="tools">
+
+      <button id="speakBtn" class="btn secondary">
+        🔊 Speak
+      </button>
+
+      <button id="searchBtn" class="btn secondary">
+        🔎 Google Search
+      </button>
+
+      <button id="clearBtn" class="btn secondary">
+        🗑 Clear
+      </button>
+
+    </div>
+
+  </main>
 
 </div>
 
 
-<script>
+<!-- ================= CAMERA ================= -->
 
-/* =====================================
-   UNI AI SETTINGS
-===================================== */
+<div id="cameraModal" class="cameraModal">
 
-/*
-IMPORTANT:
-This is your Render backend.
-Your OpenAI API key stays on the backend.
-DO NOT put your API key in this file.
-*/
+  <div class="cameraBox">
 
-const BACKEND_URL =
-    "https://uni-ai-3mg0.onrender.com/ask";
+    <video id="cameraVideo" autoplay playsinline></video>
+
+    <br><br>
+
+    <button id="captureBtn" class="btn">
+      📸 Capture
+    </button>
+
+    <button id="closeCameraBtn" class="btn secondary">
+      Close
+    </button>
+
+  </div>
+
+</div>
 
 
-/* =====================================
-   VARIABLES
-===================================== */
+<input
+  id="photoInput"
+  type="file"
+  accept="image/*"
+  capture="environment"
+  style="display:none"
+>
 
-let currentMode = "general";
-let lastAnswer = "";
-let typingElement = null;
 
-const input =
-    document.getElementById("userInput");
+<!-- ================= FIREBASE + APP ================= -->
 
-const sendButton =
-    document.getElementById("sendButton");
+<script type="module">
 
-const micButton =
-    document.getElementById("micButton");
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 
-const speakButton =
-    document.getElementById("speakButton");
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
-const searchButton =
-    document.getElementById("searchButton");
+
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSy8yConC1tbw_DrCDm182bjCRF6Ivx5Zi2xas",
+
+  authDomain: "uni-ai-a00c6.firebaseapp.com",
+
+  projectId: "uni-ai-a00c6",
+
+  storageBucket: "uni-ai-a00c6.firebasestorage.app",
+
+  messagingSenderId: "322740324379",
+
+  appId: "1:322740324379:web:686f2301fe6fbe2ed550be",
+
+  measurementId: "G-6QZ0LNXTQ3"
+};
+
+
+const firebaseApp = initializeApp(firebaseConfig);
+
+const auth = getAuth(firebaseApp);
+
+const googleProvider = new GoogleAuthProvider();
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const authOverlay =
+  document.getElementById("authOverlay");
+
+const app =
+  document.getElementById("app");
+
+const authTitle =
+  document.getElementById("authTitle");
+
+const authEmail =
+  document.getElementById("authEmail");
+
+const authPassword =
+  document.getElementById("authPassword");
+
+const emailBtn =
+  document.getElementById("emailBtn");
+
+const googleBtn =
+  document.getElementById("googleBtn");
+
+const switchBtn =
+  document.getElementById("switchBtn");
+
+const switchText =
+  document.getElementById("switchText");
+
+const authError =
+  document.getElementById("authError");
+
+const userEmail =
+  document.getElementById("userEmail");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
 const chat =
-    document.getElementById("chat");
+  document.getElementById("chat");
 
-const themeButton =
-    document.getElementById("themeButton");
+const question =
+  document.getElementById("question");
 
-const clearButton =
-    document.getElementById("clearButton");
+const status =
+  document.getElementById("status");
 
-const modeButtons =
-    document.querySelectorAll(".mode-btn");
+const sendBtn =
+  document.getElementById("sendBtn");
 
-const quickCards =
-    document.querySelectorAll(".quick-card");
+const micBtn =
+  document.getElementById("micBtn");
+
+const cameraBtn =
+  document.getElementById("cameraBtn");
+
+const speakBtn =
+  document.getElementById("speakBtn");
+
+const searchBtn =
+  document.getElementById("searchBtn");
+
+const clearBtn =
+  document.getElementById("clearBtn");
+
+const cameraModal =
+  document.getElementById("cameraModal");
+
+const cameraVideo =
+  document.getElementById("cameraVideo");
+
+const captureBtn =
+  document.getElementById("captureBtn");
+
+const closeCameraBtn =
+  document.getElementById("closeCameraBtn");
+
+const photoInput =
+  document.getElementById("photoInput");
 
 
-/* =====================================
-   THEME
-===================================== */
+/* =========================================
+   LOGIN / SIGNUP
+========================================= */
 
-const savedTheme =
-    localStorage.getItem("uni-theme");
+let signupMode = false;
 
-if (savedTheme === "light") {
-    document.body.classList.add("light");
-    themeButton.textContent = "☀️";
+
+function showError(message){
+
+  authError.textContent = message;
+
 }
 
-themeButton.addEventListener("click", function() {
 
-    document.body.classList.toggle("light");
+switchBtn.addEventListener("click", () => {
 
-    if (document.body.classList.contains("light")) {
+  signupMode = !signupMode;
 
-        themeButton.textContent = "☀️";
+  showError("");
 
-        localStorage.setItem(
-            "uni-theme",
-            "light"
-        );
+  if(signupMode){
 
-    } else {
+    authTitle.textContent = "Create your UNI account";
 
-        themeButton.textContent = "🌙";
+    emailBtn.textContent = "Sign Up";
 
-        localStorage.setItem(
-            "uni-theme",
-            "dark"
-        );
-    }
+    switchText.textContent =
+      "Already have an account?";
+
+    switchBtn.textContent =
+      " Login";
+
+    authPassword.autocomplete =
+      "new-password";
+
+  }else{
+
+    authTitle.textContent =
+      "Welcome to UNI";
+
+    emailBtn.textContent =
+      "Login";
+
+    switchText.textContent =
+      "Don't have an account?";
+
+    switchBtn.textContent =
+      " Sign Up";
+
+    authPassword.autocomplete =
+      "current-password";
+
+  }
 
 });
 
 
-/* =====================================
-   MODE
-===================================== */
+emailBtn.addEventListener("click", async () => {
 
-modeButtons.forEach(function(button) {
+  const email =
+    authEmail.value.trim();
 
-    button.addEventListener("click", function() {
+  const password =
+    authPassword.value;
 
-        modeButtons.forEach(function(btn) {
-            btn.classList.remove("active");
-        });
+  if(!email || !password){
 
-        button.classList.add("active");
+    showError("Please enter email and password.");
 
-        currentMode =
-            button.dataset.mode;
+    return;
 
-        input.placeholder =
-            "Ask UNI anything...";
+  }
 
-        if (currentMode === "study") {
-            input.placeholder =
-                "Ask a study question...";
-        }
+  if(password.length < 6){
 
-        if (currentMode === "coding") {
-            input.placeholder =
-                "Ask a coding question...";
-        }
+    showError("Password must be at least 6 characters.");
 
-        if (currentMode === "search") {
-            input.placeholder =
-                "Type something to search...";
-        }
+    return;
 
-    });
+  }
+
+  try{
+
+    emailBtn.disabled = true;
+
+    if(signupMode){
+
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    }else{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(getFirebaseError(error));
+
+  }finally{
+
+    emailBtn.disabled = false;
+
+  }
 
 });
 
 
-/* =====================================
-   ADD MESSAGE
-===================================== */
+/* =========================================
+   GOOGLE LOGIN
+========================================= */
 
-function addMessage(text, type) {
+googleBtn.addEventListener("click", async () => {
 
-    const message =
-        document.createElement("div");
+  try{
 
-    message.className =
-        "message " + type;
+    showError("");
 
-    const bubble =
-        document.createElement("div");
+    googleBtn.disabled = true;
 
-    bubble.className =
-        "bubble";
+    await signInWithPopup(
+      auth,
+      googleProvider
+    );
 
-    bubble.innerHTML =
-        formatText(text);
+  }catch(error){
 
-    message.appendChild(bubble);
+    console.error(error);
 
-    chat.appendChild(message);
+    showError(getFirebaseError(error));
 
-    chat.scrollTop =
-        chat.scrollHeight;
+  }finally{
 
-}
+    googleBtn.disabled = false;
 
+  }
 
-/* =====================================
-   BASIC TEXT FORMAT
-===================================== */
-
-function formatText(text) {
-
-    if (!text) {
-        return "";
-    }
-
-    let safe =
-        String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-
-    safe =
-        safe.replace(
-            /\*\*(.*?)\*\*/g,
-            "<strong>$1</strong>"
-        );
-
-    safe =
-        safe.replace(
-            /\n/g,
-            "<br>"
-        );
-
-    return safe;
-}
+});
 
 
-/* =====================================
-   TYPING MESSAGE
-===================================== */
+/* =========================================
+   FIREBASE AUTH STATE
+========================================= */
 
-function showThinking() {
+onAuthStateChanged(auth, (user) => {
 
-    const message =
-        document.createElement("div");
+  if(user){
 
-    message.className =
-        "message uni";
+    authOverlay.classList.add("hidden");
 
-    message.id =
-        "thinkingMessage";
+    app.classList.remove("hidden");
 
-    const bubble =
-        document.createElement("div");
+    userEmail.textContent =
+      user.displayName
+      ? user.displayName
+      : user.email;
 
-    bubble.className =
-        "bubble";
+    status.textContent =
+      "Signed in as " +
+      (user.email || "UNI user");
 
-    bubble.innerHTML = `
-        <div class="typing">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    `;
+  }else{
 
-    message.appendChild(bubble);
+    authOverlay.classList.remove("hidden");
 
-    chat.appendChild(message);
+    app.classList.add("hidden");
 
-    chat.scrollTop =
-        chat.scrollHeight;
+    userEmail.textContent = "";
 
-}
+  }
+
+});
 
 
-function removeThinking() {
+/* =========================================
+   LOGOUT
+========================================= */
 
-    const thinking =
-        document.getElementById(
-            "thinkingMessage"
-        );
+logoutBtn.addEventListener("click", async () => {
 
-    if (thinking) {
-        thinking.remove();
-    }
+  await signOut(auth);
+
+});
+
+
+/* =========================================
+   FIREBASE ERROR MESSAGES
+========================================= */
+
+function getFirebaseError(error){
+
+  switch(error.code){
+
+    case "auth/invalid-email":
+      return "Please enter a valid email.";
+
+    case "auth/email-already-in-use":
+      return "This email already has an account.";
+
+    case "auth/weak-password":
+      return "Password is too weak.";
+
+    case "auth/invalid-credential":
+      return "Email or password is incorrect.";
+
+    case "auth/popup-closed-by-user":
+      return "Google sign-in was cancelled.";
+
+    case "auth/popup-blocked":
+      return "Your browser blocked the Google login popup.";
+
+    case "auth/operation-not-allowed":
+      return "This login method is not enabled in Firebase.";
+
+    default:
+      return error.message || "Something went wrong.";
+
+  }
 
 }
 
 
-/* =====================================
-   SEND MESSAGE TO UNI
-===================================== */
+/* =========================================
+   UNI CHAT
+========================================= */
 
-async function sendMessage() {
+let currentMode = "General";
 
-    const question =
-        input.value.trim();
+let selectedImage = null;
 
-    if (!question) {
-        return;
+
+document.querySelectorAll(".mode")
+.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll(".mode")
+    .forEach(b =>
+      b.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    currentMode =
+      button.dataset.mode;
+
+    status.textContent =
+      "Mode: " + currentMode;
+
+  });
+
+});
+
+
+function addMessage(text, type){
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "message " + type;
+
+  div.textContent =
+    text;
+
+  chat.appendChild(div);
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+}
+
+
+async function askUNI(){
+
+  const text =
+    question.value.trim();
+
+  if(!text && !selectedImage){
+
+    return;
+
+  }
+
+  if(!auth.currentUser){
+
+    alert("Please login first.");
+
+    return;
+
+  }
+
+  if(text){
+
+    addMessage(text, "user");
+
+  }else{
+
+    addMessage("📷 Image sent to UNI", "user");
+
+  }
+
+  question.value = "";
+
+  status.textContent =
+    "UNI is thinking...";
+
+  sendBtn.disabled = true;
+
+
+  try{
+
+    const response =
+      await fetch(
+        "https://uni-ai-3mg0.onrender.com/ask",
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json"
+          },
+
+          body:JSON.stringify({
+
+            question:
+              "Current mode: " +
+              currentMode +
+              "\n\nUser question: " +
+              (text || "Please analyze this image."),
+
+            image:
+              selectedImage
+
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "Backend error"
+      );
+
     }
 
 
     addMessage(
-        question,
-        "user"
+      data.answer ||
+      "UNI could not answer.",
+      "ai"
     );
 
-    input.value = "";
-
-    showThinking();
-
-    try {
-
-        const response =
-            await fetch(
-                BACKEND_URL,
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        question:
-                            "You are UNI, Ujjwal Neural Intelligence. " +
-
-                            "The user is using UNI AI. " +
-
-                            "Never introduce yourself as OpenAI. " +
-
-                            "If asked your name, say UNI. " +
-
-                            "If asked your full form, say " +
-                            "Ujjwal Neural Intelligence. " +
-
-                            "Current mode: " +
-                            currentMode +
-
-                            "\n\nUser question: " +
-                            question
-
-                    })
-                }
-            );
+    status.textContent =
+      "UNI is ready";
 
 
-        const data =
-            await response.json();
+    selectedImage = null;
 
 
-        removeThinking();
+  }catch(error){
 
+    console.error(error);
 
-        if (!response.ok) {
+    addMessage(
+      "Sorry, UNI could not connect to the AI server.",
+      "ai"
+    );
 
-            throw new Error(
-                data.error ||
-                "UNI could not answer."
-            );
+    status.textContent =
+      "Connection error";
 
-        }
+  }finally{
 
+    sendBtn.disabled = false;
 
-        const answer =
-            data.answer ||
-            "Sorry, UNI could not generate an answer.";
-
-        lastAnswer =
-            answer;
-
-
-        addMessage(
-            answer,
-            "uni"
-        );
-
-
-        speak(answer);
-
-
-    } catch (error) {
-
-        removeThinking();
-
-        console.error(error);
-
-        const errorMessage =
-            "⚠️ UNI could not connect to the AI server.\n\n" +
-            "Please check that your Render backend is running.";
-
-        lastAnswer =
-            errorMessage;
-
-        addMessage(
-            errorMessage,
-            "uni"
-        );
-
-    }
+  }
 
 }
 
 
-/* =====================================
-   SEND BUTTON
-===================================== */
-
-sendButton.addEventListener(
-    "click",
-    sendMessage
+sendBtn.addEventListener(
+  "click",
+  askUNI
 );
 
 
-/* =====================================
-   ENTER KEY
-===================================== */
+question.addEventListener(
+  "keydown",
+  event => {
 
-input.addEventListener(
-    "keydown",
-    function(event) {
+    if(
+      event.key === "Enter" &&
+      !event.shiftKey
+    ){
 
-        if (event.key === "Enter") {
+      event.preventDefault();
 
-            event.preventDefault();
-
-            sendMessage();
-
-        }
+      askUNI();
 
     }
+
+  }
 );
 
 
-/* =====================================
-   SPEECH OUTPUT
-===================================== */
+/* =========================================
+   GOOGLE SEARCH
+========================================= */
 
-function speak(text) {
+searchBtn.addEventListener("click", () => {
 
-    if (!("speechSynthesis" in window)) {
-        return;
-    }
+  const q =
+    question.value.trim();
 
-    speechSynthesis.cancel();
+  if(!q){
 
-    const speech =
-        new SpeechSynthesisUtterance(text);
+    alert("Type something to search.");
 
-    speech.rate = 0.95;
-    speech.pitch = 1;
-    speech.volume = 1;
+    return;
 
-    speechSynthesis.speak(
-        speech
+  }
+
+  window.open(
+    "https://www.google.com/search?q=" +
+    encodeURIComponent(q),
+    "_blank"
+  );
+
+});
+
+
+/* =========================================
+   CLEAR CHAT
+========================================= */
+
+clearBtn.addEventListener("click", () => {
+
+  chat.innerHTML = `
+    <div class="message ai">
+      Chat cleared. Hello again! I am UNI. 🤖
+    </div>
+  `;
+
+});
+
+
+/* =========================================
+   TEXT TO SPEECH
+========================================= */
+
+speakBtn.addEventListener("click", () => {
+
+  const messages =
+    chat.querySelectorAll(".message.ai");
+
+  if(!messages.length){
+
+    return;
+
+  }
+
+  const last =
+    messages[messages.length - 1];
+
+  const speech =
+    new SpeechSynthesisUtterance(
+      last.textContent
     );
 
-}
+  speech.rate = 1;
+
+  speech.pitch = 1;
+
+  speechSynthesis.cancel();
+
+  speechSynthesis.speak(speech);
+
+});
 
 
-/* =====================================
-   SPEAKER BUTTON
-===================================== */
-
-speakButton.addEventListener(
-    "click",
-    function() {
-
-        if (lastAnswer) {
-
-            speak(
-                lastAnswer
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================
+/* =========================================
    VOICE INPUT
-===================================== */
+========================================= */
 
 const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
 
 
-let recognition = null;
+if(SpeechRecognition){
+
+  const recognition =
+    new SpeechRecognition();
+
+  recognition.lang = "en-IN";
+
+  recognition.continuous = false;
+
+  recognition.interimResults = false;
 
 
-if (SpeechRecognition) {
+  micBtn.addEventListener(
+    "click",
+    () => {
 
-    recognition =
-        new SpeechRecognition();
+      status.textContent =
+        "Listening... 🎤";
 
-    recognition.lang =
-        "en-IN";
+      recognition.start();
 
-    recognition.continuous =
-        false;
-
-    recognition.interimResults =
-        false;
+    }
+  );
 
 
-    recognition.onstart =
-        function() {
+  recognition.onresult =
+    event => {
 
-            micButton.textContent =
-                "🔴";
+      question.value =
+        event.results[0][0].transcript;
 
-        };
+      status.textContent =
+        "Voice captured";
 
-
-    recognition.onend =
-        function() {
-
-            micButton.textContent =
-                "🎤";
-
-        };
+    };
 
 
-    recognition.onerror =
-        function() {
+  recognition.onerror =
+    () => {
 
-            micButton.textContent =
-                "🎤";
+      status.textContent =
+        "Voice input error";
 
-        };
+    };
 
+}else{
 
-    recognition.onresult =
-        function(event) {
+  micBtn.addEventListener(
+    "click",
+    () => {
 
-            const transcript =
-                event.results[0][0].transcript;
+      alert(
+        "Voice input is not supported by this browser."
+      );
 
-            input.value =
-                transcript;
-
-            sendMessage();
-
-        };
-
-
-    micButton.addEventListener(
-        "click",
-        function() {
-
-            try {
-
-                recognition.start();
-
-            } catch (error) {
-
-                console.log(error);
-
-            }
-
-        }
-    );
-
-} else {
-
-    micButton.addEventListener(
-        "click",
-        function() {
-
-            alert(
-                "Voice input is not supported by this browser."
-            );
-
-        }
-    );
+    }
+  );
 
 }
 
 
-/* =====================================
-   GOOGLE SEARCH
-===================================== */
+/* =========================================
+   CAMERA
+========================================= */
 
-function searchWeb(query) {
+let cameraStream = null;
 
-    if (!query.trim()) {
-        return;
+
+cameraBtn.addEventListener("click", () => {
+
+  photoInput.click();
+
+});
+
+
+photoInput.addEventListener(
+  "change",
+  async event => {
+
+    const file =
+      event.target.files[0];
+
+    if(!file){
+
+      return;
+
     }
 
-    const url =
-        "https://www.google.com/search?q=" +
-        encodeURIComponent(query);
+    try{
 
-    window.open(
-        url,
-        "_blank"
-    );
+      selectedImage =
+        await compressImage(file);
+
+      status.textContent =
+        "Photo selected 📷 — press Send";
+
+    }catch(error){
+
+      console.error(error);
+
+      status.textContent =
+        "Could not process image";
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   CAMERA FUNCTION
+========================================= */
+
+async function openCamera(){
+
+  try{
+
+    cameraStream =
+      await navigator.mediaDevices
+      .getUserMedia({
+        video:true
+      });
+
+    cameraVideo.srcObject =
+      cameraStream;
+
+    cameraModal.style.display =
+      "flex";
+
+  }catch(error){
+
+    console.error(error);
+
+    photoInput.click();
+
+  }
 
 }
 
 
-searchButton.addEventListener(
-    "click",
-    function() {
+captureBtn.addEventListener(
+  "click",
+  () => {
 
-        const query =
-            input.value.trim();
+    const canvas =
+      document.createElement("canvas");
 
-        if (query) {
-            searchWeb(query);
-        }
+    canvas.width =
+      cameraVideo.videoWidth;
 
-    }
+    canvas.height =
+      cameraVideo.videoHeight;
+
+    const ctx =
+      canvas.getContext("2d");
+
+    ctx.drawImage(
+      cameraVideo,
+      0,
+      0
+    );
+
+    selectedImage =
+      canvas.toDataURL(
+        "image/jpeg",
+        0.75
+      );
+
+    closeCamera();
+
+    status.textContent =
+      "Photo captured 📷 — press Send";
+
+  }
 );
 
 
-/* =====================================
-   QUICK ACTION CARDS
-===================================== */
-
-quickCards.forEach(
-    function(card) {
-
-        card.addEventListener(
-            "click",
-            function() {
-
-                const question =
-                    card.dataset.question;
-
-                const search =
-                    card.dataset.search;
-
-
-                if (search) {
-
-                    searchWeb(search);
-
-                    return;
-
-                }
-
-
-                if (question) {
-
-                    input.value =
-                        question;
-
-                    sendMessage();
-
-                }
-
-            }
-        );
-
-    }
+closeCameraBtn.addEventListener(
+  "click",
+  closeCamera
 );
 
 
-/* =====================================
-   CLEAR CHAT
-===================================== */
+function closeCamera(){
 
-clearButton.addEventListener(
-    "click",
-    function() {
+  cameraModal.style.display =
+    "none";
 
-        chat.innerHTML = `
+  if(cameraStream){
 
-            <div class="message uni">
+    cameraStream
+    .getTracks()
+    .forEach(track =>
+      track.stop()
+    );
 
-                <div class="bubble">
+    cameraStream = null;
 
-                    👋 Hi! I'm <strong>UNI</strong> —
-                    Ujjwal Neural Intelligence.
-                    <br><br>
+  }
 
-                    Chat cleared! ✨
-                    What would you like to do?
+}
 
-                </div>
 
-            </div>
+/* =========================================
+   IMAGE COMPRESSION
+========================================= */
 
-        `;
+function compressImage(file){
 
-        lastAnswer = "";
+  return new Promise(
+    (resolve,reject) => {
 
-        if ("speechSynthesis" in window) {
-            speechSynthesis.cancel();
-        }
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        event => {
+
+          const img =
+            new Image();
+
+          img.onload =
+            () => {
+
+              const max =
+                1200;
+
+              let width =
+                img.width;
+
+              let height =
+                img.height;
+
+
+              if(width > max){
+
+                height =
+                  height *
+                  max /
+                  width;
+
+                width =
+                  max;
+
+              }
+
+
+              if(height > max){
+
+                width =
+                  width *
+                  max /
+                  height;
+
+                height =
+                  max;
+
+              }
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+              canvas.width =
+                width;
+
+              canvas.height =
+                height;
+
+
+              const ctx =
+                canvas.getContext("2d");
+
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+              );
+
+
+              resolve(
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.75
+                )
+              );
+
+            };
+
+
+          img.onerror =
+            reject;
+
+          img.src =
+            event.target.result;
+
+        };
+
+
+      reader.onerror =
+        reject;
+
+      reader.readAsDataURL(file);
 
     }
-);
+  );
+
+}
 
 
-/* =====================================
-   FOCUS INPUT
-===================================== */
+/* =========================================
+   CAMERA BUTTON
+   Long press / normal photo picker
+========================================= */
 
-window.addEventListener(
-    "load",
-    function() {
-
-        setTimeout(
-            function() {
-                input.focus();
-            },
-            300
-        );
-
-    }
+cameraBtn.addEventListener(
+  "dblclick",
+  openCamera
 );
 
 </script>
