@@ -1,10 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>UNI AI — Ujjwal Neural Intelligence</title>
 
 <style>
@@ -15,19 +13,68 @@
   font-family:Arial,Helvetica,sans-serif;
 }
 
+:root{
+  --bg:#07030f;
+  --panel:rgba(18,8,35,.78);
+  --panel2:rgba(30,12,55,.7);
+  --border:rgba(180,80,255,.28);
+  --purple:#a855f7;
+  --violet:#7c3aed;
+  --pink:#ec4899;
+  --text:#f8f5ff;
+  --muted:#a99bbd;
+  --green:#4ade80;
+}
+
 body{
-  min-height:100vh;
-  background:#07111f;
-  color:#f5f7ff;
+  height:100vh;
   overflow:hidden;
+  background:var(--bg);
+  color:var(--text);
 }
 
-body.light{
-  background:#f4f7fb;
-  color:#111827;
+/* FUTURISTIC BACKGROUND */
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.20;
+  pointer-events:none;
+  z-index:-1;
 }
 
-button,input,textarea{
+body::before{
+  background:#9333ea;
+  top:-150px;
+  left:-100px;
+  animation:float1 9s infinite alternate;
+}
+
+body::after{
+  background:#ec4899;
+  right:-150px;
+  bottom:-180px;
+  animation:float2 11s infinite alternate;
+}
+
+@keyframes float1{
+  from{transform:translate(0,0)}
+  to{transform:translate(100px,80px)}
+}
+
+@keyframes float2{
+  from{transform:translate(0,0)}
+  to{transform:translate(-100px,-80px)}
+}
+
+button,
+input,
+textarea{
   font:inherit;
 }
 
@@ -35,50 +82,159 @@ button{
   cursor:pointer;
 }
 
+/* LOGIN */
+
+.login-screen{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at 30% 20%,rgba(168,85,247,.20),transparent 35%),
+    radial-gradient(circle at 70% 80%,rgba(236,72,153,.16),transparent 35%),
+    #07030f;
+}
+
+.login-card{
+  width:100%;
+  max-width:430px;
+  padding:34px;
+  border:1px solid rgba(190,90,255,.35);
+  border-radius:26px;
+  background:rgba(20,8,38,.82);
+  backdrop-filter:blur(22px);
+  box-shadow:
+    0 0 40px rgba(168,85,247,.14),
+    inset 0 0 30px rgba(168,85,247,.04);
+}
+
+.login-logo{
+  text-align:center;
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:white;
+  text-shadow:
+    0 0 10px #a855f7,
+    0 0 30px #7c3aed;
+}
+
+.login-logo span{
+  color:#d946ef;
+}
+
+.login-sub{
+  text-align:center;
+  margin:8px 0 28px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.login-input{
+  width:100%;
+  padding:14px;
+  margin-bottom:11px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  outline:none;
+  background:rgba(5,2,15,.75);
+  color:white;
+}
+
+.login-input:focus{
+  border-color:#a855f7;
+  box-shadow:0 0 15px rgba(168,85,247,.25);
+}
+
+.login-btn,
+.google-btn{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+.login-btn{
+  border:1px solid #a855f7;
+  color:white;
+  background:linear-gradient(135deg,#7c3aed,#c026d3);
+  box-shadow:0 0 18px rgba(168,85,247,.25);
+}
+
+.google-btn{
+  border:1px solid #4b3761;
+  color:white;
+  background:rgba(40,20,60,.7);
+}
+
+.login-btn:hover,
+.google-btn:hover{
+  transform:translateY(-1px);
+}
+
+.login-message{
+  min-height:20px;
+  margin-top:8px;
+  text-align:center;
+  color:#fb7185;
+  font-size:12px;
+}
+
+.signup-link{
+  display:block;
+  margin:15px auto 0;
+  border:0;
+  background:transparent;
+  color:#c084fc;
+  font-size:12px;
+}
+
+/* APP */
+
 .app{
   display:flex;
+  width:100%;
   height:100vh;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-  width:290px;
-  background:#0b1729;
-  border-right:1px solid #20304a;
+  width:285px;
+  height:100vh;
+  flex-shrink:0;
   display:flex;
   flex-direction:column;
-  transition:.25s;
+  background:rgba(11,5,22,.84);
+  backdrop-filter:blur(20px);
+  border-right:1px solid var(--border);
+  box-shadow:8px 0 35px rgba(100,30,160,.08);
   z-index:20;
 }
 
-body.light .sidebar{
-  background:#ffffff;
-  border-color:#dce3ee;
-}
-
-.sidebar-top{
-  padding:18px;
-  border-bottom:1px solid #20304a;
-}
-
-body.light .sidebar-top{
-  border-color:#dce3ee;
+.sidebar-head{
+  padding:20px;
+  border-bottom:1px solid var(--border);
 }
 
 .logo{
-  font-size:25px;
-  font-weight:800;
-  letter-spacing:.5px;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-shadow:0 0 15px rgba(168,85,247,.7);
 }
 
 .logo span{
-  color:#55b8ff;
+  color:#d946ef;
 }
 
-.sublogo{
-  color:#94a3b8;
-  font-size:12px;
+.subtitle{
+  color:var(--muted);
+  font-size:11px;
   margin-top:4px;
 }
 
@@ -86,164 +242,154 @@ body.light .sidebar-top{
   width:100%;
   margin-top:18px;
   padding:12px;
-  border:0;
+  border:1px solid #a855f7;
   border-radius:12px;
-  background:#1683ff;
   color:white;
-  font-weight:700;
+  background:linear-gradient(135deg,#6d28d9,#be185d);
+  box-shadow:0 0 18px rgba(168,85,247,.18);
 }
 
-.new-chat:hover{
-  background:#0d72e5;
-}
-
-.history-title{
+.history-label{
   padding:16px 18px 8px;
-  color:#94a3b8;
-  font-size:12px;
-  font-weight:700;
+  color:#8f80a5;
+  font-size:10px;
+  letter-spacing:1.5px;
+  font-weight:bold;
   text-transform:uppercase;
 }
 
 .history{
   flex:1;
   overflow-y:auto;
-  padding:6px 10px;
+  padding:5px 10px;
 }
 
-.history-item{
+.history-empty{
+  padding:18px 10px;
+  color:#6f6380;
+  font-size:12px;
+  text-align:center;
+}
+
+.history-row{
   display:flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:6px;
+  gap:5px;
+  margin-bottom:5px;
 }
 
 .history-open{
   flex:1;
   min-width:0;
-  text-align:left;
-  border:0;
-  background:transparent;
-  color:inherit;
   padding:11px;
+  text-align:left;
+  border:1px solid transparent;
   border-radius:10px;
+  color:#d9cbea;
+  background:transparent;
 }
 
 .history-open:hover,
 .history-open.active{
-  background:#16263e;
-}
-
-body.light .history-open:hover,
-body.light .history-open.active{
-  background:#edf3fb;
+  border-color:rgba(168,85,247,.22);
+  background:rgba(168,85,247,.10);
+  color:white;
 }
 
 .history-name{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  font-size:14px;
+  font-size:13px;
 }
 
-.delete-chat{
-  width:32px;
-  height:32px;
+.history-delete{
+  width:34px;
   border:0;
-  border-radius:8px;
+  border-radius:9px;
+  color:#806f91;
   background:transparent;
-  color:#94a3b8;
 }
 
-.delete-chat:hover{
-  background:#2a1a20;
-  color:#ff6b7a;
+.history-delete:hover{
+  color:#fb7185;
+  background:rgba(251,113,133,.08);
 }
 
 .user-area{
-  border-top:1px solid #20304a;
   padding:14px;
-}
-
-body.light .user-area{
-  border-color:#dce3ee;
+  border-top:1px solid var(--border);
 }
 
 .user-email{
-  font-size:12px;
-  color:#94a3b8;
+  margin-bottom:10px;
+  color:#9c8cac;
+  font-size:11px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  margin-bottom:10px;
 }
 
-.small-btns{
+.user-buttons{
   display:flex;
   gap:7px;
 }
 
 .small-btn{
   flex:1;
-  border:1px solid #30435f;
-  background:transparent;
-  color:inherit;
   padding:8px;
+  border:1px solid #453258;
   border-radius:9px;
-  font-size:12px;
-}
-
-.small-btn:hover{
-  background:#16263e;
+  color:#d8c9e8;
+  background:rgba(40,18,60,.45);
+  font-size:11px;
 }
 
 /* MAIN */
 
 .main{
   flex:1;
+  min-width:0;
+  height:100vh;
   display:flex;
   flex-direction:column;
-  min-width:0;
 }
 
 .topbar{
-  height:64px;
+  height:68px;
+  flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 18px;
-  border-bottom:1px solid #20304a;
-  background:#091525;
-}
-
-body.light .topbar{
-  background:#ffffff;
-  border-color:#dce3ee;
+  border-bottom:1px solid var(--border);
+  background:rgba(8,3,17,.68);
+  backdrop-filter:blur(18px);
 }
 
 .top-left{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:11px;
 }
 
 .menu-btn{
   display:none;
   border:0;
+  color:white;
   background:transparent;
-  color:inherit;
-  font-size:24px;
+  font-size:23px;
 }
 
 .chat-title{
-  font-size:16px;
-  font-weight:700;
+  font-size:15px;
+  font-weight:bold;
 }
 
 .status{
-  font-size:11px;
-  color:#42d392;
   margin-top:3px;
+  color:#4ade80;
+  font-size:10px;
+  letter-spacing:.4px;
 }
 
 .top-actions{
@@ -251,16 +397,18 @@ body.light .topbar{
   gap:7px;
 }
 
-.icon-btn{
-  border:1px solid #30435f;
-  background:transparent;
-  color:inherit;
-  padding:8px 10px;
+.top-btn{
+  padding:8px 11px;
+  border:1px solid #49325c;
   border-radius:9px;
+  color:#d7c8e6;
+  background:rgba(35,15,50,.45);
+  font-size:11px;
 }
 
-.icon-btn:hover{
-  background:#16263e;
+.top-btn:hover{
+  border-color:#a855f7;
+  box-shadow:0 0 12px rgba(168,85,247,.15);
 }
 
 /* CHAT */
@@ -268,12 +416,99 @@ body.light .topbar{
 .chat{
   flex:1;
   overflow-y:auto;
-  padding:25px;
+  padding:28px;
 }
+
+.welcome{
+  max-width:720px;
+  margin:65px auto;
+  text-align:center;
+}
+
+.ai-orb{
+  width:82px;
+  height:82px;
+  margin:0 auto 22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #c084fc;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#d946ef 0%,#7c3aed 35%,#19072d 70%);
+  box-shadow:
+    0 0 20px #a855f7,
+    0 0 55px rgba(168,85,247,.35),
+    inset 0 0 25px rgba(255,255,255,.15);
+  animation:orbPulse 2.4s infinite alternate;
+}
+
+@keyframes orbPulse{
+  from{transform:scale(.96);box-shadow:0 0 18px #a855f7}
+  to{transform:scale(1.04);box-shadow:0 0 40px #c026d3}
+}
+
+.welcome h1{
+  font-size:42px;
+  letter-spacing:1px;
+}
+
+.welcome h1 span{
+  background:linear-gradient(90deg,#a855f7,#ec4899,#c084fc);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.welcome p{
+  margin-top:10px;
+  color:#9889aa;
+  line-height:1.6;
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:28px;
+}
+
+.feature{
+  padding:16px;
+  text-align:left;
+  border:1px solid rgba(168,85,247,.18);
+  border-radius:14px;
+  background:rgba(22,8,40,.55);
+  backdrop-filter:blur(10px);
+}
+
+.feature b{
+  display:block;
+  margin-bottom:5px;
+  color:#d8b4fe;
+}
+
+.feature span{
+  color:#8f809f;
+  font-size:12px;
+}
+
+/* MESSAGES */
 
 .message-row{
   display:flex;
   margin-bottom:18px;
+  animation:messageIn .2s ease;
+}
+
+@keyframes messageIn{
+  from{
+    opacity:0;
+    transform:translateY(7px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .message-row.user{
@@ -282,116 +517,97 @@ body.light .topbar{
 
 .message{
   max-width:800px;
-  padding:13px 16px;
-  border-radius:16px;
-  line-height:1.55;
+  padding:14px 17px;
+  line-height:1.6;
   white-space:pre-wrap;
-  word-wrap:break-word;
-}
-
-.message.ai{
-  background:#102039;
-  border:1px solid #203b60;
-}
-
-body.light .message.ai{
-  background:#eef4fb;
-  border-color:#d7e3f1;
+  word-break:break-word;
+  border-radius:17px;
 }
 
 .message.user{
-  background:#1683ff;
   color:white;
+  border:1px solid rgba(236,72,153,.45);
+  background:linear-gradient(135deg,#6d28d9,#be185d);
+  box-shadow:0 0 20px rgba(168,85,247,.10);
 }
 
-.welcome{
-  max-width:700px;
-  margin:70px auto;
-  text-align:center;
+.message.ai{
+  border:1px solid rgba(168,85,247,.20);
+  background:rgba(24,10,42,.72);
+  backdrop-filter:blur(12px);
+  box-shadow:inset 0 0 20px rgba(168,85,247,.025);
 }
 
-.welcome h1{
-  font-size:42px;
-  margin-bottom:8px;
+/* THINKING */
+
+.thinking{
+  display:flex;
+  gap:5px;
+  align-items:center;
 }
 
-.welcome h1 span{
-  color:#4caeff;
+.dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#c084fc;
+  animation:dot 1s infinite alternate;
 }
 
-.welcome p{
-  color:#94a3b8;
-  line-height:1.6;
+.dot:nth-child(2){
+  animation-delay:.2s;
 }
 
-.welcome-card{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+.dot:nth-child(3){
+  animation-delay:.4s;
 }
 
-.mode-card{
-  border:1px solid #263b58;
-  background:#0d1b2e;
-  padding:15px;
-  border-radius:13px;
-  text-align:left;
-  color:inherit;
-}
-
-body.light .mode-card{
-  background:#ffffff;
-  border-color:#dce3ee;
-}
-
-.mode-card b{
-  display:block;
-  margin-bottom:4px;
+@keyframes dot{
+  from{opacity:.25;transform:translateY(0)}
+  to{opacity:1;transform:translateY(-4px)}
 }
 
 /* INPUT */
 
 .bottom{
-  padding:12px 18px 18px;
-  border-top:1px solid #20304a;
-  background:#091525;
-}
-
-body.light .bottom{
-  background:#ffffff;
-  border-color:#dce3ee;
+  flex-shrink:0;
+  padding:11px 18px 17px;
+  border-top:1px solid var(--border);
+  background:rgba(7,3,15,.76);
+  backdrop-filter:blur(18px);
 }
 
 .modebar{
+  max-width:1050px;
+  margin:0 auto 9px;
   display:flex;
   gap:7px;
-  margin-bottom:9px;
   overflow-x:auto;
 }
 
 .mode{
-  border:1px solid #30435f;
-  background:transparent;
-  color:inherit;
-  padding:7px 11px;
+  flex-shrink:0;
+  padding:7px 12px;
+  border:1px solid #49325c;
   border-radius:20px;
-  font-size:12px;
-  white-space:nowrap;
+  color:#a998b8;
+  background:rgba(35,15,50,.4);
+  font-size:11px;
 }
 
 .mode.active{
-  background:#1683ff;
-  border-color:#1683ff;
   color:white;
+  border-color:#a855f7;
+  background:linear-gradient(135deg,#7c3aed,#be185d);
+  box-shadow:0 0 14px rgba(168,85,247,.18);
 }
 
 .input-wrap{
+  max-width:1050px;
+  margin:auto;
   display:flex;
   align-items:flex-end;
   gap:8px;
-  max-width:1100px;
-  margin:auto;
 }
 
 #question{
@@ -399,154 +615,59 @@ body.light .bottom{
   min-height:48px;
   max-height:150px;
   resize:none;
-  border:1px solid #30435f;
-  border-radius:14px;
-  padding:13px;
-  background:#0c1a2c;
-  color:white;
+  padding:13px 15px;
   outline:none;
-}
-
-body.light #question{
-  background:#f8fafc;
-  color:#111827;
-  border-color:#cbd5e1;
+  border:1px solid #49325c;
+  border-radius:15px;
+  color:white;
+  background:rgba(14,5,25,.85);
 }
 
 #question:focus{
-  border-color:#1683ff;
+  border-color:#a855f7;
+  box-shadow:0 0 18px rgba(168,85,247,.12);
 }
 
+.voice-btn,
 .send-btn{
+  width:50px;
   height:48px;
-  min-width:54px;
-  border:0;
-  border-radius:13px;
-  background:#1683ff;
-  color:white;
-  font-size:19px;
-  font-weight:bold;
-}
-
-.send-btn:hover{
-  background:#0d72e5;
+  border-radius:14px;
 }
 
 .voice-btn{
-  height:48px;
-  min-width:48px;
-  border:1px solid #30435f;
-  border-radius:13px;
-  background:transparent;
-  color:inherit;
-  font-size:18px;
+  border:1px solid #49325c;
+  color:#d5c4e4;
+  background:rgba(35,15,50,.5);
 }
 
 .voice-btn.active{
-  background:#d9465f;
+  border-color:#ec4899;
   color:white;
-  border-color:#d9465f;
+  background:#9d174d;
+  box-shadow:0 0 20px rgba(236,72,153,.3);
 }
 
-.footer-note{
-  text-align:center;
-  color:#64748b;
-  font-size:10px;
-  margin-top:8px;
-}
-
-/* LOGIN */
-
-.login-screen{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:#06101e;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.login-card{
-  width:100%;
-  max-width:430px;
-  background:#0d1b2e;
-  border:1px solid #29415f;
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 20px 70px rgba(0,0,0,.45);
-}
-
-.login-logo{
-  text-align:center;
-  font-size:34px;
-  font-weight:800;
-}
-
-.login-logo span{
-  color:#55b8ff;
-}
-
-.login-sub{
-  text-align:center;
-  color:#94a3b8;
-  font-size:13px;
-  margin:7px 0 24px;
-}
-
-.login-input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #30435f;
-  background:#081525;
+.send-btn{
+  border:1px solid #c084fc;
   color:white;
-  margin-bottom:10px;
-  outline:none;
+  background:linear-gradient(135deg,#7c3aed,#c026d3);
+  box-shadow:0 0 18px rgba(168,85,247,.2);
+  font-size:18px;
 }
 
-.login-btn{
-  width:100%;
-  padding:12px;
-  border:0;
-  border-radius:10px;
-  background:#1683ff;
-  color:white;
-  font-weight:700;
-  margin-bottom:9px;
+.send-btn:disabled{
+  opacity:.55;
 }
 
-.google-btn{
-  width:100%;
-  padding:12px;
-  border:1px solid #405574;
-  border-radius:10px;
-  background:#14243a;
-  color:white;
-  font-weight:700;
-}
-
-.login-message{
+.footer{
+  margin-top:7px;
   text-align:center;
-  min-height:20px;
-  color:#ff8290;
-  font-size:12px;
-  margin-top:10px;
+  color:#5f536d;
+  font-size:9px;
 }
 
-.login-switch{
-  text-align:center;
-  color:#94a3b8;
-  font-size:12px;
-  margin-top:16px;
-}
-
-.login-switch button{
-  border:0;
-  background:transparent;
-  color:#55b8ff;
-}
+/* HIDDEN */
 
 .hidden{
   display:none !important;
@@ -554,13 +675,14 @@ body.light #question{
 
 /* MOBILE */
 
-@media(max-width:750px){
+@media(max-width:760px){
 
   .sidebar{
     position:fixed;
-    left:-300px;
+    left:-295px;
     top:0;
     bottom:0;
+    transition:left .2s;
   }
 
   .sidebar.open{
@@ -571,28 +693,32 @@ body.light #question{
     display:block;
   }
 
-  .chat{
-    padding:15px;
-  }
-
-  .welcome{
-    margin:40px auto;
-  }
-
-  .welcome h1{
-    font-size:34px;
-  }
-
-  .welcome-card{
-    grid-template-columns:1fr;
-  }
-
   .topbar{
     padding:0 10px;
   }
 
-  .chat-title{
-    font-size:14px;
+  .top-btn{
+    padding:7px 8px;
+  }
+
+  .chat{
+    padding:16px;
+  }
+
+  .welcome{
+    margin:35px auto;
+  }
+
+  .welcome h1{
+    font-size:31px;
+  }
+
+  .feature-grid{
+    grid-template-columns:1fr;
+  }
+
+  .bottom{
+    padding:9px 10px 12px;
   }
 }
 </style>
@@ -629,19 +755,18 @@ body.light #question{
     >
 
     <button id="emailBtn" class="login-btn">
-      Sign In
+      SIGN IN
     </button>
 
     <button id="googleBtn" class="google-btn">
-      Continue with Google
+      CONTINUE WITH GOOGLE
     </button>
 
     <div id="loginMessage" class="login-message"></div>
 
-    <div class="login-switch">
-      New user?
-      <button id="signupBtn">Create account</button>
-    </div>
+    <button id="signupBtn" class="signup-link">
+      Create a new account
+    </button>
 
   </div>
 
@@ -656,23 +781,23 @@ body.light #question{
 
   <aside id="sidebar" class="sidebar">
 
-    <div class="sidebar-top">
+    <div class="sidebar-head">
 
       <div class="logo">
         UNI <span>AI</span>
       </div>
 
-      <div class="sublogo">
-        Ujjwal Neural Intelligence
+      <div class="subtitle">
+        UJJWAL NEURAL INTELLIGENCE
       </div>
 
       <button id="newChatBtn" class="new-chat">
-        + New Chat
+        ＋ NEW CHAT
       </button>
 
     </div>
 
-    <div class="history-title">
+    <div class="history-label">
       Chat History
     </div>
 
@@ -684,10 +809,10 @@ body.light #question{
         Not signed in
       </div>
 
-      <div class="small-btns">
+      <div class="user-buttons">
 
         <button id="themeBtn" class="small-btn">
-          🌙 Theme
+          ◐ Theme
         </button>
 
         <button id="logoutBtn" class="small-btn">
@@ -714,25 +839,27 @@ body.light #question{
         </button>
 
         <div>
+
           <div id="chatTitle" class="chat-title">
             New Chat
           </div>
 
           <div class="status">
-            ● UNI AI Online
+            ● SYSTEM ONLINE
           </div>
+
         </div>
 
       </div>
 
       <div class="top-actions">
 
-        <button id="clearBtn" class="icon-btn">
-          Clear
+        <button id="clearBtn" class="top-btn">
+          CLEAR
         </button>
 
-        <button id="historyBtn" class="icon-btn">
-          History
+        <button id="historyBtn" class="top-btn">
+          HISTORY
         </button>
 
       </div>
@@ -742,45 +869,7 @@ body.light #question{
 
     <!-- CHAT -->
 
-    <section id="chat" class="chat">
-
-      <div id="welcome" class="welcome">
-
-        <h1>
-          Welcome to <span>UNI AI</span>
-        </h1>
-
-        <p>
-          Ujjwal Neural Intelligence — your personal AI assistant.
-        </p>
-
-        <div class="welcome-card">
-
-          <div class="mode-card">
-            <b>📚 Study</b>
-            Class 8 friendly explanations and homework help.
-          </div>
-
-          <div class="mode-card">
-            <b>💻 Coding</b>
-            Programming and development assistance.
-          </div>
-
-          <div class="mode-card">
-            <b>🔎 Search</b>
-            Search mode for your AI workflow.
-          </div>
-
-          <div class="mode-card">
-            <b>💬 General</b>
-            Ask UNI anything.
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+    <section id="chat" class="chat"></section>
 
 
     <!-- INPUT -->
@@ -790,23 +879,22 @@ body.light #question{
       <div class="modebar">
 
         <button class="mode active" data-mode="General">
-          General
+          ◈ General
         </button>
 
         <button class="mode" data-mode="Study">
-          📚 Study
+          ◈ Study
         </button>
 
         <button class="mode" data-mode="Coding">
-          💻 Coding
+          ◈ Coding
         </button>
 
         <button class="mode" data-mode="Search">
-          🔎 Search
+          ◈ Search
         </button>
 
       </div>
-
 
       <div class="input-wrap">
 
@@ -816,8 +904,8 @@ body.light #question{
 
         <textarea
           id="question"
-          placeholder="Message UNI AI..."
           rows="1"
+          placeholder="Message UNI..."
         ></textarea>
 
         <button id="sendBtn" class="send-btn">
@@ -826,8 +914,8 @@ body.light #question{
 
       </div>
 
-      <div class="footer-note">
-        UNI AI • Ujjwal Neural Intelligence
+      <div class="footer">
+        UNI AI • UJJWAL NEURAL INTELLIGENCE
       </div>
 
     </div>
@@ -839,13 +927,13 @@ body.light #question{
 
 <script type="module">
 
-/* =========================
-   FIREBASE IMPORTS
-========================= */
+/* =========================================
+   FIREBASE
+========================================= */
 
 import {
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 
 import {
   getAuth,
@@ -855,7 +943,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
 import {
   getFirestore,
@@ -868,12 +956,12 @@ import {
   query,
   orderBy,
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
 
-/* =========================
+/* =========================================
    FIREBASE CONFIG
-========================= */
+========================================= */
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8ncItbw_DrCDm182bjCRF6Ivx5Zi2xas",
@@ -886,22 +974,15 @@ const firebaseConfig = {
 };
 
 
-/* =========================
-   INITIALIZE
-========================= */
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
 
 
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
 
 const loginScreen = document.getElementById("loginScreen");
 const appScreen = document.getElementById("app");
@@ -910,84 +991,53 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 
 const emailBtn = document.getElementById("emailBtn");
-const signupBtn = document.getElementById("signupBtn");
 const googleBtn = document.getElementById("googleBtn");
+const signupBtn = document.getElementById("signupBtn");
 
 const loginMessage = document.getElementById("loginMessage");
 
+const sidebar = document.getElementById("sidebar");
 const historyBox = document.getElementById("history");
 
 const chatBox = document.getElementById("chat");
-
-const welcome = document.getElementById("welcome");
+const chatTitle = document.getElementById("chatTitle");
 
 const question = document.getElementById("question");
-
 const sendBtn = document.getElementById("sendBtn");
-
 const voiceBtn = document.getElementById("voiceBtn");
 
-const clearBtn = document.getElementById("clearBtn");
-
 const newChatBtn = document.getElementById("newChatBtn");
-
+const clearBtn = document.getElementById("clearBtn");
 const historyBtn = document.getElementById("historyBtn");
-
 const menuBtn = document.getElementById("menuBtn");
 
-const sidebar = document.getElementById("sidebar");
-
 const themeBtn = document.getElementById("themeBtn");
-
 const logoutBtn = document.getElementById("logoutBtn");
 
 const userEmail = document.getElementById("userEmail");
 
-const chatTitle = document.getElementById("chatTitle");
 
-
-/* =========================
+/* =========================================
    STATE
-========================= */
+========================================= */
 
 let currentUser = null;
-
 let currentChatId = null;
-
 let currentMessages = [];
-
 let selectedMode = "General";
-
 let unsubscribeHistory = null;
-
-let isSending = false;
-
-let voiceEnabled = true;
+let sending = false;
 
 
-/* =========================
+/* =========================================
    THEME
-========================= */
+========================================= */
 
-const savedTheme = localStorage.getItem("uniTheme");
-
-if(savedTheme === "light"){
+if(localStorage.getItem("uniTheme") === "light"){
   document.body.classList.add("light");
 }
 
-function updateThemeButton(){
-
-  if(document.body.classList.contains("light")){
-    themeBtn.textContent = "☀️ Theme";
-  }else{
-    themeBtn.textContent = "🌙 Theme";
-  }
-
-}
-
-updateThemeButton();
-
-themeBtn.onclick = () => {
+themeBtn.onclick = function(){
 
   document.body.classList.toggle("light");
 
@@ -998,41 +1048,61 @@ themeBtn.onclick = () => {
       : "dark"
   );
 
-  updateThemeButton();
-
 };
 
 
-/* =========================
-   LOGIN MESSAGE
-========================= */
+/* =========================================
+   AUTH ERROR
+========================================= */
 
-function showLoginMessage(message){
+function authError(error){
 
-  loginMessage.textContent = message;
+  const code = error.code || "";
 
+  if(code.includes("invalid-credential")){
+    return "Incorrect email or password.";
+  }
+
+  if(code.includes("user-not-found")){
+    return "No account found.";
+  }
+
+  if(code.includes("wrong-password")){
+    return "Incorrect password.";
+  }
+
+  if(code.includes("email-already-in-use")){
+    return "This email already has an account.";
+  }
+
+  if(code.includes("weak-password")){
+    return "Password should be at least 6 characters.";
+  }
+
+  if(code.includes("popup-closed-by-user")){
+    return "Google login was cancelled.";
+  }
+
+  return error.message || "Something went wrong.";
 }
 
 
-/* =========================
-   EMAIL SIGN IN
-========================= */
+/* =========================================
+   LOGIN
+========================================= */
 
-emailBtn.onclick = async () => {
+emailBtn.onclick = async function(){
 
   const email = emailInput.value.trim();
-
   const password = passwordInput.value;
 
   if(!email || !password){
-
-    showLoginMessage("Please enter email and password.");
-
+    loginMessage.textContent =
+      "Enter email and password.";
     return;
-
   }
 
-  showLoginMessage("Signing in...");
+  loginMessage.textContent = "Signing in...";
 
   try{
 
@@ -1042,48 +1112,41 @@ emailBtn.onclick = async () => {
       password
     );
 
-    showLoginMessage("");
+    loginMessage.textContent = "";
 
   }catch(error){
 
-    showLoginMessage(
-      friendlyAuthError(error)
-    );
+    loginMessage.textContent =
+      authError(error);
 
   }
 
 };
 
 
-/* =========================
+/* =========================================
    SIGN UP
-========================= */
+========================================= */
 
-signupBtn.onclick = async () => {
+signupBtn.onclick = async function(){
 
   const email = emailInput.value.trim();
-
   const password = passwordInput.value;
 
   if(!email || !password){
-
-    showLoginMessage("Enter email and password first.");
-
+    loginMessage.textContent =
+      "Enter email and password first.";
     return;
-
   }
 
   if(password.length < 6){
-
-    showLoginMessage(
-      "Password must be at least 6 characters."
-    );
-
+    loginMessage.textContent =
+      "Password must have at least 6 characters.";
     return;
-
   }
 
-  showLoginMessage("Creating account...");
+  loginMessage.textContent =
+    "Creating account...";
 
   try{
 
@@ -1093,26 +1156,26 @@ signupBtn.onclick = async () => {
       password
     );
 
-    showLoginMessage("");
+    loginMessage.textContent = "";
 
   }catch(error){
 
-    showLoginMessage(
-      friendlyAuthError(error)
-    );
+    loginMessage.textContent =
+      authError(error);
 
   }
 
 };
 
 
-/* =========================
-   GOOGLE LOGIN
-========================= */
+/* =========================================
+   GOOGLE
+========================================= */
 
-googleBtn.onclick = async () => {
+googleBtn.onclick = async function(){
 
-  showLoginMessage("Opening Google login...");
+  loginMessage.textContent =
+    "Opening Google...";
 
   try{
 
@@ -1121,103 +1184,57 @@ googleBtn.onclick = async () => {
       googleProvider
     );
 
-    showLoginMessage("");
+    loginMessage.textContent = "";
 
   }catch(error){
 
-    showLoginMessage(
-      friendlyAuthError(error)
-    );
+    loginMessage.textContent =
+      authError(error);
 
   }
 
 };
 
 
-/* =========================
-   AUTH ERROR
-========================= */
-
-function friendlyAuthError(error){
-
-  const code = error.code || "";
-
-  if(code.includes("invalid-credential")){
-    return "Email or password is incorrect.";
-  }
-
-  if(code.includes("wrong-password")){
-    return "Incorrect password.";
-  }
-
-  if(code.includes("user-not-found")){
-    return "No account found with this email.";
-  }
-
-  if(code.includes("email-already-in-use")){
-    return "This email already has an account.";
-  }
-
-  if(code.includes("popup-closed-by-user")){
-    return "Google login was cancelled.";
-  }
-
-  if(code.includes("too-many-requests")){
-    return "Too many attempts. Try again later.";
-  }
-
-  return error.message || "Something went wrong.";
-
-}
-
-
-/* =========================
+/* =========================================
    AUTH STATE
-========================= */
+========================================= */
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, async function(user){
 
   currentUser = user;
 
-  if(user){
-
-    loginScreen.classList.add("hidden");
-
-    appScreen.classList.remove("hidden");
-
-    userEmail.textContent =
-      user.email || "Google User";
-
-    startHistoryListener();
-
-    await createNewChat();
-
-  }else{
+  if(!user){
 
     loginScreen.classList.remove("hidden");
-
     appScreen.classList.add("hidden");
 
     if(unsubscribeHistory){
-
       unsubscribeHistory();
-
       unsubscribeHistory = null;
-
     }
 
+    return;
   }
+
+  loginScreen.classList.add("hidden");
+  appScreen.classList.remove("hidden");
+
+  userEmail.textContent =
+    user.email || "Google User";
+
+  startHistory();
+
+  await createNewChat();
 
 });
 
 
-/* =========================
-   CHAT COLLECTION
-========================= */
+/* =========================================
+   FIRESTORE COLLECTION
+========================================= */
 
-function chatsCollection(){
-
-  if(!currentUser) return null;
+function chatCollection(){
 
   return collection(
     db,
@@ -1229,120 +1246,116 @@ function chatsCollection(){
 }
 
 
-/* =========================
-   HISTORY LISTENER
-========================= */
+/* =========================================
+   HISTORY
+========================================= */
 
-function startHistoryListener(){
+function startHistory(){
 
   if(!currentUser) return;
 
   if(unsubscribeHistory){
-
     unsubscribeHistory();
-
   }
 
   const q = query(
-    chatsCollection(),
-    orderBy("updatedAt", "desc")
+    chatCollection(),
+    orderBy("updatedAt","desc")
   );
 
   unsubscribeHistory = onSnapshot(
     q,
-    (snapshot) => {
+    function(snapshot){
 
       historyBox.innerHTML = "";
 
       if(snapshot.empty){
 
-        const empty = document.createElement("div");
+        const empty =
+          document.createElement("div");
 
-        empty.style.padding = "15px";
-        empty.style.color = "#64748b";
-        empty.style.fontSize = "12px";
-        empty.textContent = "No saved chats yet.";
+        empty.className =
+          "history-empty";
+
+        empty.textContent =
+          "No saved chats yet.";
 
         historyBox.appendChild(empty);
 
         return;
-
       }
 
-      snapshot.forEach((chatDoc) => {
+      snapshot.forEach(function(item){
 
-        const data = chatDoc.data();
+        const data = item.data();
 
-        const row = document.createElement("div");
+        const row =
+          document.createElement("div");
 
-        row.className = "history-item";
+        row.className =
+          "history-row";
 
-
-        const openButton =
+        const open =
           document.createElement("button");
 
-        openButton.className = "history-open";
+        open.className =
+          "history-open";
 
-        if(chatDoc.id === currentChatId){
-
-          openButton.classList.add("active");
-
+        if(item.id === currentChatId){
+          open.classList.add("active");
         }
-
 
         const name =
           document.createElement("div");
 
-        name.className = "history-name";
+        name.className =
+          "history-name";
 
         name.textContent =
           data.title || "New Chat";
 
+        open.appendChild(name);
 
-        openButton.appendChild(name);
+        open.onclick = function(){
 
-
-        openButton.onclick = () => {
-
-          openChat(chatDoc.id);
+          openChat(item.id);
 
           sidebar.classList.remove("open");
 
         };
 
 
-        const deleteButton =
+        const remove =
           document.createElement("button");
 
-        deleteButton.className = "delete-chat";
+        remove.className =
+          "history-delete";
 
-        deleteButton.textContent = "×";
+        remove.textContent = "×";
 
-        deleteButton.title = "Delete chat";
+        remove.title = "Delete chat";
 
-
-        deleteButton.onclick = async (event) => {
+        remove.onclick = function(event){
 
           event.stopPropagation();
 
-          await deleteChat(chatDoc.id);
+          deleteChat(item.id);
 
         };
 
 
-        row.appendChild(openButton);
-
-        row.appendChild(deleteButton);
+        row.appendChild(open);
+        row.appendChild(remove);
 
         historyBox.appendChild(row);
 
       });
 
     },
-    (error) => {
+    function(error){
 
       console.error(
-        "History error:",
+        "Firestore history error:",
         error
       );
 
@@ -1352,44 +1365,44 @@ function startHistoryListener(){
 }
 
 
-/* =========================
-   CREATE NEW CHAT
-========================= */
+/* =========================================
+   NEW CHAT
+========================================= */
 
 async function createNewChat(){
 
   if(!currentUser) return;
 
-  const newRef = doc(
-    chatsCollection()
-  );
+  const chatRef =
+    doc(chatCollection());
 
-  currentChatId = newRef.id;
+  currentChatId = chatRef.id;
 
   currentMessages = [];
 
-  chatTitle.textContent = "New Chat";
+  chatTitle.textContent =
+    "New Chat";
 
-  renderMessages();
+  renderChat();
 
   try{
 
     await setDoc(
-      newRef,
+      chatRef,
       {
-        userId: currentUser.uid,
-        title: "New Chat",
-        messages: [],
-        mode: selectedMode,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
+        userId:currentUser.uid,
+        title:"New Chat",
+        messages:[],
+        mode:selectedMode,
+        createdAt:serverTimestamp(),
+        updatedAt:serverTimestamp()
       }
     );
 
   }catch(error){
 
     console.error(
-      "Could not create chat:",
+      "Create chat error:",
       error
     );
 
@@ -1398,9 +1411,9 @@ async function createNewChat(){
 }
 
 
-/* =========================
+/* =========================================
    OPEN CHAT
-========================= */
+========================================= */
 
 async function openChat(chatId){
 
@@ -1408,24 +1421,21 @@ async function openChat(chatId){
 
   try{
 
-    const chatRef = doc(
-      db,
-      "users",
-      currentUser.uid,
-      "chats",
-      chatId
-    );
+    const chatRef =
+      doc(
+        db,
+        "users",
+        currentUser.uid,
+        "chats",
+        chatId
+      );
 
-    const snapshot =
+    const snap =
       await getDoc(chatRef);
 
-    if(!snapshot.exists()){
+    if(!snap.exists()) return;
 
-      return;
-
-    }
-
-    const data = snapshot.data();
+    const data = snap.data();
 
     currentChatId = chatId;
 
@@ -1437,15 +1447,12 @@ async function openChat(chatId){
     chatTitle.textContent =
       data.title || "New Chat";
 
-    if(data.mode){
+    selectedMode =
+      data.mode || "General";
 
-      selectedMode = data.mode;
+    updateModes();
 
-      updateModeButtons();
-
-    }
-
-    renderMessages();
+    renderChat();
 
   }catch(error){
 
@@ -1459,42 +1466,41 @@ async function openChat(chatId){
 }
 
 
-/* =========================
-   SAVE CURRENT CHAT
-========================= */
+/* =========================================
+   SAVE CHAT
+========================================= */
 
-async function saveCurrentChat(){
+async function saveChat(){
 
   if(!currentUser || !currentChatId){
-
     return;
-
   }
 
-  const title =
-    makeTitleFromMessages();
+  const chatRef =
+    doc(
+      db,
+      "users",
+      currentUser.uid,
+      "chats",
+      currentChatId
+    );
 
-  const chatRef = doc(
-    db,
-    "users",
-    currentUser.uid,
-    "chats",
-    currentChatId
-  );
+  const title =
+    getChatTitle();
 
   try{
 
     await setDoc(
       chatRef,
       {
-        userId: currentUser.uid,
-        title: title,
-        messages: currentMessages,
-        mode: selectedMode,
-        updatedAt: serverTimestamp()
+        userId:currentUser.uid,
+        title:title,
+        messages:currentMessages,
+        mode:selectedMode,
+        updatedAt:serverTimestamp()
       },
       {
-        merge: true
+        merge:true
       }
     );
 
@@ -1507,61 +1513,52 @@ async function saveCurrentChat(){
       error
     );
 
-    alert(
-      "Chat could not be saved. Check your Firestore Rules."
-    );
-
   }
 
 }
 
 
-/* =========================
+/* =========================================
    CHAT TITLE
-========================= */
+========================================= */
 
-function makeTitleFromMessages(){
+function getChatTitle(){
 
-  const firstUser =
+  const first =
     currentMessages.find(
-      item => item.role === "user"
+      function(message){
+        return message.role === "user";
+      }
     );
 
-  if(!firstUser){
-
+  if(!first){
     return "New Chat";
-
   }
 
   let title =
-    String(firstUser.text || "")
+    String(first.text || "")
       .replace(/\s+/g," ")
       .trim();
 
-  if(title.length > 42){
-
+  if(title.length > 45){
     title =
-      title.substring(0,42) + "...";
-
+      title.substring(0,45) + "...";
   }
 
   return title || "New Chat";
-
 }
 
 
-/* =========================
+/* =========================================
    DELETE CHAT
-========================= */
+========================================= */
 
 async function deleteChat(chatId){
 
   if(!currentUser) return;
 
   const okay =
-    confirm(
-      "Delete this chat permanently?"
-    );
+    confirm("Delete this chat?");
 
   if(!okay) return;
 
@@ -1586,12 +1583,8 @@ async function deleteChat(chatId){
   }catch(error){
 
     console.error(
-      "Delete error:",
+      "Delete chat error:",
       error
-    );
-
-    alert(
-      "Could not delete this chat."
     );
 
   }
@@ -1599,28 +1592,26 @@ async function deleteChat(chatId){
 }
 
 
-/* =========================
-   RENDER MESSAGES
-========================= */
+/* =========================================
+   RENDER CHAT
+========================================= */
 
-function renderMessages(){
+function renderChat(){
 
   chatBox.innerHTML = "";
 
   if(currentMessages.length === 0){
 
-    chatBox.appendChild(
-      createWelcome()
-    );
+    renderWelcome();
 
     return;
 
   }
 
   currentMessages.forEach(
-    message => {
+    function(message){
 
-      addMessageToScreen(
+      addMessage(
         message.role,
         message.text
       );
@@ -1628,64 +1619,69 @@ function renderMessages(){
     }
   );
 
-  scrollToBottom();
+  scrollBottom();
 
 }
 
 
-/* =========================
+/* =========================================
    WELCOME
-========================= */
+========================================= */
 
-function createWelcome(){
+function renderWelcome(){
 
-  const div =
+  const welcome =
     document.createElement("div");
 
-  div.className = "welcome";
+  welcome.className = "welcome";
 
-  div.innerHTML = `
-    <h1>Welcome to <span>UNI AI</span></h1>
-    <p>Ujjwal Neural Intelligence — your personal AI assistant.</p>
+  welcome.innerHTML = `
+    <div class="ai-orb">✦</div>
 
-    <div class="welcome-card">
+    <h1>
+      Welcome to <span>UNI AI</span>
+    </h1>
 
-      <div class="mode-card">
-        <b>📚 Study</b>
-        Class 8 friendly explanations and homework help.
+    <p>
+      Ujjwal Neural Intelligence<br>
+      Your futuristic personal AI assistant.
+    </p>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        <b>◈ Study</b>
+        <span>Simple explanations and homework help.</span>
       </div>
 
-      <div class="mode-card">
-        <b>💻 Coding</b>
-        Programming and development assistance.
+      <div class="feature">
+        <b>◈ Coding</b>
+        <span>Build and debug your projects.</span>
       </div>
 
-      <div class="mode-card">
-        <b>🔎 Search</b>
-        Search mode for your AI workflow.
+      <div class="feature">
+        <b>◈ Search</b>
+        <span>Use UNI's search mode.</span>
       </div>
 
-      <div class="mode-card">
-        <b>💬 General</b>
-        Ask UNI anything.
+      <div class="feature">
+        <b>◈ General</b>
+        <span>Ask UNI anything.</span>
       </div>
 
     </div>
   `;
 
-  return div;
+  chatBox.appendChild(welcome);
 
 }
 
 
-/* =========================
+/* =========================================
    ADD MESSAGE
-========================= */
+========================================= */
 
-function addMessageToScreen(
-  role,
-  text
-){
+function addMessage(role,text){
 
   const row =
     document.createElement("div");
@@ -1695,7 +1691,6 @@ function addMessageToScreen(
     (role === "user"
       ? "user"
       : "ai");
-
 
   const bubble =
     document.createElement("div");
@@ -1715,13 +1710,70 @@ function addMessageToScreen(
 }
 
 
-/* =========================
+/* =========================================
+   THINKING MESSAGE
+========================================= */
+
+function showThinking(){
+
+  const row =
+    document.createElement("div");
+
+  row.className =
+    "message-row ai";
+
+  row.id = "thinkingMessage";
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className =
+    "message ai";
+
+  bubble.innerHTML = `
+    <div class="thinking">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  `;
+
+  row.appendChild(bubble);
+
+  chatBox.appendChild(row);
+
+  scrollBottom();
+
+}
+
+
+/* =========================================
+   REMOVE THINKING SAFELY
+========================================= */
+
+function removeThinking(){
+
+  const element =
+    document.getElementById(
+      "thinkingMessage"
+    );
+
+  if(element){
+
+    element.remove();
+
+  }
+
+}
+
+
+/* =========================================
    SEND MESSAGE
-========================= */
+========================================= */
 
 async function sendMessage(){
 
-  if(isSending) return;
+  if(sending) return;
 
   const text =
     question.value.trim();
@@ -1736,17 +1788,13 @@ async function sendMessage(){
 
   }
 
-  if(!currentChatId){
-
-    await createNewChat();
-
-  }
-
-  isSending = true;
+  sending = true;
 
   sendBtn.disabled = true;
 
-  sendBtn.textContent = "...";
+  question.value = "";
+
+  resizeTextarea();
 
 
   currentMessages.push({
@@ -1754,30 +1802,19 @@ async function sendMessage(){
     text:text
   });
 
-  question.value = "";
+  renderChat();
 
-  autoResize();
+  await saveChat();
 
-  renderMessages();
-
-  await saveCurrentChat();
-
-
-  const aiMessageIndex =
-    currentMessages.length;
-
-  currentMessages.push({
-    role:"assistant",
-    text:"UNI is thinking..."
-  });
-
-  renderMessages();
+  showThinking();
 
 
   try{
 
     const prompt =
-`You are UNI AI, which stands for Ujjwal Neural Intelligence.
+`You are UNI AI.
+
+UNI means Ujjwal Neural Intelligence.
 
 Never introduce yourself as OpenAI.
 
@@ -1785,7 +1822,7 @@ You are a helpful AI assistant.
 
 Current mode: ${selectedMode}
 
-User message:
+User:
 ${text}`;
 
 
@@ -1794,12 +1831,9 @@ ${text}`;
         "https://uni-ai-3mg0.onrender.com/ask",
         {
           method:"POST",
-
           headers:{
-            "Content-Type":
-              "application/json"
+            "Content-Type":"application/json"
           },
-
           body:JSON.stringify({
             question:prompt
           })
@@ -1810,7 +1844,7 @@ ${text}`;
     if(!response.ok){
 
       throw new Error(
-        "Backend returned " +
+        "Server error: " +
         response.status
       );
 
@@ -1821,21 +1855,25 @@ ${text}`;
       await response.json();
 
 
-    let answer =
+    const answer =
       data.answer ||
-      data.output ||
       data.response ||
+      data.output ||
       "UNI could not generate an answer.";
 
 
-    currentMessages[
-      aiMessageIndex
-    ].text = answer;
+    removeThinking();
 
 
-    renderMessages();
+    currentMessages.push({
+      role:"assistant",
+      text:String(answer)
+    });
 
-    await saveCurrentChat();
+
+    renderChat();
+
+    await saveChat();
 
     speak(answer);
 
@@ -1847,44 +1885,44 @@ ${text}`;
       error
     );
 
-
-    currentMessages[
-      aiMessageIndex
-    ].text =
-      "Sorry, UNI could not connect to the AI server right now.";
+    removeThinking();
 
 
-    renderMessages();
+    currentMessages.push({
+      role:"assistant",
+      text:
+        "Sorry, UNI could not connect to the AI server right now."
+    });
 
-    await saveCurrentChat();
 
-  }finally{
+    renderChat();
 
-    isSending = false;
-
-    sendBtn.disabled = false;
-
-    sendBtn.textContent = "➤";
+    await saveChat();
 
   }
+
+
+  sending = false;
+
+  sendBtn.disabled = false;
 
 }
 
 
-/* =========================
+/* =========================================
    SEND BUTTON
-========================= */
+========================================= */
 
 sendBtn.onclick = sendMessage;
 
 
-/* =========================
-   ENTER KEY
-========================= */
+/* =========================================
+   ENTER
+========================================= */
 
 question.addEventListener(
   "keydown",
-  (event) => {
+  function(event){
 
     if(
       event.key === "Enter" &&
@@ -1901,16 +1939,16 @@ question.addEventListener(
 );
 
 
-/* =========================
-   AUTO RESIZE
-========================= */
+/* =========================================
+   TEXTAREA
+========================================= */
 
 question.addEventListener(
   "input",
-  autoResize
+  resizeTextarea
 );
 
-function autoResize(){
+function resizeTextarea(){
 
   question.style.height = "auto";
 
@@ -1923,11 +1961,11 @@ function autoResize(){
 }
 
 
-/* =========================
+/* =========================================
    NEW CHAT
-========================= */
+========================================= */
 
-newChatBtn.onclick = async () => {
+newChatBtn.onclick = async function(){
 
   await createNewChat();
 
@@ -1936,57 +1974,57 @@ newChatBtn.onclick = async () => {
 };
 
 
-/* =========================
-   CLEAR CHAT
-========================= */
+/* =========================================
+   CLEAR
+========================================= */
 
-clearBtn.onclick = async () => {
+clearBtn.onclick = async function(){
 
   if(!currentChatId) return;
 
   const okay =
     confirm(
-      "Clear all messages in this chat?"
+      "Clear messages from this chat?"
     );
 
   if(!okay) return;
 
   currentMessages = [];
 
-  renderMessages();
+  renderChat();
 
-  await saveCurrentChat();
+  await saveChat();
 
 };
 
 
-/* =========================
+/* =========================================
    HISTORY BUTTON
-========================= */
+========================================= */
 
-historyBtn.onclick = () => {
+historyBtn.onclick = function(){
 
   sidebar.classList.toggle("open");
 
 };
 
 
-/* =========================
+/* =========================================
    MOBILE MENU
-========================= */
+========================================= */
 
-menuBtn.onclick = () => {
+menuBtn.onclick = function(){
 
   sidebar.classList.toggle("open");
 
 };
 
 
-/* =========================
+/* =========================================
    LOGOUT
-========================= */
+========================================= */
 
-logoutBtn.onclick = async () => {
+logoutBtn.onclick = async function(){
 
   try{
 
@@ -1994,41 +2032,38 @@ logoutBtn.onclick = async () => {
 
   }catch(error){
 
-    console.error(
-      "Logout error:",
-      error
-    );
+    console.error(error);
 
   }
 
 };
 
 
-/* =========================
+/* =========================================
    MODES
-========================= */
+========================================= */
 
 document
   .querySelectorAll(".mode")
-  .forEach(button => {
+  .forEach(function(button){
 
-    button.onclick = () => {
+    button.onclick = function(){
 
       selectedMode =
         button.dataset.mode;
 
-      updateModeButtons();
+      updateModes();
 
     };
 
   });
 
 
-function updateModeButtons(){
+function updateModes(){
 
   document
     .querySelectorAll(".mode")
-    .forEach(button => {
+    .forEach(function(button){
 
       button.classList.toggle(
         "active",
@@ -2040,15 +2075,15 @@ function updateModeButtons(){
 }
 
 
-/* =========================
+/* =========================================
    VOICE INPUT
-========================= */
-
-let recognition = null;
+========================================= */
 
 const SpeechRecognition =
   window.SpeechRecognition ||
   window.webkitSpeechRecognition;
+
+let recognition = null;
 
 if(SpeechRecognition){
 
@@ -2062,46 +2097,45 @@ if(SpeechRecognition){
   recognition.interimResults = false;
 
 
-  recognition.onstart = () => {
+  recognition.onstart = function(){
 
     voiceBtn.classList.add("active");
 
   };
 
 
-  recognition.onend = () => {
+  recognition.onend = function(){
 
     voiceBtn.classList.remove("active");
 
   };
 
 
-  recognition.onresult = (event) => {
+  recognition.onresult =
+    function(event){
 
-    const spoken =
-      event.results[0][0].transcript;
+      question.value =
+        event.results[0][0].transcript;
 
-    question.value =
-      spoken;
+      resizeTextarea();
 
-    autoResize();
-
-  };
+    };
 
 
-  recognition.onerror = (event) => {
+  recognition.onerror =
+    function(error){
 
-    console.error(
-      "Voice error:",
-      event.error
-    );
+      console.log(
+        "Voice error:",
+        error
+      );
 
-    voiceBtn.classList.remove("active");
+      voiceBtn.classList.remove("active");
 
-  };
+    };
 
 
-  voiceBtn.onclick = () => {
+  voiceBtn.onclick = function(){
 
     try{
 
@@ -2120,37 +2154,33 @@ if(SpeechRecognition){
   voiceBtn.disabled = true;
 
   voiceBtn.title =
-    "Voice input is not supported in this browser.";
+    "Voice input is not supported.";
 
 }
 
 
-/* =========================
+/* =========================================
    TEXT TO SPEECH
-========================= */
+========================================= */
 
 function speak(text){
 
-  if(!voiceEnabled) return;
-
-  if(!("speechSynthesis" in window)) return;
+  if(!("speechSynthesis" in window)){
+    return;
+  }
 
   window.speechSynthesis.cancel();
 
-  const cleanText =
+  const clean =
     String(text)
       .replace(/[*#`_]/g,"")
       .replace(/\n+/g," ");
 
   const speech =
-    new SpeechSynthesisUtterance(
-      cleanText
-    );
+    new SpeechSynthesisUtterance(clean);
 
   speech.lang = "en-IN";
-
   speech.rate = 1;
-
   speech.pitch = 1;
 
   window.speechSynthesis.speak(
@@ -2159,8 +2189,23 @@ function speak(text){
 
 }
 
+
+/* =========================================
+   SCROLL
+========================================= */
+
+function scrollBottom(){
+
+  requestAnimationFrame(function(){
+
+    chatBox.scrollTop =
+      chatBox.scrollHeight;
+
+  });
+
+}
+
 </script>
 
 </body>
 </html>
-```
