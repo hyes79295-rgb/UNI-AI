@@ -2,1864 +2,1205 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b24">
 <title>UNI AI — Ujjwal Neural Intelligence</title>
 
 <style>
-* {
-  box-sizing: border-box;
+:root {
+  --bg:#0c0818; --panel:#15102a; --panel2:#21183b;
+  --line:#39275d; --text:#f4efff; --muted:#b8abd4;
+  --accent:#b56cff; --bubble:#24183f;
 }
-
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  color: white;
-  background:
-    radial-gradient(circle at 20% 20%, #32105c 0%, transparent 35%),
-    radial-gradient(circle at 90% 90%, #4a0b38 0%, transparent 35%),
-    #08030f;
+  margin:0; min-height:100vh; background:radial-gradient(ellipse at top,#211344,var(--bg) 65%);
+  color:var(--text); font:15px/1.5 system-ui,Arial,sans-serif;
 }
-
-button,
-textarea,
-input {
-  font-family: inherit;
-}
-
+button,input,textarea,select { font:inherit; }
 button {
-  cursor: pointer;
+  cursor:pointer; color:var(--text); background:var(--panel2);
+  border:1px solid var(--line); border-radius:12px; padding:9px 12px;
 }
-
-/* APP */
-
-#app {
-  display: flex;
-  width: 100%;
-  height: 100vh;
+button:hover { border-color:var(--accent); }
+button:disabled { opacity:.55; }
+input,textarea,select {
+  color:var(--text); background:var(--bg); border:1px solid var(--line);
+  border-radius:10px; padding:10px;
 }
-
-/* SIDEBAR */
-
-.sidebar {
-  width: 300px;
-  background: rgba(10, 4, 18, 0.95);
-  border-right: 1px solid #42205c;
-  display: flex;
-  flex-direction: column;
+.hidden { display:none!important; }
+.muted { color:var(--muted); }
+.small { font-size:12px; }
+.brand {
+  font-weight:850; font-size:22px; letter-spacing:.7px;
+  background:linear-gradient(90deg,#fff,#c69aff,#8f80ff);
+  color:transparent; background-clip:text;
 }
-
-.logo {
-  padding: 25px;
+.primary {
+  background:linear-gradient(110deg,#7b4dff,#c05cff);
+  border:0; font-weight:750;
 }
-
-.logo h1 {
-  margin: 0;
-  font-size: 30px;
-}
-
-.logo h1 span {
-  color: #d14cff;
-}
-
-.logo p {
-  margin: 5px 0 0;
-  color: #9d91a9;
-  font-size: 12px;
-}
-
-.new-chat {
-  margin: 0 22px 25px;
-  padding: 17px;
-  border: none;
-  border-radius: 15px;
-  color: white;
-  font-size: 17px;
-  background: linear-gradient(135deg, #762cff, #d92a91);
-  box-shadow: 0 0 25px rgba(180, 50, 255, .25);
-}
-
-.history-title {
-  padding: 18px 22px 10px;
-  border-top: 1px solid #32183f;
-  color: #91839c;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-}
-
-#historyList {
-  overflow-y: auto;
-  padding: 0 12px;
-  flex: 1;
-}
-
-.history-item {
-  display: flex;
-  gap: 5px;
-  margin: 5px 0;
-}
-
-.history-open {
-  flex: 1;
-  padding: 13px;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  background: transparent;
-  color: #eee;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.history-open:hover,
-.history-open.active {
-  background: #21102e;
-  border-color: #61307c;
-}
-
-.delete-history {
-  width: 35px;
-  border: none;
-  background: transparent;
-  color: #87788e;
-  font-size: 20px;
-}
-
-.delete-history:hover {
-  color: #ff557d;
-}
-
-/* MAIN */
-
-.main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-/* TOP */
-
-.topbar {
-  height: 80px;
-  flex-shrink: 0;
-  padding: 0 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #392044;
-  background: rgba(7, 2, 13, .8);
-}
-
-.chat-title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.online {
-  margin-top: 5px;
-  color: #48e69c;
-  font-size: 12px;
-}
-
-.top-btn {
-  padding: 10px 14px;
-  border: 1px solid #5c3274;
-  border-radius: 11px;
-  background: #170b21;
-  color: #ddd;
-}
-
-/* CHAT */
-
-#chatBox {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding: 30px 7%;
-}
-
-.welcome {
-  max-width: 850px;
-  margin: 25px auto;
-  text-align: center;
-}
-
-.orb {
-  width: 100px;
-  height: 100px;
-  margin: auto auto 25px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: radial-gradient(circle, #9a3cff, #31075b, #0b0312);
-  border: 1px solid #c176ff;
-  box-shadow: 0 0 40px #9b3cff;
-  font-size: 35px;
-}
-
-.welcome h1 {
-  font-size: 52px;
-  margin: 0;
-}
-
-.welcome h1 span {
-  color: #cf4cff;
-}
-
-.welcome p {
-  color: #a99bb4;
-  font-size: 17px;
-}
-
-.features {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 35px;
-}
-
-.feature {
-  padding: 20px;
-  border: 1px solid #382047;
-  border-radius: 17px;
-  background: rgba(35, 12, 50, .45);
-  text-align: left;
-}
-
-.feature strong {
-  color: #d6b1ff;
-  font-size: 18px;
-}
-
-.feature p {
-  font-size: 13px;
-}
-
-/* MESSAGES */
-
-.message {
-  max-width: 900px;
-  margin: 15px auto;
-  display: flex;
-}
-
-.message.user {
-  justify-content: flex-end;
-}
-
-.bubble {
-  max-width: 80%;
-  padding: 14px 17px;
-  border-radius: 17px;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  line-height: 1.5;
-}
-
-.user .bubble {
-  background: linear-gradient(135deg, #7029dc, #b6297d);
-  border-bottom-right-radius: 5px;
-}
-
-.assistant .bubble {
-  background: #1b0d27;
-  border: 1px solid #40234f;
-  border-bottom-left-radius: 5px;
-}
-
-.label {
-  color: #8f809a;
-  font-size: 10px;
-  margin-bottom: 5px;
-}
-
-/* COMPOSER */
-
-.composer-area {
-  flex-shrink: 0;
-  padding: 10px 18px 14px;
-  border-top: 1px solid #3b2148;
-  background: rgba(7, 2, 13, .95);
-}
-
-/* MODES */
-
-.modes {
-  display: flex;
-  gap: 8px;
-  max-width: 1100px;
-  margin: 0 auto 10px;
-  overflow-x: auto;
-}
-
-.mode {
-  padding: 9px 16px;
-  border-radius: 30px;
-  border: 1px solid #56306b;
-  background: #13081c;
-  color: #a99bae;
-  white-space: nowrap;
-}
-
-.mode.active {
-  color: white;
-  border: none;
-  background: linear-gradient(135deg, #792cff, #dd2c91);
-}
-
-/* WRITING BOX */
-
-.composer {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  align-items: flex-end;
-  gap: 9px;
-}
-
-#messageInput {
-  flex: 1;
-  min-width: 0;
-  min-height: 54px;
-  max-height: 150px;
-  resize: none;
-  outline: none;
-  padding: 15px;
-  border-radius: 16px;
-  border: 1px solid #66347e;
-  background: #1a0b25;
-  color: white;
-  font-size: 16px;
-}
-
-#messageInput:focus {
-  border-color: #bd4cff;
-  box-shadow: 0 0 18px rgba(190, 76, 255, .2);
-}
-
-#messageInput::placeholder {
-  color: #918399;
-}
-
-.voice-btn,
-.send-btn {
-  width: 52px;
-  height: 52px;
-  flex-shrink: 0;
-  border-radius: 15px;
-}
-
-.voice-btn {
-  border: 1px solid #613578;
-  background: #180b23;
-  color: white;
-  font-size: 20px;
-}
-
-.send-btn {
-  border: none;
-  background: linear-gradient(135deg, #7b2cff, #df2c91);
-  color: white;
-  font-size: 23px;
-}
-
-.voice-btn.listening {
-  background: #7b153e;
-}
-
-.status {
-  max-width: 1100px;
-  margin: 5px auto 0;
-  color: #897a94;
-  font-size: 11px;
-  min-height: 14px;
-}
-
-/* LOGIN */
-
-#authScreen {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  background: #08030f;
-  padding: 20px;
-}
-
+.wide { width:100%; }
+.auth-wrap { min-height:100vh; display:grid; place-items:center; padding:18px; }
 .auth-card {
-  width: min(420px, 100%);
-  padding: 30px;
-  border-radius: 22px;
-  border: 1px solid #58306d;
-  background: #12071c;
-  box-shadow: 0 0 60px rgba(140, 45, 220, .2);
+  width:min(430px,100%); padding:26px; border-radius:22px;
+  background:#140e28; border:1px solid var(--line);
 }
-
-.auth-card h1 {
-  text-align: center;
-  margin: 0;
+.auth-card input { width:100%; margin:6px 0 12px; }
+.app { display:grid; grid-template-columns:255px minmax(0,1fr); height:100dvh; }
+.sidebar {
+  padding:15px; background:#100b20; border-right:1px solid var(--line);
+  display:flex; flex-direction:column; gap:10px; min-height:0;
 }
-
-.auth-card h1 span {
-  color: #d04cff;
+.sidebar-top,.topbar,.row {
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
 }
-
-.auth-sub {
-  text-align: center;
-  color: #9e91a9;
-  margin: 8px 0 25px;
+.side-actions { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.side-actions button,.tool { font-size:12px; }
+.section-label {
+  color:var(--muted); font-size:11px; text-transform:uppercase;
+  letter-spacing:1.2px; margin-top:5px;
 }
-
-.auth-card input {
-  width: 100%;
-  padding: 13px;
-  margin-bottom: 10px;
-  border-radius: 11px;
-  border: 1px solid #4b285e;
-  background: #0e0615;
-  color: white;
-  outline: none;
+.list { display:flex; flex-direction:column; gap:5px; overflow:auto; }
+.history-item { text-align:left; background:transparent; border-color:transparent; }
+.history-item span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.history-item.active { background:var(--panel2); border-color:var(--line); }
+.project-row { display:flex; gap:5px; }
+.project-row input { width:100%; min-width:0; }
+.sidebar-bottom { margin-top:auto; overflow-wrap:anywhere; }
+.main { display:flex; flex-direction:column; min-width:0; min-height:0; }
+.topbar { padding:12px 16px; border-bottom:1px solid var(--line); }
+.topbar select { max-width:145px; }
+.messages {
+  flex:1; overflow:auto; padding:22px clamp(10px,4vw,55px);
+  display:flex; flex-direction:column; gap:18px;
 }
-
-.auth-main,
-.google {
-  width: 100%;
-  padding: 13px;
-  margin-top: 8px;
-  border-radius: 11px;
-  cursor: pointer;
+.welcome { margin:auto; text-align:center; max-width:650px; padding:20px; }
+.orb {
+  width:78px; height:78px; margin:auto; border-radius:25px;
+  display:grid; place-items:center; font-size:30px;
+  background:linear-gradient(145deg,#a65aff,#5d49f7);
+  box-shadow:0 0 40px #9955ff55;
 }
-
-.auth-main {
-  border: none;
-  background: linear-gradient(135deg, #7b2cff, #df2c91);
-  color: white;
+.suggestions { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:20px; }
+.msg {
+  width:100%; max-width:900px; margin:auto;
+  display:grid; grid-template-columns:35px minmax(0,1fr); gap:10px;
 }
-
-.google {
-  border: 1px solid #56306b;
-  background: #190b24;
-  color: white;
+.avatar {
+  width:34px; height:34px; border-radius:12px;
+  display:grid; place-items:center; background:linear-gradient(145deg,#9a5cff,#5949e9);
+  font-weight:800;
 }
-
-.switch {
-  text-align: center;
-  color: #97899f;
-  font-size: 13px;
-  margin-top: 15px;
+.msg.user .avatar { background:#2c2442; }
+.bubble {
+  min-width:0; white-space:pre-wrap; overflow-wrap:anywhere;
+  padding:13px 15px; border:1px solid var(--line);
+  background:var(--bubble); border-radius:6px 17px 17px 17px;
 }
-
-.switch button {
-  border: none;
-  background: none;
-  color: #c66aff;
+.bubble img { max-width:100%; height:auto; border-radius:12px; display:block; margin-top:10px; }
+.msg-actions { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+.msg-actions button { font-size:11px; padding:5px 8px; }
+.composer-wrap {
+  padding:10px clamp(8px,4vw,45px) 14px;
+  border-top:1px solid var(--line); background:#0d0919;
 }
-
-#error {
-  min-height: 18px;
-  color: #ff6d91;
-  text-align: center;
-  font-size: 12px;
+.tools { display:flex; flex-wrap:wrap; gap:6px; max-width:900px; margin:0 auto 8px; }
+.tool.active { background:#58358a; border-color:#ba8aff; }
+.composer {
+  max-width:900px; margin:auto; display:flex; gap:8px; align-items:flex-end;
+  border:1px solid #61418d; background:var(--panel); border-radius:18px; padding:8px;
 }
-
-.hidden {
-  display: none !important;
+.composer textarea {
+  flex:1; min-width:0; resize:vertical; max-height:180px; border:0; outline:0;
+  background:transparent; padding:8px;
 }
-
-/* MOBILE */
-
-@media(max-width: 700px) {
+.round { width:42px; height:42px; padding:0; flex-shrink:0; }
+.status { max-width:900px; margin:5px auto; font-size:12px; color:#d7c0ff; }
+.attachment { font-size:12px; color:#d8c9ff; overflow-wrap:anywhere; }
+.modal-backdrop {
+  position:fixed; inset:0; z-index:10; background:#0009;
+  display:grid; place-items:center; padding:15px;
+}
+.modal {
+  width:min(520px,100%); background:var(--panel); border:1px solid var(--line);
+  border-radius:20px; padding:20px; max-height:85vh; overflow:auto;
+}
+.modal input,.modal textarea,.modal select { width:100%; margin:7px 0 12px; }
+.modal-actions { display:flex; gap:8px; justify-content:flex-end; }
+.light {
+  --bg:#f4f1fc; --panel:#fff; --panel2:#eee7ff; --line:#d6c9ee;
+  --text:#211634; --muted:#685b7c; --bubble:#f1eaff;
+  background:radial-gradient(ellipse at top,#e5d8ff,var(--bg) 65%);
+}
+.light .sidebar,.light .topbar,.light .composer-wrap { background:#ffffffdd; }
+.light .auth-card { background:#fff; }
+.light .msg.user .bubble { background:#eee7ff; }
+.midnight {
+  --bg:#080c14; --panel:#101724; --panel2:#172337; --line:#283c58;
+  --text:#edf5ff; --muted:#a5b7cc; --bubble:#121f33;
+  background:radial-gradient(ellipse at top,#102843,var(--bg) 65%);
+}
+.midnight .primary { background:linear-gradient(110deg,#227bff,#20c4d7); }
+@media(max-width:760px) {
+  .app { grid-template-columns:1fr; }
   .sidebar {
-    display: none;
+    position:fixed; z-index:5; top:0; bottom:0; left:0;
+    width:min(300px,86vw); transform:translateX(-105%);
+    transition:transform .2s; box-shadow:0 10px 40px #0008;
   }
-
-  .welcome h1 {
-    font-size: 37px;
-  }
-
-  .features {
-    grid-template-columns: 1fr;
-  }
-
-  #chatBox {
-    padding: 20px 12px;
-  }
-
-  .composer-area {
-    padding: 8px;
-  }
-
-  .bubble {
-    max-width: 90%;
-  }
-
-  .voice-btn,
-  .send-btn {
-    width: 48px;
-    height: 48px;
-  }
-
-  #messageInput {
-    min-height: 48px;
-    font-size: 15px;
-  }
+  .sidebar.open { transform:translateX(0); }
+  .topbar { padding:10px; }
+  .topbar select { max-width:112px; }
+  .messages { padding:14px 8px; }
+  .msg { grid-template-columns:30px minmax(0,1fr); gap:7px; }
+  .avatar { width:29px; height:29px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="authScreen">
-
+<!-- SIGN IN / SIGN UP -->
+<div id="authScreen" class="auth-wrap">
   <div class="auth-card">
+    <div class="brand">✦ UNI AI</div>
+    <p class="muted">Ujjwal Neural Intelligence</p>
+    <h2 id="authTitle">Welcome back</h2>
 
-    <h1>UNI <span>AI</span></h1>
+    <label>Email</label>
+    <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com">
 
-    <div class="auth-sub">
-      Ujjwal Neural Intelligence
-    </div>
+    <label>Password</label>
+    <input id="authPassword" type="password" autocomplete="current-password" placeholder="Password">
 
-    <input id="email" type="email" placeholder="Email">
+    <button id="authSubmit" class="primary wide">Sign in</button>
+    <button id="googleBtn" class="wide" style="margin-top:8px">Continue with Google</button>
 
-    <input id="password" type="password" placeholder="Password">
-
-    <div id="error"></div>
-
-    <button id="authBtn" class="auth-main">
-      Sign In
-    </button>
-
-    <button id="googleBtn" class="google">
-      Continue with Google
-    </button>
-
-    <div class="switch">
-      <span id="switchText">New user?</span>
-      <button id="switchBtn">
-        Create account
-      </button>
-    </div>
-
+    <p id="authError" class="small"></p>
+    <p class="small muted">
+      <span id="authSwitchText">New to UNI?</span>
+      <a href="#" id="authSwitch">Create account</a>
+    </p>
   </div>
-
 </div>
 
+<!-- MAIN APP -->
+<div id="app" class="app hidden">
 
-<!-- APP -->
-<div id="app" class="hidden">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <div class="logo">
-      <h1>UNI <span>AI</span></h1>
-      <p>UJJWAL NEURAL INTELLIGENCE</p>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">✦ UNI AI</div>
+      <button id="closeSidebar">✕</button>
     </div>
 
-    <button id="newChat" class="new-chat">
-      ＋ NEW CHAT
-    </button>
+    <button id="newChat" class="primary">＋ New chat</button>
 
-    <div class="history-title">
-      CHAT HISTORY
+    <div class="side-actions">
+      <button id="newProject">＋ Project</button>
+      <button id="memoryBtn">✧ Memory</button>
+      <button id="themeBtn">◐ Theme</button>
+      <button id="logoutBtn">↪ Sign out</button>
     </div>
 
-    <div id="historyList"></div>
+    <div class="section-label">Projects</div>
+    <div id="projectList" class="list"></div>
 
+    <div class="project-row">
+      <input id="projectNameInput" placeholder="New project name">
+      <button id="addProject">Add</button>
+    </div>
+
+    <div class="section-label">Chat history</div>
+    <div id="historyList" class="list" style="flex:1"></div>
+
+    <div class="sidebar-bottom">
+      <div id="userPill" class="small muted">Signed in</div>
+      <p class="small muted">Your chats are stored in your Firebase account.</p>
+    </div>
   </aside>
 
-
-  <!-- MAIN -->
   <main class="main">
-
     <header class="topbar">
-
-      <div>
-        <div id="chatTitle" class="chat-title">
-          New Chat
-        </div>
-
-        <div class="online">
-          ● SYSTEM ONLINE
-        </div>
+      <div class="row">
+        <button id="menuBtn">☰</button>
+        <div class="brand">UNI <span class="muted" style="font-size:12px">/ AI workspace</span></div>
       </div>
-
-      <div>
-        <button id="clearBtn" class="top-btn">
-          CLEAR
-        </button>
-
-        <button id="logoutBtn" class="top-btn">
-          LOGOUT
-        </button>
+      <div class="row">
+        <select id="activeProject" aria-label="Current project">
+          <option value="">No project</option>
+        </select>
+        <select id="modeSelect" aria-label="AI mode">
+          <option value="general">General</option>
+          <option value="study">Study</option>
+          <option value="search">Web Search</option>
+          <option value="image">Image Q&A</option>
+          <option value="files">Documents</option>
+          <option value="writing">Writing</option>
+          <option value="coding">Coding</option>
+        </select>
       </div>
-
     </header>
 
-
-    <!-- CHAT AREA -->
-    <section id="chatBox">
-
+    <section id="messages" class="messages">
       <div id="welcome" class="welcome">
-
-        <div class="orb">
-          ✦
+        <div class="orb">✦</div>
+        <h1>What can I help with?</h1>
+        <p class="muted">Ask, learn, search, code, or explore ideas with UNI AI.</p>
+        <div class="suggestions">
+          <button data-prompt="Explain a difficult topic in simple steps.">📚 Study help</button>
+          <button data-prompt="Search the web for current information about ">🌐 Web search</button>
+          <button data-prompt="Help me write and debug this code: ">⌘ Coding</button>
+          <button data-prompt="Give me ideas for a science project.">✦ Project ideas</button>
         </div>
-
-        <h1>
-          Welcome to <span>UNI AI</span>
-        </h1>
-
-        <p>
-          Ujjwal Neural Intelligence
-        </p>
-
-        <p>
-          Your futuristic personal AI assistant.
-        </p>
-
-        <div class="features">
-
-          <div class="feature">
-            <strong>◇ Study</strong>
-            <p>Simple explanations and homework help.</p>
-          </div>
-
-          <div class="feature">
-            <strong>◇ Coding</strong>
-            <p>Build and debug your projects.</p>
-          </div>
-
-          <div class="feature">
-            <strong>◇ Search</strong>
-            <p>Use UNI's search mode.</p>
-          </div>
-
-          <div class="feature">
-            <strong>◇ General</strong>
-            <p>Ask UNI anything.</p>
-          </div>
-
-        </div>
-
       </div>
-
     </section>
 
+    <section class="composer-wrap">
+      <div class="tools">
+        <button id="searchBtn" class="tool">🌐 Web search</button>
+        <button id="codingBtn" class="tool">⌘ Coding</button>
 
-    <!-- WRITING SECTION -->
-    <section class="composer-area">
+        <label class="tool">
+          🖼 Image
+          <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+        </label>
 
-      <div class="modes">
+        <label class="tool">
+          📎 File
+          <input id="fileInput" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.md,.csv,.json,.rtf" hidden>
+        </label>
 
-        <button class="mode active" data-mode="General">
-          ◇ General
-        </button>
-
-        <button class="mode" data-mode="Study">
-          ◇ Study
-        </button>
-
-        <button class="mode" data-mode="Coding">
-          ◇ Coding
-        </button>
-
-        <button class="mode" data-mode="Search">
-          ◇ Search
-        </button>
-
+        <button id="imageGenBtn" class="tool">🎨 Create image</button>
+        <span id="attachmentName" class="attachment"></span>
+        <button id="clearAttachment" class="tool hidden">Remove attachment</button>
       </div>
 
+      <div id="status" class="status" role="status"></div>
 
-      <!-- THIS IS THE WRITING BOX -->
       <div class="composer">
-
-        <button id="voiceBtn" class="voice-btn">
-          🎤
-        </button>
-
-        <textarea
-          id="messageInput"
-          rows="1"
-          placeholder="Write your message..."
-        ></textarea>
-
-        <button id="sendBtn" class="send-btn">
-          ➤
-        </button>
-
+        <button id="voiceBtn" class="round" title="Voice input">🎙</button>
+        <textarea id="messageInput" rows="1" placeholder="Message UNI AI..."></textarea>
+        <button id="sendBtn" class="primary round" title="Send message">➤</button>
       </div>
 
-      <div id="status" class="status"></div>
-
+      <div class="small muted" style="text-align:center;margin-top:7px">
+        Enter to send · Shift + Enter for a new line
+      </div>
     </section>
-
   </main>
-
 </div>
 
+<!-- MODAL -->
+<div id="modalBackdrop" class="modal-backdrop hidden">
+  <div class="modal">
+    <h2 id="modalTitle">Settings</h2>
+    <div id="modalBody"></div>
+    <div class="modal-actions">
+      <button id="modalCancel">Cancel</button>
+      <button id="modalSave" class="primary">Save</button>
+    </div>
+  </div>
+</div>
 
 <script type="module">
-
-/* FIREBASE */
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
+  getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
   signOut
 } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  setDoc,
-  getDoc,
-  deleteDoc,
-  onSnapshot,
-  query,
-  orderBy,
-  serverTimestamp,
-  doc
+  getFirestore, collection, doc, addDoc, getDoc, getDocs,
+  setDoc, deleteDoc, query, orderBy, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-   ========================= */
-
+/* Replace the placeholder with your current Firebase Web API key. */
 const firebaseConfig = {
-
-  /*
-    IMPORTANT:
-    Put your CURRENT Firebase Web API key here.
-    Do NOT put your OpenAI API key here.
-  */
-
   apiKey: "AIzaSyC8ncItbw_DrCDm182bjCRF6Ivx5Zi2xas",
-
   authDomain: "uni-ai-a00c6.firebaseapp.com",
-
   projectId: "uni-ai-a00c6",
-
   storageBucket: "uni-ai-a00c6.firebasestorage.app",
-
   messagingSenderId: "322740324379",
-
   appId: "1:322740324379:web:686f2301fe6fbe2ed550be",
-
   measurementId: "G-6QZ0LNXTQ3"
 };
 
+/* Your existing Render backend. */
+const API_BASE = "https://uni-ai-3mg0.onrender.com";
 
-const BACKEND_URL =
-  "https://uni-ai-3mg0.onrender.com/ask";
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
+const $ = id => document.getElementById(id);
 
-const firebaseApp =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(firebaseApp);
-
-const db =
-  getFirestore(firebaseApp);
-
-const googleProvider =
-  new GoogleAuthProvider();
-
-
-/* VARIABLES */
-
-let currentUser = null;
-let currentChatId = null;
-let messages = [];
-let currentMode = "General";
+let user = null;
 let signupMode = false;
+let busy = false;
+let currentMode = "general";
+let currentTheme = "cyber";
+let activeChatId = null;
+let activeProjectId = "";
+let currentProjectFilter = "all";
+let memoryText = "";
+let chats = [];
+let projects = [];
+let activeMessages = [];
+let pendingImage = null;
+let pendingFile = null;
+let modalAction = null;
 let recognition = null;
+let listening = false;
 
+function userChatsRef() {
+  return collection(db, "users", user.uid, "chats");
+}
+function projectsRef() {
+  return collection(db, "users", user.uid, "projects");
+}
+function preferencesRef() {
+  return doc(db, "users", user.uid, "preferences", "memory");
+}
+function settingsRef() {
+  return doc(db, "users", user.uid, "preferences", "settings");
+}
 
-/* ELEMENTS */
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
 
-const authScreen =
-  document.getElementById("authScreen");
+function setStatus(message) {
+  $("status").textContent = message || "";
+}
 
-const app =
-  document.getElementById("app");
+function setBusy(value) {
+  busy = value;
+  $("sendBtn").disabled = value;
+  $("imageGenBtn").disabled = value;
+  $("sendBtn").textContent = value ? "…" : "➤";
+}
 
-const email =
-  document.getElementById("email");
+function setMode(mode) {
+  currentMode = mode;
+  $("modeSelect").value = mode;
+  document.querySelectorAll(".tool").forEach(el => el.classList.remove("active"));
+  if (mode === "search") $("searchBtn").classList.add("active");
+  if (mode === "coding" || mode === "code") $("codingBtn").classList.add("active");
+}
 
-const password =
-  document.getElementById("password");
+function applyTheme() {
+  document.body.classList.remove("light", "midnight");
+  if (currentTheme === "light") document.body.classList.add("light");
+  if (currentTheme === "midnight") document.body.classList.add("midnight");
+}
 
-const error =
-  document.getElementById("error");
+function showApp(show) {
+  $("authScreen").classList.toggle("hidden", show);
+  $("app").classList.toggle("hidden", !show);
+}
 
-const authBtn =
-  document.getElementById("authBtn");
+function getActiveMessages() {
+  return activeMessages.slice();
+}
 
-const switchBtn =
-  document.getElementById("switchBtn");
+function drawMessages(messages) {
+  activeMessages = messages.slice();
+  const root = $("messages");
+  root.innerHTML = "";
 
-const switchText =
-  document.getElementById("switchText");
-
-const googleBtn =
-  document.getElementById("googleBtn");
-
-const messageInput =
-  document.getElementById("messageInput");
-
-const sendBtn =
-  document.getElementById("sendBtn");
-
-const voiceBtn =
-  document.getElementById("voiceBtn");
-
-const chatBox =
-  document.getElementById("chatBox");
-
-const welcome =
-  document.getElementById("welcome");
-
-const historyList =
-  document.getElementById("historyList");
-
-const chatTitle =
-  document.getElementById("chatTitle");
-
-const status =
-  document.getElementById("status");
-
-
-/* AUTH MODE */
-
-switchBtn.onclick = () => {
-
-  signupMode = !signupMode;
-
-  if (signupMode) {
-
-    authBtn.textContent =
-      "Create Account";
-
-    switchText.textContent =
-      "Already have an account?";
-
-    switchBtn.textContent =
-      "Sign in";
-
-  } else {
-
-    authBtn.textContent =
-      "Sign In";
-
-    switchText.textContent =
-      "New user?";
-
-    switchBtn.textContent =
-      "Create account";
-  }
-
-  error.textContent = "";
-};
-
-
-/* EMAIL AUTH */
-
-authBtn.onclick = async () => {
-
-  const userEmail =
-    email.value.trim();
-
-  const userPassword =
-    password.value;
-
-  if (!userEmail || !userPassword) {
-
-    error.textContent =
-      "Enter email and password.";
-
+  if (!messages.length) {
+    root.innerHTML = `
+      <div id="welcome" class="welcome">
+        <div class="orb">✦</div>
+        <h1>What can I help with?</h1>
+        <p class="muted">Ask UNI anything to get started.</p>
+      </div>`;
     return;
   }
 
-  try {
+  messages.forEach((msg, index) => {
+    const row = document.createElement("div");
+    row.className = "msg " + (msg.role === "user" ? "user" : "assistant");
 
-    if (signupMode) {
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+    avatar.textContent = msg.role === "user" ? "Y" : "U";
 
-      await createUserWithEmailAndPassword(
-        auth,
-        userEmail,
-        userPassword
-      );
+    const body = document.createElement("div");
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = msg.content || "";
 
-    } else {
-
-      await signInWithEmailAndPassword(
-        auth,
-        userEmail,
-        userPassword
-      );
-
+    if (msg.imageData) {
+      const image = document.createElement("img");
+      image.src = msg.imageData;
+      image.alt = "Attached or generated image";
+      bubble.appendChild(image);
     }
 
-    error.textContent = "";
+    if (msg.fileName) {
+      const fileLabel = document.createElement("div");
+      fileLabel.className = "small muted";
+      fileLabel.textContent = "📎 " + msg.fileName;
+      bubble.appendChild(fileLabel);
+    }
 
-  } catch (e) {
+    body.appendChild(bubble);
 
-    console.error(e);
+    const actions = document.createElement("div");
+    actions.className = "msg-actions";
 
-    error.textContent =
-      e.message;
+    if (msg.role === "assistant") {
+      const copy = document.createElement("button");
+      copy.textContent = "Copy";
+      copy.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(msg.content || "");
+          setStatus("Response copied.");
+        } catch {
+          setStatus("Copy not available in this browser.");
+        }
+      };
+      actions.appendChild(copy);
 
-  }
+      const speak = document.createElement("button");
+      speak.textContent = "🔊 Read";
+      speak.onclick = () => speakText(msg.content || "");
+      actions.appendChild(speak);
 
-};
+      const regenerate = document.createElement("button");
+      regenerate.textContent = "↻ Regenerate";
+      regenerate.onclick = () => regenerateResponse(index);
+      actions.appendChild(regenerate);
+    }
 
+    if (msg.role === "user") {
+      const edit = document.createElement("button");
+      edit.textContent = "✎ Edit prompt";
+      edit.onclick = () => {
+        $("messageInput").value = msg.content || "";
+        $("messageInput").dataset.editIndex = String(index);
+        $("messageInput").focus();
+        setStatus("Edit your prompt, then press Send.");
+      };
+      actions.appendChild(edit);
+    }
 
-/* GOOGLE LOGIN */
+    body.appendChild(actions);
+    row.append(avatar, body);
+    root.appendChild(row);
+  });
 
-googleBtn.onclick = async () => {
+  root.scrollTop = root.scrollHeight;
+}
 
-  try {
+async function loadChats() {
+  const snapshot = await getDocs(
+    query(userChatsRef(), orderBy("updatedAt", "desc"))
+  );
+  chats = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderHistory();
+}
 
-    await signInWithPopup(
-      auth,
-      googleProvider
-    );
+function renderHistory() {
+  const root = $("historyList");
+  root.innerHTML = "";
 
-  } catch (e) {
+  const filtered = chats.filter(chat =>
+    currentProjectFilter === "all" ||
+    (chat.projectId || "") === currentProjectFilter
+  );
 
-    console.error(e);
+  filtered.forEach(chat => {
+    const button = document.createElement("button");
+    button.className = "history-item" +
+      (chat.id === activeChatId ? " active" : "");
+    button.innerHTML = `<span>${escapeHTML(chat.title || "New chat")}</span>`;
 
-    error.textContent =
-      e.message;
+    button.onclick = () => openChat(chat.id);
 
-  }
+    const del = document.createElement("span");
+    del.textContent = " ×";
+    del.title = "Delete chat";
+    del.style.cursor = "pointer";
+    del.onclick = async event => {
+      event.stopPropagation();
+      if (!confirm("Delete this chat?")) return;
+      await deleteDoc(doc(userChatsRef(), chat.id));
+      chats = chats.filter(item => item.id !== chat.id);
+      if (activeChatId === chat.id) newChat();
+      renderHistory();
+    };
 
-};
+    button.appendChild(del);
+    root.appendChild(button);
+  });
+}
 
+async function saveChat(messages) {
+  if (!user) return;
 
-/* LOGOUT */
+  const firstUser = messages.find(m => m.role === "user");
+  const title = (firstUser?.content || "New chat").slice(0, 55);
 
-document.getElementById("logoutBtn").onclick =
-  async () => {
-
-    await signOut(auth);
-
+  const payload = {
+    userId: user.uid,
+    title,
+    messages,
+    projectId: activeProjectId || "",
+    updatedAt: serverTimestamp()
   };
 
-
-/* FIRESTORE PATH */
-
-function chatsRef() {
-
-  return collection(
-    db,
-    "users",
-    currentUser.uid,
-    "chats"
-  );
-
-}
-
-
-/* NEW CHAT */
-
-async function createChat() {
-
-  if (!currentUser) return;
-
-  const ref =
-    await addDoc(
-      chatsRef(),
-      {
-
-        userId:
-          currentUser.uid,
-
-        title:
-          "New Chat",
-
-        mode:
-          currentMode,
-
-        messages:
-          [],
-
-        createdAt:
-          serverTimestamp(),
-
-        updatedAt:
-          serverTimestamp()
-
-      }
-    );
-
-  currentChatId =
-    ref.id;
-
-  messages = [];
-
-  chatTitle.textContent =
-    "New Chat";
-
-  renderMessages();
-
-}
-
-
-/* SAVE CHAT */
-
-async function saveChat() {
-
-  if (!currentUser ||
-      !currentChatId) return;
-
-  let title =
-    "New Chat";
-
-  const first =
-    messages.find(
-      m => m.role === "user"
-    );
-
-  if (first) {
-
-    title =
-      first.content
-        .replace(/\s+/g, " ")
-        .slice(0, 45);
-
+  if (activeChatId) {
+    await setDoc(doc(userChatsRef(), activeChatId), payload, { merge: true });
+  } else {
+    const created = await addDoc(userChatsRef(), {
+      ...payload,
+      createdAt: serverTimestamp()
+    });
+    activeChatId = created.id;
   }
 
-  await setDoc(
-
-    doc(
-      db,
-      "users",
-      currentUser.uid,
-      "chats",
-      currentChatId
-    ),
-
-    {
-
-      userId:
-        currentUser.uid,
-
-      title:
-        title || "New Chat",
-
-      mode:
-        currentMode,
-
-      messages:
-        messages,
-
-      updatedAt:
-        serverTimestamp()
-
-    },
-
-    { merge: true }
-
-  );
-
-  chatTitle.textContent =
-    title || "New Chat";
+  await loadChats();
 }
-
-
-/* OPEN CHAT */
 
 async function openChat(id) {
+  const snapshot = await getDoc(doc(userChatsRef(), id));
+  if (!snapshot.exists()) return;
 
-  const ref =
-    doc(
-      db,
-      "users",
-      currentUser.uid,
-      "chats",
-      id
-    );
-
-  const snap =
-    await getDoc(ref);
-
-  if (!snap.exists()) return;
-
-  const data =
-    snap.data();
-
-  currentChatId =
-    id;
-
-  messages =
-    data.messages || [];
-
-  currentMode =
-    data.mode || "General";
-
-  chatTitle.textContent =
-    data.title || "New Chat";
-
-  updateModes();
-
-  renderMessages();
-
+  const data = snapshot.data();
+  activeChatId = id;
+  activeProjectId = data.projectId || "";
+  $("activeProject").value = activeProjectId;
+  drawMessages(Array.isArray(data.messages) ? data.messages : []);
+  renderHistory();
+  $("sidebar").classList.remove("open");
 }
 
-
-/* RENDER */
-
-function renderMessages() {
-
-  chatBox
-    .querySelectorAll(".message")
-    .forEach(
-      element => element.remove()
-    );
-
-  if (messages.length === 0) {
-
-    welcome.classList.remove(
-      "hidden"
-    );
-
-    return;
-
-  }
-
-  welcome.classList.add(
-    "hidden"
-  );
-
-  messages.forEach(
-    message => {
-
-      addMessageToScreen(
-        message.role,
-        message.content
-      );
-
-    }
-  );
-
+function newChat() {
+  activeChatId = null;
+  activeMessages = [];
+  activeProjectId = activeProjectId || "";
+  $("activeProject").value = activeProjectId;
+  drawMessages([]);
+  renderHistory();
+  $("sidebar").classList.remove("open");
 }
 
-
-/* ADD MESSAGE */
-
-function addMessageToScreen(
-  role,
-  content
-) {
-
-  welcome.classList.add(
-    "hidden"
-  );
-
-  const row =
-    document.createElement("div");
-
-  row.className =
-    "message " + role;
-
-  const wrapper =
-    document.createElement("div");
-
-  const label =
-    document.createElement("div");
-
-  label.className =
-    "label";
-
-  label.textContent =
-    role === "user"
-      ? "YOU"
-      : "UNI";
-
-  const bubble =
-    document.createElement("div");
-
-  bubble.className =
-    "bubble";
-
-  bubble.textContent =
-    content;
-
-  wrapper.appendChild(label);
-
-  wrapper.appendChild(bubble);
-
-  row.appendChild(wrapper);
-
-  chatBox.appendChild(row);
-
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
-
+async function loadProjects() {
+  const snapshot = await getDocs(projectsRef());
+  projects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderProjects();
 }
 
+function renderProjects() {
+  const root = $("projectList");
+  root.innerHTML = "";
 
-/* SEND MESSAGE */
+  const all = document.createElement("button");
+  all.className = "history-item" +
+    (currentProjectFilter === "all" ? " active" : "");
+  all.textContent = "◈ All chats";
+  all.onclick = () => {
+    currentProjectFilter = "all";
+    renderProjects();
+    renderHistory();
+  };
+  root.appendChild(all);
 
-async function sendMessage() {
+  const select = $("activeProject");
+  select.innerHTML = '<option value="">No project</option>';
 
-  const text =
-    messageInput.value.trim();
+  projects.forEach(project => {
+    const button = document.createElement("button");
+    button.className = "history-item" +
+      (currentProjectFilter === project.id ? " active" : "");
+    button.textContent = "▣ " + project.name;
+    button.onclick = () => {
+      currentProjectFilter = project.id;
+      activeProjectId = project.id;
+      renderProjects();
+      renderHistory();
+      select.value = project.id;
+    };
+    root.appendChild(button);
 
-  if (!text) return;
-
-  if (!currentUser) {
-
-    status.textContent =
-      "Please sign in first.";
-
-    return;
-
-  }
-
-  if (!currentChatId) {
-
-    await createChat();
-
-  }
-
-  messageInput.value = "";
-
-  autoResize();
-
-  messages.push({
-
-    role: "user",
-
-    content: text,
-
-    time:
-      new Date().toISOString()
-
+    const option = document.createElement("option");
+    option.value = project.id;
+    option.textContent = project.name;
+    select.appendChild(option);
   });
 
-  addMessageToScreen(
-    "user",
-    text
+  select.value = activeProjectId;
+}
+
+async function addProject() {
+  const name = $("projectNameInput").value.trim();
+  if (!name) return setStatus("Type a project name first.");
+
+  const result = await addDoc(projectsRef(), {
+    name: name.slice(0, 60),
+    createdAt: serverTimestamp()
+  });
+
+  $("projectNameInput").value = "";
+  activeProjectId = result.id;
+  currentProjectFilter = result.id;
+  await loadProjects();
+  renderHistory();
+  newChat();
+}
+
+async function loadPreferences() {
+  const [memoryDoc, settingsDoc] = await Promise.all([
+    getDoc(preferencesRef()),
+    getDoc(settingsRef())
+  ]);
+
+  memoryText = memoryDoc.exists() ? (memoryDoc.data().text || "") : "";
+  currentTheme = settingsDoc.exists()
+    ? (settingsDoc.data().theme || "cyber")
+    : "cyber";
+
+  applyTheme();
+}
+
+function openModal(title, html, onSave) {
+  $("modalTitle").textContent = title;
+  $("modalBody").innerHTML = html;
+  $("modalBackdrop").classList.remove("hidden");
+  modalAction = onSave;
+}
+
+$("modalCancel").onclick = () => {
+  $("modalBackdrop").classList.add("hidden");
+  modalAction = null;
+};
+
+$("modalSave").onclick = async () => {
+  try {
+    if (modalAction) await modalAction();
+    $("modalBackdrop").classList.add("hidden");
+    modalAction = null;
+  } catch (error) {
+    setStatus(error.message || "Could not save.");
+  }
+};
+
+$("modalBackdrop").onclick = event => {
+  if (event.target === $("modalBackdrop")) $("modalCancel").click();
+};
+
+$("memoryBtn").onclick = () => {
+  openModal(
+    "UNI Memory",
+    `<p class="muted small">
+      Save useful preferences for future chats. Avoid passwords and sensitive details.
+    </p>
+    <label>What should UNI remember?</label>
+    <textarea id="memoryEditor" rows="6"
+      placeholder="Example: Explain school topics in simple Hinglish.">${escapeHTML(memoryText)}</textarea>
+    <label><input id="voiceReplies" type="checkbox" style="width:auto">
+      Automatically read AI replies aloud
+    </label>`,
+    async () => {
+      memoryText = $("memoryEditor").value.trim().slice(0, 2500);
+      await setDoc(preferencesRef(), {
+        text: memoryText,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+
+      localStorage.setItem(
+        "uniVoiceReplies",
+        $("voiceReplies").checked ? "yes" : "no"
+      );
+      setStatus("Memory saved.");
+    }
   );
+};
 
-  await saveChat();
+$("themeBtn").onclick = () => {
+  openModal(
+    "Choose theme",
+    `<label>Website theme</label>
+    <select id="themeChoice">
+      <option value="cyber">Purple Cyber</option>
+      <option value="light">Light</option>
+      <option value="midnight">Midnight Blue</option>
+    </select>`,
+    async () => {
+      currentTheme = $("themeChoice").value;
+      applyTheme();
+      await setDoc(settingsRef(), {
+        theme: currentTheme
+      }, { merge: true });
+    }
+  );
+};
 
-  status.textContent =
-    "UNI is thinking...";
+$("newProject").onclick = () => {
+  openModal(
+    "Create a project",
+    `<label>Project name</label>
+    <input id="projectModalName" placeholder="School, Coding, Science project">`,
+    async () => {
+      const name = $("projectModalName").value.trim();
+      if (!name) return;
 
-  sendBtn.disabled = true;
+      const created = await addDoc(projectsRef(), {
+        name: name.slice(0, 60),
+        createdAt: serverTimestamp()
+      });
+
+      activeProjectId = created.id;
+      currentProjectFilter = created.id;
+      await loadProjects();
+      newChat();
+    }
+  );
+};
+
+function readAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function compressImage(dataURL, maxSide = 900, quality = 0.7) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      const scale = Math.min(
+        1, maxSide / Math.max(image.width, image.height)
+      );
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(image.width * scale));
+      canvas.height = Math.max(1, Math.round(image.height * scale));
+      const context = canvas.getContext("2d");
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    image.onerror = reject;
+    image.src = dataURL;
+  });
+}
+
+function updateAttachment() {
+  const name = pendingImage?.name || pendingFile?.name || "";
+  $("attachmentName").textContent = name;
+  $("clearAttachment").classList.toggle("hidden", !name);
+}
+
+$("imageInput").onchange = async () => {
+  const file = $("imageInput").files?.[0];
+  if (!file) return;
+
+  if (file.size > 10 * 1024 * 1024) {
+    return setStatus("Image must be under 10 MB.");
+  }
 
   try {
-
-    const prompt =
-
-      "You are UNI AI, which stands for Ujjwal Neural Intelligence. " +
-
-      "You are a helpful personal AI assistant. " +
-
-      "Never introduce yourself as OpenAI. " +
-
-      "Current mode: " +
-      currentMode +
-      ". " +
-
-      "Answer the user's question clearly.\n\n" +
-
-      "User: " +
-      text;
-
-
-    const response =
-      await fetch(
-        BACKEND_URL,
-        {
-
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-
-              question:
-                prompt,
-
-              mode:
-                currentMode
-
-            })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Backend error"
-      );
-
-    }
-
-
-    const answer =
-      data.answer ||
-      data.response ||
-      data.output ||
-      data.text;
-
-
-    if (!answer) {
-
-      throw new Error(
-        "UNI returned no answer."
-      );
-
-    }
-
-
-    messages.push({
-
-      role: "assistant",
-
-      content:
-        String(answer),
-
-      time:
-        new Date().toISOString()
-
-    });
-
-
-    addMessageToScreen(
-      "assistant",
-      String(answer)
-    );
-
-
-    await saveChat();
-
-    speak(
-      String(answer)
-    );
-
-    status.textContent = "";
-
-
-  } catch (e) {
-
-    console.error(e);
-
-    const msg =
-      "Sorry, UNI could not connect to the backend.";
-
-    messages.push({
-
-      role: "assistant",
-
-      content:
-        msg
-
-    });
-
-    addMessageToScreen(
-      "assistant",
-      msg
-    );
-
-    await saveChat();
-
-    status.textContent =
-      e.message || "Connection error.";
-
-  }
-
-
-  sendBtn.disabled = false;
-
-  messageInput.focus();
-
-}
-
-
-/* SEND BUTTON */
-
-sendBtn.onclick =
-  sendMessage;
-
-
-/* ENTER TO SEND */
-
-messageInput.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "Enter" &&
-      !event.shiftKey
-    ) {
-
-      event.preventDefault();
-
-      sendMessage();
-
-    }
-
-  }
-);
-
-
-/* TEXTAREA SIZE */
-
-function autoResize() {
-
-  messageInput.style.height =
-    "auto";
-
-  messageInput.style.height =
-    Math.min(
-      messageInput.scrollHeight,
-      150
-    ) + "px";
-
-}
-
-messageInput.addEventListener(
-  "input",
-  autoResize
-);
-
-
-/* MODES */
-
-document
-  .querySelectorAll(".mode")
-  .forEach(button => {
-
-    button.onclick = () => {
-
-      currentMode =
-        button.dataset.mode;
-
-      updateModes();
-
+    pendingImage = {
+      name: file.name,
+      data: await compressImage(await readAsDataURL(file))
     };
+    pendingFile = null;
+    setMode("image");
+    updateAttachment();
+    setStatus("Image attached. Ask UNI a question and press Send.");
+  } catch {
+    setStatus("Could not read this image.");
+  }
+};
 
-  });
+$("fileInput").onchange = async () => {
+  const file = $("fileInput").files?.[0];
+  if (!file) return;
 
+  if (file.size > 15 * 1024 * 1024) {
+    return setStatus("Document must be under 15 MB.");
+  }
 
-function updateModes() {
+  if (!/\.(pdf|doc|docx|ppt|pptx|xls|xlsx|txt|md|csv|json|rtf)$/i.test(file.name)) {
+    return setStatus("Choose a supported PDF or document file.");
+  }
 
-  document
-    .querySelectorAll(".mode")
-    .forEach(button => {
+  try {
+    pendingFile = {
+      name: file.name,
+      data: await readAsDataURL(file)
+    };
+    pendingImage = null;
+    setMode("files");
+    updateAttachment();
+    setStatus("Document attached. Ask a question and press Send.");
+  } catch {
+    setStatus("Could not read this document.");
+  }
+};
 
-      button.classList.toggle(
-        "active",
-        button.dataset.mode ===
-          currentMode
-      );
+$("clearAttachment").onclick = () => {
+  pendingImage = null;
+  pendingFile = null;
+  $("imageInput").value = "";
+  $("fileInput").value = "";
+  updateAttachment();
+  setStatus("Attachment removed.");
+};
 
-    });
+async function sendMessage(_unused = null, editIndex = null) {
+  if (busy || !user) return;
 
-}
+  const text = $("messageInput").value.trim();
 
+  if (!text && !pendingImage && !pendingFile) {
+    return setStatus("Write a message or attach a file first.");
+  }
 
-/* NEW CHAT BUTTON */
+  const previous = getActiveMessages();
+  const base = editIndex !== null
+    ? previous.slice(0, editIndex)
+    : previous;
 
-document.getElementById(
-  "newChat"
-).onclick =
-  async () => {
-
-    await createChat();
-
+  const userMessage = {
+    role: "user",
+    content: text || (pendingFile
+      ? "Please explain this document."
+      : "Please describe this image."),
+    ...(pendingImage ? { imageData: pendingImage.data } : {}),
+    ...(pendingFile ? { fileName: pendingFile.name } : {})
   };
 
+  const messages = [...base, userMessage];
+  const imageData = pendingImage?.data || "";
+  const file = pendingFile;
 
-/* CLEAR */
+  $("messageInput").value = "";
+  $("messageInput").dataset.editIndex = "";
+  pendingImage = null;
+  pendingFile = null;
+  updateAttachment();
 
-document.getElementById(
-  "clearBtn"
-).onclick =
-  async () => {
+  drawMessages(messages);
+  setBusy(true);
+  setStatus("UNI is thinking...");
 
-    messages = [];
+  try {
+    await saveChat(messages);
 
-    renderMessages();
+    const history = messages.slice(-8, -1).map(item => ({
+      role: item.role,
+      content: item.content
+    }));
 
-    await saveChat();
+    const token = await user.getIdToken();
 
+    const response = await fetch(API_BASE + "/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({
+        message: userMessage.content,
+        mode: currentMode,
+        history,
+        memory: memoryText,
+        imageData,
+        fileData: file?.data || "",
+        fileName: file?.name || ""
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Request failed.");
+
+    const answer = {
+      role: "assistant",
+      content: data.answer || "No answer returned."
+    };
+
+    const finalMessages = [...messages, answer];
+    drawMessages(finalMessages);
+    await saveChat(finalMessages);
+    setStatus("");
+
+    if (localStorage.getItem("uniVoiceReplies") === "yes") {
+      speakText(answer.content);
+    }
+  } catch (error) {
+    setStatus(error.message || "Could not connect to UNI backend.");
+  } finally {
+    setBusy(false);
+    renderHistory();
+  }
+}
+
+async function regenerateResponse(index) {
+  if (busy) return;
+
+  const messages = getActiveMessages();
+  if (messages[index]?.role !== "assistant") return;
+
+  let userIndex = index - 1;
+  while (userIndex >= 0 && messages[userIndex].role !== "user") {
+    userIndex--;
+  }
+  if (userIndex < 0) return;
+
+  const original = messages[userIndex];
+  const prior = messages.slice(0, userIndex);
+  const prompt = original.content || "";
+
+  $("messageInput").value = prompt;
+  setBusy(true);
+  setStatus("Regenerating response...");
+
+  try {
+    const token = await user.getIdToken();
+    const response = await fetch(API_BASE + "/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({
+        message: prompt,
+        mode: currentMode,
+        history: prior.slice(-8).map(m => ({
+          role: m.role,
+          content: m.content
+        })),
+        memory: memoryText,
+        imageData: original.imageData || ""
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Regeneration failed.");
+
+    const result = [
+      ...prior,
+      original,
+      { role: "assistant", content: data.answer || "No answer returned." }
+    ];
+
+    drawMessages(result);
+    await saveChat(result);
+    setStatus("New response generated.");
+  } catch (error) {
+    setStatus(error.message || "Regeneration failed.");
+  } finally {
+    setBusy(false);
+  }
+}
+
+$("sendBtn").onclick = () => {
+  const editValue = $("messageInput").dataset.editIndex;
+  const editIndex = editValue ? Number(editValue) : null;
+  sendMessage(null, editIndex);
+};
+
+$("messageInput").addEventListener("keydown", event => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    $("sendBtn").click();
+  }
+});
+
+document.querySelectorAll("[data-prompt]").forEach(button => {
+  button.onclick = () => {
+    $("messageInput").value = button.dataset.prompt;
+    $("messageInput").focus();
+  };
+});
+
+$("modeSelect").onchange = () => setMode($("modeSelect").value);
+$("searchBtn").onclick = () => setMode("search");
+$("codingBtn").onclick = () => setMode("coding");
+
+function speakText(text) {
+  if (!("speechSynthesis" in window)) {
+    return setStatus("Speech output is not supported in this browser.");
+  }
+
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text.slice(0, 6000));
+  utterance.lang = "en-IN";
+  window.speechSynthesis.speak(utterance);
+}
+
+$("voiceBtn").onclick = () => {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    return setStatus("Voice input is not supported here. Try Chrome and allow microphone access.");
+  }
+
+  if (listening) {
+    recognition?.stop();
+    return;
+  }
+
+  recognition = new SpeechRecognition();
+  recognition.lang = "en-IN";
+  recognition.interimResults = false;
+
+  recognition.onstart = () => {
+    listening = true;
+    $("voiceBtn").textContent = "⏹";
+    setStatus("Listening... speak now.");
   };
 
+  recognition.onresult = event => {
+    $("messageInput").value +=
+      ($("messageInput").value ? " " : "") +
+      event.results[0][0].transcript;
+  };
 
-/* CHAT HISTORY */
+  recognition.onerror = event => {
+    setStatus("Voice error: " + event.error + ". Check microphone permission.");
+  };
 
-function startHistory() {
-
-  const q =
-    query(
-      chatsRef(),
-      orderBy(
-        "updatedAt",
-        "desc"
-      )
-    );
-
-
-  onSnapshot(
-    q,
-    snapshot => {
-
-      historyList.innerHTML = "";
-
-      snapshot.forEach(
-        snap => {
-
-          const data =
-            snap.data();
-
-          const row =
-            document.createElement(
-              "div"
-            );
-
-          row.className =
-            "history-item";
-
-
-          const open =
-            document.createElement(
-              "button"
-            );
-
-          open.className =
-            "history-open";
-
-          open.textContent =
-            data.title ||
-            "New Chat";
-
-          open.onclick =
-            () => openChat(
-              snap.id
-            );
-
-
-          const del =
-            document.createElement(
-              "button"
-            );
-
-          del.className =
-            "delete-history";
-
-          del.textContent =
-            "×";
-
-          del.onclick =
-            async event => {
-
-              event.stopPropagation();
-
-              await deleteDoc(
-                doc(
-                  db,
-                  "users",
-                  currentUser.uid,
-                  "chats",
-                  snap.id
-                )
-              );
-
-              if (
-                currentChatId ===
-                snap.id
-              ) {
-
-                currentChatId =
-                  null;
-
-                messages = [];
-
-                await createChat();
-
-              }
-
-            };
-
-
-          row.appendChild(
-            open
-          );
-
-          row.appendChild(
-            del
-          );
-
-          historyList.appendChild(
-            row
-          );
-
-        }
-      );
-
-    },
-
-    error => {
-
-      console.error(error);
-
-      status.textContent =
-        "Firestore error. Check your rules.";
-
+  recognition.onend = () => {
+    listening = false;
+    $("voiceBtn").textContent = "🎙";
+    if ($("messageInput").value.trim()) {
+      setStatus("Speech captured. Press Send.");
     }
-
-  );
-
-}
-
-
-/* VOICE INPUT */
-
-const SpeechRecognition =
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
-
-
-if (SpeechRecognition) {
-
-  recognition =
-    new SpeechRecognition();
-
-  recognition.lang =
-    "en-IN";
-
-  recognition.continuous =
-    false;
-
-  recognition.interimResults =
-    false;
-
-
-  recognition.onstart =
-    () => {
-
-      voiceBtn.classList.add(
-        "listening"
-      );
-
-      voiceBtn.textContent =
-        "⏺";
-
-      status.textContent =
-        "Listening...";
-
-    };
-
-
-  recognition.onresult =
-    event => {
-
-      const text =
-        event
-          .results[0][0]
-          .transcript;
-
-      messageInput.value +=
-        (
-          messageInput.value
-            ? " "
-            : ""
-        ) + text;
-
-      autoResize();
-
-    };
-
-
-  recognition.onend =
-    () => {
-
-      voiceBtn.classList.remove(
-        "listening"
-      );
-
-      voiceBtn.textContent =
-        "🎤";
-
-      status.textContent =
-        "";
-
-    };
-
-
-  voiceBtn.onclick =
-    () => {
-
-      recognition.start();
-
-    };
-
-} else {
-
-  voiceBtn.onclick =
-    () => {
-
-      status.textContent =
-        "Voice input is not supported.";
-
-    };
-
-}
-
-
-/* VOICE REPLY */
-
-function speak(text) {
-
-  if (
-    !("speechSynthesis" in window)
-  ) return;
-
-  speechSynthesis.cancel();
-
-  const voice =
-    new SpeechSynthesisUtterance(
-      text
-    );
-
-  voice.lang =
-    "en-IN";
-
-  voice.rate =
-    1;
-
-  speechSynthesis.speak(
-    voice
-  );
-
-}
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    if (!user) {
-
-      currentUser =
-        null;
-
-      app.classList.add(
-        "hidden"
-      );
-
-      authScreen.classList.remove(
-        "hidden"
-      );
-
-      return;
-
-    }
-
-
-    currentUser =
-      user;
-
-    authScreen.classList.add(
-      "hidden"
-    );
-
-    app.classList.remove(
-      "hidden"
-    );
-
-
-    startHistory();
-
-
-    if (!currentChatId) {
-
-      const q =
-        query(
-          chatsRef(),
-          orderBy(
-            "updatedAt",
-            "desc"
-          )
-        );
-
-
-      onSnapshot(
-        q,
-        async snapshot => {
-
-          if (
-            !currentChatId &&
-            snapshot.empty
-          ) {
-
-            await createChat();
-
-          } else if (
-            !currentChatId &&
-            !snapshot.empty
-          ) {
-
-            await openChat(
-              snapshot.docs[0].id
-            );
-
-          }
-
-        },
-        error => {
-
-          console.error(error);
-
-        }
-      );
-
-    }
-
-
-    messageInput.focus();
-
+  };
+
+  recognition.start();
+};
+
+$("imageGenBtn").onclick = async () => {
+  const prompt = $("messageInput").value.trim();
+  if (!prompt) return setStatus("Type an image description first.");
+
+  setBusy(true);
+  setStatus("Creating image...");
+
+  try {
+    const token = await user.getIdToken();
+    const response = await fetch(API_BASE + "/image", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({ prompt })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Image creation failed.");
+
+    const imageData = await compressImage(data.imageData, 850, 0.62);
+
+    const messages = [
+      ...getActiveMessages(),
+      { role: "user", content: "Create image: " + prompt },
+      {
+        role: "assistant",
+        content: "Here is the image created for your prompt.",
+        imageData
+      }
+    ];
+
+    drawMessages(messages);
+    await saveChat(messages);
+    $("messageInput").value = "";
+    setStatus("Image created.");
+  } catch (error) {
+    setStatus(error.message || "Image generation failed.");
+  } finally {
+    setBusy(false);
   }
-);
+};
 
+$("newChat").onclick = () => newChat();
+$("addProject").onclick = () => addProject();
+$("activeProject").onchange = () => {
+  activeProjectId = $("activeProject").value;
+};
+
+$("menuBtn").onclick = () => $("sidebar").classList.add("open");
+$("closeSidebar").onclick = () => $("sidebar").classList.remove("open");
+
+$("authSwitch").onclick = event => {
+  event.preventDefault();
+  signupMode = !signupMode;
+  $("authTitle").textContent = signupMode ? "Create account" : "Welcome back";
+  $("authSubmit").textContent = signupMode ? "Create account" : "Sign in";
+  $("authSwitchText").textContent = signupMode
+    ? "Already have an account?"
+    : "New to UNI?";
+  $("authSwitch").textContent = signupMode ? "Sign in" : "Create account";
+};
+
+$("authSubmit").onclick = async () => {
+  const email = $("authEmail").value.trim();
+  const password = $("authPassword").value;
+  $("authError").textContent = "";
+
+  try {
+    if (signupMode) {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
+  } catch (error) {
+    $("authError").textContent = error.message;
+  }
+};
+
+$("googleBtn").onclick = async () => {
+  try {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+  } catch (error) {
+    $("authError").textContent = error.message;
+  }
+};
+
+$("logoutBtn").onclick = () => signOut(auth);
+
+onAuthStateChanged(auth, async currentUser => {
+  user = currentUser;
+
+  if (!user) {
+    showApp(false);
+    return;
+  }
+
+  showApp(true);
+  $("userPill").textContent = user.email || "Signed in";
+
+  try {
+    await Promise.all([
+      loadChats(),
+      loadProjects(),
+      loadPreferences()
+    ]);
+
+    newChat();
+  } catch (error) {
+    setStatus("Could not load account data: " + error.message);
+  }
+});
+
+window.addEventListener("beforeunload", () => {
+  if (recognition && listening) recognition.stop();
+});
 </script>
-
 </body>
 </html>
